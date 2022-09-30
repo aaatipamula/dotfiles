@@ -1,0 +1,241 @@
+" disable compatibility to old-time vi
+set nocompatible 
+
+" show matching 
+set showmatch               
+
+" case insensitive 
+set ignorecase              
+
+" middle-click paste with 
+set mouse=v                 
+
+" highlight search 
+set hlsearch                
+
+" incremental search
+set incsearch               
+
+" number of columns occupied by a tab 
+set tabstop=4               
+
+" see multiple spaces as tabstops so <BS> does the right thing 
+set softtabstop=4           
+
+" converts tabs to white space
+set expandtab               
+
+" width for autoindents
+set shiftwidth=4            
+
+" indent a new line the same amount as the line just typed
+set autoindent              
+
+" add line numbers
+set number                  
+
+" get bash-like tab completions
+set wildmode=longest,list   
+
+" allow auto-indenting depending on file type
+filetype plugin indent on   
+
+" syntax highlighting
+syntax on                   
+
+" enable mouse click
+set mouse=a                 
+
+" using system clipboard
+set clipboard=unnamedplus   
+
+" Speed up scrolling in Vim
+set ttyfast                 
+
+" wrap text in buffer
+set wrap                    
+
+" numbers relative to current line
+set relativenumber          
+
+" smort hehe
+set smartindent             
+
+" scroll before current hits end of buffer
+set scrolloff=8             
+
+" use terminal colors when emulating terminal
+set termguicolors
+
+" Show what percentage of page you are down
+set ruler
+
+" smarter vim
+set smartcase
+
+" set encoding for english
+set encoding=utf-8
+
+" show tablines
+set showtabline=2
+
+set splitright
+
+set splitbelow
+
+" No annoying sounds
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Ingore complied files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Remap Escape key to \i 
+inoremap <leader>i <Esc>
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Indicate if I am in insert mode
+autocmd InsertEnter,InsertLeave * set cul!
+
+" Escape insert mode in terminal with \t
+tmap <leader>e <C-W>N
+
+" Switch window in terminal with \w
+tmap <leader>w <C-W><C-W>
+
+" Resize terminal to 10 lines
+tmap <leader>c <C-W>:res10<cr>
+
+" Open terminal with \t in normal mode
+nmap <leader>tr :term<cr>
+
+" Open new terminal and resize to 10 lines
+nmap <leader>ts :term<cr><C-W>:res10<cr>
+
+" ====================
+" == Plugin Configs ==
+" ====================
+call plug#begin()
+ Plug 'dracula/vim'
+ Plug 'scrooloose/nerdtree'
+ Plug 'preservim/nerdcommenter'
+ Plug 'mhinz/vim-startify'
+ Plug 'neoclide/coc.nvim', {'branch': 'release'}
+ Plug 'jiangmiao/auto-pairs'
+ Plug 'sheerun/vim-polyglot'
+ Plug 'ryanoasis/vim-devicons'
+call plug#end()
+
+" Try to use dracula if installed
+try
+    colorscheme dracula
+catch
+    colorscheme slate
+endtry
+
+" Remap command for NERDTree
+nmap <leader>dir :NERDTree<cr>
+
+" Disable warning from coc plugin for vim < 8.2
+let g:coc_disable_startup_warning = 1
+
+" Add a space after commenting out a line
+let g:NERDTreeSpaceDelims = 2
+let g:NERDDefaultAlign = 'left'
+
+" Make sure to run the following commannd after coc is installed 
+" :CocInstall coc-tsserver coc-eslint coc-json coc-prettier coc-css 
+
+" Coc has problems with backup files
+set nobackup
+set nowritebackup
+
+" Having longer update time (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Highlight the symbol and its references when holding the cursor.
+" Make sure to run ':CocInstall: coc-highlight' to make sure it works
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Goto definition
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
