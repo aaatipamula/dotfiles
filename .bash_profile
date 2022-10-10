@@ -1,7 +1,6 @@
-# Include bashrc if present
-if [ -f '~/.bashrc' ];
-    then 
-    . '~/.bashrc';
+# Include bashrc if present if [ -f "$HOME/.bashrc" ];
+if [ -f "$HOME/.bashrc" ];
+    . "$HOME/.bashrc";
 fi
 
 # Name of the Machine
