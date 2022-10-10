@@ -27,4 +27,6 @@ source ~/.bashrc
 # Install node 14.10.0
 nvm install 14.10.0
 
+git config --global user.name "Aniketh"
+git config --global user.email "aaatipamula@gmail.com"
 
