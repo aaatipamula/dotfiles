@@ -1,5 +1,6 @@
 # Include bashrc if present if [ -f "$HOME/.bashrc" ];
 if [ -f "$HOME/.bashrc" ];
+then
     . "$HOME/.bashrc";
 fi
 
