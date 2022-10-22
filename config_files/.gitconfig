@@ -1,0 +1,8 @@
+[user]
+	email = aaatipamula@gmail.com
+	name = Aniketh
+[alias]
+	ca = commit -am
+	st = status
+	a = add
+	co = commit -m

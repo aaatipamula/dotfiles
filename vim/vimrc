@@ -1,3 +1,6 @@
+" set default color
+let g:color = "dracula"
+
 " disable compatibility to old-time vi
 set nocompatible 
 
@@ -150,6 +153,7 @@ nmap <leader>ts :term<cr><C-W>:res10<cr>
 " ====================
 call plug#begin()
  Plug 'dracula/vim'
+ Plug 'arcticicestudio/nord-vim'
  Plug 'scrooloose/nerdtree'
  Plug 'preservim/nerdcommenter'
  Plug 'mhinz/vim-startify'
@@ -159,12 +163,22 @@ call plug#begin()
  Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-" Try to use dracula if installed
+" Try and set default theme
 try
-    colorscheme dracula
+    if g:color == "dracula"
+        colorscheme dracula
+    elseif g:color == "nord"
+        colorscheme nord
+    else 
+        colorscheme slate
+    endif
 catch
     colorscheme slate
 endtry
+
+" Quick remap colorschemes
+nmap <leader>dr :colorscheme dracula
+nmap <leader>nr :colorscheme nord
 
 " Remap command for NERDTree
 nmap <leader>dir :NERDTree<cr>
