@@ -14,7 +14,7 @@ jobs:
         run: ./setupscripts/dracula_install.sh
 
       - name: test ubuntu setup
-        run: ./setupscripts/init_setup.sh
+        run: sudo ./setupscripts/init_setup.sh
 
       - name: test vim setup
         run: ./setupscripts/vim_setup.sh
