@@ -1,13 +1,36 @@
-# Config Files
+# Dotfiles
 
-## .bash_profile
+## About
 
-I mostly just use this for basic config of my shell. Just the basic commands/aliases that I use often. I won't really touch this files and any machine specific configs should go in the `.bashrc` file.
+This is a repo to host any files and scripts that help me get a machine set up faster. That way I don't have to go back and manually do all of this configuration again :).
 
-## vimrc
+### config_files
 
-This is the current version of my fully decked out vimrc. I have a basic version named `basic.vim` which just changes my keybindings if I want a basic config that feels pretty good for any machine I won't be using often.
+This is just config files for various programs. They are listed below:
+- Bash
+- Git
+- Windows Terminal
 
-## setupscripts
+### vim
 
-This contains 4 files. One for setting up an ubuntu machine, one for installing the dracula vim theme (mostly for use in not commonly used machines) and a file for installing vim-plug for a machine where I might want to use often. The last file is a general purpose setup script. I just need to put in the name of the package manager and it should hopefully just work. However I can manually config just using the script as a template if needed.
+This contains two different config files for vim. 
+
+- vimrc
+- basic.vim
+
+The `vimrc` file contains my main fully decked out config for Vim. This is mostly used on any machine that I will regularly code on. 
+The `basic.vim` file is a basic config for Vim that I use on remote machines or machines I don't intend to use regularly.
+
+### setupscripts
+
+This contains 4 files. 
+
+- `dracula_install.sh`
+- `init_setup.sh`
+- `init_setup_general.sh`
+- `vim_setup.sh`
+
+The first file is a simple script to install the Dracula theme for vim. I don't intend to use this often however its there if I need it.
+The second file is a setup script for Ubuntu systems. This installs packages I use often.
+The third file is a setup script for any other Linux machine I may use. Its not tested and I have no idea if it actually works lol.
+The last file is a simple script to install vim-plug for any mahcine I intend to use regularly.
