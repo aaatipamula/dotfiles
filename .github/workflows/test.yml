@@ -33,7 +33,7 @@ jobs:
         run: sudo docker cp ./setupscripts/init_setup_general.sh test:/home/
 
       - name: test script
-        run: sudo docker exec test /home/init_setup_general.sh
+        run: sudo docker exec test /home/init_setup_general.sh dnf
         
   
 
