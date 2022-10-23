@@ -24,6 +24,8 @@ alias la='ls -a'            # Everything including hidden files
 alias svim="sudo vim"
 alias p3='python3'
 alias q='exit'
+alias hist='history'
+alias mkdirs='mkdir -p'
 
 # Uncomment below if python 3.10 isn't default
 #alias python3='python3.10'
@@ -33,6 +35,7 @@ alias q='exit'
 alias vimrc="vim $vimrc"
 alias bashrc="vim $bashrc"
 alias bashpr="vim $bashpr"
+alias gitconf="vim $gitconfig"
 alias loadbash="source $bashpr"
 
 # Command Prompt
