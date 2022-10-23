@@ -30,10 +30,10 @@ jobs:
         run: sudo docker run -it --name test -d fedora
 
       - name: copy files
-        run: sudo docker cp ./setupscripts/init_setup.sh test:/home/
+        run: sudo docker cp ./setupscripts/init_setup_general.sh test:/home/
 
       - name: test script
-        run: sudo docker exec test /home/init_setup.sh
+        run: sudo docker exec test /home/init_setup_general.sh
         
   
 
