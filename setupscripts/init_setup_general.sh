@@ -11,4 +11,4 @@ fi
 
 sudo $1 update && sudo $1 upgrade
 
-sudo $1 install htop ssh.server vim tmux docker rsycn python3 neofetch neovim node.js
+sudo $1 install htop ssh.server vim tmux docker python3 neovim nodejs

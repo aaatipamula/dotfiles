@@ -7,3 +7,4 @@
 	a = add
 	aa = add .
 	co = commit -m
+	pom = push origin master
