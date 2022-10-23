@@ -26,9 +26,6 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v3
 
-      - name: install docker
-        run: sudo apt install docker
-
       - name: make fedora container 
         run: sudo docker run -it --name test -d fedora
 
