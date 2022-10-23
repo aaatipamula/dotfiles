@@ -5,4 +5,5 @@
 	ca = commit -am
 	st = status
 	a = add
+	aa = add .
 	co = commit -m
