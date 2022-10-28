@@ -1,9 +1,3 @@
-# Include bashrc if present
-if [ -f "$HOME/.bashrc" ];
-then
-    . "$HOME/.bashrc";
-fi
-
 # Name of the Machine
 export machine_name="machine_name"
 

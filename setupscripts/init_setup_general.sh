@@ -9,6 +9,8 @@ then
     exit 1
 fi
 
+# update and upgrade
 sudo $1 update && sudo $1 upgrade
 
-sudo $1 install htop ssh.server vim tmux docker python3 neovim nodejs
+# install commonly used programs
+sudo $1 install htop vim tmux docker python3 
