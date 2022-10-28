@@ -51,13 +51,13 @@ get_package_manager()
     case $1 in 
 
         ubuntu) 
-            package_manager = "apt"
+            package_manager="apt"
             ;;
         fedora)
-            package_manager = "dnf"
+            package_manager="dnf"
             ;;
         mac)
-            package_manager = "brew"
+            package_manager="brew"
             ;;
         *)
             echo "Could not match package manager."
