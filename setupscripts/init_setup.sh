@@ -92,7 +92,7 @@ fi
 
 setup_shell
 
-package_manager = ""
+package_manager=""
 
 case $1 in
     -s)
