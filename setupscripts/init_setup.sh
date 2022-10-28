@@ -66,15 +66,12 @@ get_package_manager()
             exit 1
     esac
 
-    return package_manager
-
 }
 
 setup_shell()
 {
 
     cat ./config_files/.bash_profile >> "$HOME/.bashrc"
-    source "$HOME/.bashrc"
 
     cp ./config_files/.gitconfig "$HOME"
 
@@ -99,8 +96,8 @@ setup_shell
 
 case $1 in
     -s)
-        pm = get_package_manager $2
-        install_apps $pm
+        get_package_manager $2
+        install_apps $package_manager
         ;;
 
     -v)
@@ -108,7 +105,7 @@ case $1 in
         ;;
 
     -sv)
-        pm = get_package_manager $2
+        get_package_manager $2
         install_apps $pm
         setup_vim
         ;;
