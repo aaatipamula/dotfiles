@@ -13,12 +13,11 @@ jobs:
       - name: test dracula install
         run: ./setupscripts/dracula_install.sh
 
-
       - name: test vim setup
         run: ./setupscripts/vim_setup.sh
 
   test-init-setup0:
-    name: test init_setup
+    name: test init_setup with apps and vim install
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -27,16 +26,9 @@ jobs:
       - name: test sudo+vim
         run: sudo ./setupscripts/init_setup.sh -sv ubuntu
 
+
   test-init-setup1:
-    name: test init_setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v3
-
-
-  test-init-setup2:
-    name: test init_setup
+    name: test init_setup with just application install
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -47,7 +39,7 @@ jobs:
 
 
   test-init-setup3:
-    name: test init_setup
+    name: test init_setup with vim install
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -58,7 +50,7 @@ jobs:
 
 
   test-init-setup4:
-    name: test init_setup
+    name: test init_setup basic
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -66,23 +58,5 @@ jobs:
 
       - name: test basic 
         run: sudo ./setupscripts/init_setup.sh 
-
-  test-fedora:
-    name: test on fedora
-    runs-on: ubuntu-latest
-    steps: 
-      - name: checkout code
-        uses: actions/checkout@v3
-
-      - name: make fedora container 
-        run: sudo docker run -it --name test -d fedora
-
-      - name: copy files
-        run: sudo docker cp ./setupscripts/init_setup.sh test:/home/
-
-      - name: test script
-        run: sudo docker exec test /home/init_setup.sh -sv fedora
-        
-  
 
         

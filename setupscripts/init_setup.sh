@@ -73,10 +73,10 @@ get_package_manager()
 setup_shell()
 {
 
-    cat ../config_files/.bash_profile >> "$HOME/.bashrc"
+    cat ./config_files/.bash_profile >> "$HOME/.bashrc"
     source "$HOME/.bashrc"
 
-    cp ../config_files/.gitconfig "$HOME"
+    cp ./config_files/.gitconfig "$HOME"
 
 }
 
@@ -89,7 +89,7 @@ setup_vim()
     
 }
 
-if $0 != "./init_setup.sh"
+if [ $0 != "./setupscripts/init_setup.sh" ] 
 then 
     echo "Please run script in root directory"
     exit 1
