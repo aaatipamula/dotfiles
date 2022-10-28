@@ -48,8 +48,6 @@ install_apps()
 get_package_manager()
 {
 
-    package_manager = ""
-
     case $1 in 
 
         ubuntu) 
@@ -94,6 +92,8 @@ fi
 
 setup_shell
 
+package_manager = ""
+
 case $1 in
     -s)
         get_package_manager $2
@@ -106,7 +106,7 @@ case $1 in
 
     -sv)
         get_package_manager $2
-        install_apps $pm
+        install_apps $package_manager
         setup_vim
         ;;
 
