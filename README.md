@@ -1,5 +1,7 @@
 # Dotfiles
 
+[![test-scripts](https://github.com/aaatipamula/dotfiles/actions/workflows/test.yml/badge.svg)](https://github.com/aaatipamula/dotfiles/actions/workflows/test.yml)
+
 ## About
 
 This is a repo to host any files and scripts that help me get a machine set up faster. That way I don't have to go back and manually do all of this configuration again :).
