@@ -69,7 +69,7 @@ get_package_manager()
 setup_shell()
 {
 
-    if ![ -f "$HOME/.local/bin/" ]
+    if ! [ -f "$HOME/.local/bin/" ]
     then
         mkdir -p "$HOME/.local/bin/"
     fi
@@ -121,4 +121,4 @@ case $1 in
         ;;
 esac
 
-echo "Setup done! Run `source ~/.bashrc` to load shell configuration."
+echo "Setup done! Run 'source ~/.bashrc' to load shell configuration."

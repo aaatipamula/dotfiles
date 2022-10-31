@@ -4,7 +4,7 @@
 
 ## About
 
-This is a repo to host any files and scripts that help me get a machine set up faster. That way I don't have to go back and manually do all of this configuration again :).
+This is a repo to host any files and scripts that help me get a machine set up faster. That way I don't have to go back and manually do all of this configuration again. （￣︶￣）↗
 
 ### config_files
 
@@ -30,9 +30,7 @@ This contains 4 files.
 - `dracula_install.sh`
 - `init_setup.sh`
 - `init_setup_general.sh`
-- `vim_setup.sh`
 
 The first file is a simple script to install the Dracula theme for vim. I don't intend to use this often however its there if I need it.
-The second file is a setup script for Ubuntu systems. This installs packages I use often.
-The third file is a setup script for any other Linux machine I may use. Its not tested and I have no idea if it actually works lol.
-The last file is a simple script to install vim-plug for any mahcine I intend to use regularly.
+The second file is a setup script where specific parts of setup can be initated or no. This setup script will add all my prefered shell configurations regardless of any flags present or not. There are also options to install vim and install apps that I use often based on how often I plan on using the machine. 
+The third file is a setup script for any other Linux machine I may use. Its here just incase the previous file doesn't work for one reason or another

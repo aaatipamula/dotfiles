@@ -13,9 +13,6 @@ jobs:
       - name: test dracula install
         run: ./setupscripts/dracula_install.sh
 
-      - name: test vim setup
-        run: ./setupscripts/vim_setup.sh
-
   test-init-setup0:
     name: test init_setup with apps and vim install
     runs-on: ubuntu-latest
