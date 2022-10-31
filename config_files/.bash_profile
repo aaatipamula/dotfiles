@@ -1,3 +1,4 @@
+
 # Name of the Machine
 export machine_name="machine_name"
 
@@ -20,6 +21,7 @@ alias p3='python3'
 alias q='exit'
 alias hist='history'
 alias mkdirs='mkdir -p'
+alias readme='readme.sh'
 
 # Uncomment below if python 3.10 isn't default
 #alias python3='python3.10'

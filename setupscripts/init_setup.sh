@@ -69,9 +69,15 @@ get_package_manager()
 setup_shell()
 {
 
+    if ![ -f "$HOME/.local/bin/" ]
+    then
+        mkdir -p "$HOME/.local/bin/"
+    fi
+
     cat ./config_files/.bash_profile >> "$HOME/.bashrc"
 
     cp ./config_files/.gitconfig "$HOME"
+    cp ./config_files/readme.sh ~/.local/bin
 
 }
 
@@ -111,6 +117,8 @@ case $1 in
         ;;
 
     *)
-        exit 0
+        echo "No valid options were selected."
         ;;
 esac
+
+echo "Setup done! Run `source ~/.bashrc` to load shell configuration."
