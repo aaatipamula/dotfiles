@@ -4,7 +4,7 @@
 
 ## About
 
-This is a repo to host any files and scripts that help me get a machine set up faster. That way I don't have to go back and manually do all of this configuration again. （￣︶￣）↗
+This is a repo to host any files and scripts that help me get a machine set up faster. That way I don't have to go back and manually do all of this configuration again. （。＾▽＾）
 
 ### config_files
 
@@ -25,7 +25,7 @@ The `basic.vim` file is a basic config for Vim that I use on remote machines or 
 
 ### setupscripts
 
-This contains 4 files. 
+This contains 3 files. 
 
 - `dracula_install.sh`
 - `init_setup.sh`
