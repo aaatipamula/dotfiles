@@ -20,7 +20,7 @@ install_apps()
             sudo $1 update && sudo $1 upgrade
 
             # install commonly used programs
-            sudo $1 install htop vim tmux docker python3 
+            sudo $1 install htop vim tmux docker python3 curl
 
             # Install nvm for node version control etc.
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -39,7 +39,7 @@ install_apps()
             sudo $1 update && sudo $1 upgrade
 
             # install commonly used programs
-            sudo $1 install htop vim tmux docker python3 nodejs
+            sudo $1 install htop vim tmux docker python3 nodejs curl
             ;;
     esac
 
@@ -48,9 +48,9 @@ install_apps()
 get_package_manager()
 {
 
-    case $1 in 
+    case $1 in
 
-        ubuntu) 
+        ubuntu)
             package_manager="apt"
             ;;
         fedora)
@@ -68,30 +68,43 @@ get_package_manager()
 
 setup_shell()
 {
+    echo "Setting up Bash."
 
-    if ! [ -f "$HOME/.local/bin/" ]
+    if  [ ! -d "~/.local/bin/" ]
     then
-        mkdir -p "$HOME/.local/bin/"
+        mkdir -p "~/.local/bin/"
     fi
 
-    cat ./config_files/.bash_profile >> "$HOME/.bashrc"
+    cat "./config_files/.bashrc" >> "~/.bashrc"
 
-    cp ./config_files/.gitconfig "$HOME"
-    cp ./config_files/readme.sh ~/.local/bin
+    cp "./config_files/.gitconfig" "~"
+    cp "./config_files/readme.sh" "~/.local/bin"
+
+    echo "Finished setting up Bash!"
 
 }
 
 setup_vim()
 {
 
-	# Install vim-plug
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    
+    echo "Installing vim-plug."
+
+    # Install vim-plug
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    echo "Setting up vimrc"
+
+    if [ ! -d "~/.vim" ]
+    then
+        mkdir "~/.vim"
+    fi
+
+    cp "./vim/vimrc" "~/.vim/"
 }
 
-if [ $0 != "./setupscripts/init_setup.sh" ] 
-then 
+if [ $0 != "./setupscripts/init_setup.sh" ]
+then
     echo "Please run script in root directory"
     exit 1
 fi

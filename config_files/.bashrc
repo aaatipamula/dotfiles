@@ -22,6 +22,7 @@ alias q='exit'
 alias hist='history'
 alias mkdirs='mkdir -p'
 alias readme='readme.sh'
+alias cl='clear'
 
 # Uncomment below if python 3.10 isn't default
 #alias python3='python3.10'
@@ -32,7 +33,7 @@ alias vimrc="vim $vimrc"
 alias bashrc="vim $bashrc"
 alias bashpr="vim $bashpr"
 alias gitconf="vim $gitconfig"
-alias loadbash="source $bashpr"
+alias loadbash="source $bashrc"
 
 # Command Prompt
 export PS1="\[$(tput bold)\]\[$(tput setaf 6)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]$machine_name \[$(tput setaf 3)\]\w\[$(tput setaf 6)\]]\n-> \[$(tput sgr0)\]"

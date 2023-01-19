@@ -11,7 +11,6 @@ This is a repo to host any files and scripts that help me get a machine set up f
 This is just config files for various programs. They are listed below:
 - Bash
 - Git
-- Windows Terminal
 
 ### vim
 
