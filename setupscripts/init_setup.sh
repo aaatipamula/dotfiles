@@ -13,7 +13,7 @@ install_apps()
     case $1 in
 
         apt)
-            # Add repo for neovim and python 3.10
+            # Add repo for neovim
             sudo add-apt-repository ppa:neovim-ppa/stable
 
             # update and upgrade
@@ -70,15 +70,15 @@ setup_shell()
 {
     echo "Setting up Bash."
 
-    if  [ ! -d "~/.local/bin/" ]
+    if  [ ! -d "$HOME/.local/bin/" ]
     then
-        mkdir -p "~/.local/bin/"
+        mkdir -p "$HOME/.local/bin/"
     fi
 
-    cat "./config_files/.bashrc" >> "~/.bashrc"
+    cat "./config_files/.bashrc" >> "$HOME/.bashrc"
 
-    cp "./config_files/.gitconfig" "~"
-    cp "./config_files/readme.sh" "~/.local/bin"
+    cp "./config_files/.gitconfig" "$HOME"
+    cp "./config_files/readme.sh" "$HOME/.local/bin"
 
     echo "Finished setting up Bash!"
 
@@ -90,17 +90,17 @@ setup_vim()
     echo "Installing vim-plug."
 
     # Install vim-plug
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     echo "Setting up vimrc"
 
-    if [ ! -d "~/.vim" ]
+    if [ ! -d "$HOME/.vim" ]
     then
-        mkdir "~/.vim"
+        mkdir "$HOME/.vim"
     fi
 
-    cp "./vim/vimrc" "~/.vim/"
+    cp "./vim/vimrc" "$HOME/.vim/"
 }
 
 if [ $0 != "./setupscripts/init_setup.sh" ]
@@ -134,4 +134,4 @@ case $1 in
         ;;
 esac
 
-echo "Setup done! Run 'source ~/.bashrc' to load shell configuration."
+echo "Setup done! Run 'source $HOME/.bashrc' to load shell configuration."
