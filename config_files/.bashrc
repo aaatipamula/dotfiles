@@ -9,6 +9,7 @@ export VISUAL="vim"
 export bashrc="$HOME/.bashrc"
 export bashpr="$HOME/.bash_profile"
 export vimrc="$HOME/.vim/vimrc"
+export gitconf="$HOME/.gitconfig"
 
 # Useful aliases and shortcuts
 alias ls='ls -lh --color=auto'
@@ -32,13 +33,13 @@ alias cl='clear'
 alias vimrc="vim $vimrc"
 alias bashrc="vim $bashrc"
 alias bashpr="vim $bashpr"
-alias gitconf="vim $gitconfig"
+alias gitconf="vim $gitconf"
 alias loadbash="source $bashrc"
 
 # Command Prompt
 export PS1="\[$(tput bold)\]\[$(tput setaf 6)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]$machine_name \[$(tput setaf 3)\]\w\[$(tput setaf 6)\]]\n-> \[$(tput sgr0)\]"
 
-# Make sure path includes my local /bin directory
+# Make sure path includes my local bin directory
 export PATH=/home/aaatipamula/.local/bin:$PATH
 
 # Change directory by just typing in name

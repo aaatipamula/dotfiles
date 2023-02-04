@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# General purpose setup script for ubuntu and fedora
+
+# Valid flags:
+# -s: Install apps (requires sudo access)
+# -v: Install vim config with plugins
 install_apps()
 {
 
@@ -24,14 +29,6 @@ install_apps()
 
             # Install nvm for node version control etc.
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-
-            # Load nvm without restarting shell/terminal
-            export NVM_DIR="/home/runner/.nvm"
-            [ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-            [ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-            # Install node 14.10.0
-            nvm install 14.10.0
             ;;
 
         *)
@@ -39,7 +36,10 @@ install_apps()
             sudo $1 update && sudo $1 upgrade
 
             # install commonly used programs
-            sudo $1 install htop vim tmux docker python3 nodejs curl
+            sudo $1 install htop vim tmux docker python3 curl
+
+            # Install nvm for node version control etc.
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
             ;;
     esac
 
@@ -60,8 +60,7 @@ get_package_manager()
             package_manager="brew"
             ;;
         *)
-            echo "Could not match package manager."
-            exit 1
+            return 1
     esac
 
 }
@@ -70,17 +69,24 @@ setup_shell()
 {
     echo "Setting up Bash."
 
-    if  [ ! -d "$HOME/.local/bin/" ]
+    if  [ ! -d ~/.local/bin ]
     then
-        mkdir -p "$HOME/.local/bin/"
+        mkdir -p ~/.local/bin
     fi
 
-    cat "./config_files/.bashrc" >> "$HOME/.bashrc"
+    cat ./config_files/.bashrc >> ~/.bashrc
 
-    cp "./config_files/.gitconfig" "$HOME"
-    cp "./config_files/readme.sh" "$HOME/.local/bin"
+    cp ./config_files/.gitconfig ~
+    cp ./config_files/readme.sh ~/.local/bin
 
     echo "Finished setting up Bash!"
+
+    if [ ! -d ~/.vim ]
+    then
+        mkdir ~/.vim
+    fi
+
+    cp -b ./vim/basic.vim ~/.vim/vimrc
 
 }
 
@@ -93,17 +99,24 @@ setup_vim()
     curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-    echo "Setting up vimrc"
-
-    if [ ! -d "$HOME/.vim" ]
+    if [ $? -eq "1" ]
     then
-        mkdir "$HOME/.vim"
+        echo "Failed to install Vim-Plug."
+        echo "Please enter the following lines into your terminal: "
+        echo "curl -fLo \$HOME/.vim/autoload/plug.vim --create-dirs \\"
+        echo "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        exit 1
+
+    else
+        install_apps $package_manager
     fi
 
-    cp "./vim/vimrc" "$HOME/.vim/"
+    echo "Setting up vimrc"
+
+    cp -b ./vim/vimrc ~/.vim
 }
 
-if [ $0 != "./setupscripts/init_setup.sh" ]
+if [ $0 != ./setupscripts/init_setup.sh ]
 then
     echo "Please run script in root directory"
     exit 1
@@ -116,7 +129,16 @@ package_manager=""
 case $1 in
     -s)
         get_package_manager $2
-        install_apps $package_manager
+
+        if [ $? -eq "1" ]
+        then
+            echo "Could not match package manager skipping application install..."
+            exit 1
+
+        else
+            install_apps $package_manager
+        fi
+
         ;;
 
     -v)
@@ -125,13 +147,23 @@ case $1 in
 
     -sv)
         get_package_manager $2
-        install_apps $package_manager
+
+        if [ $? -eq "1" ]
+        then
+            echo "Could not match package manager skipping application install..."
+            exit 1
+
+        else
+            install_apps $package_manager
+        fi
+
         setup_vim
         ;;
 
     *)
         echo "No valid options were selected."
+        exit 1
         ;;
 esac
 
-echo "Setup done! Run 'source $HOME/.bashrc' to load shell configuration."
+echo "Setup done! Run 'source ~/.bashrc' to load shell configuration."
