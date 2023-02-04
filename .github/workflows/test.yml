@@ -56,4 +56,3 @@ jobs:
       - name: test basic 
         run: ./setupscripts/init_setup.sh 
 
-        
