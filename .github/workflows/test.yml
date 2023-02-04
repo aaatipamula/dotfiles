@@ -44,7 +44,11 @@ jobs:
 
       - name: test vim 
         run: ./setupscripts/init_setup.sh -v
+
+      - name: show vim directory
         run: ls ~/.vim
+
+      - name: show contents of vimrc
         run: cat ~/.vim/vimrc
 
 
@@ -57,8 +61,16 @@ jobs:
 
       - name: test basic 
         run: ./setupscripts/init_setup.sh 
+
+      - name: show contents of bashrc
         run: cat ~/.bashrc
+
+      - name: show contents of gitconfig
         run: cat ~/.gitconfig
+
+      - name: show bin directory
         run: ls ~/.local/bin
+
+      - name: show contents of vimrc
         run: cat ~/.vim/vimrc
 
