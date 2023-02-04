@@ -44,6 +44,8 @@ jobs:
 
       - name: test vim 
         run: ./setupscripts/init_setup.sh -v
+        run: ls ~/.vim
+        run: cat ~/.vim/vimrc
 
 
   test-init-setup4:
@@ -55,4 +57,8 @@ jobs:
 
       - name: test basic 
         run: ./setupscripts/init_setup.sh 
+        run: cat ~/.bashrc
+        run: cat ~/.gitconfig
+        run: ls ~/.local/bin
+        run: cat ~/.vim/vimrc
 
