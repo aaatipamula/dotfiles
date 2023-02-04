@@ -99,6 +99,7 @@ setup_vim()
     curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+    # Check if vim-plug install failed
     if [ $? -eq "1" ]
     then
         echo "Failed to install Vim-Plug."
@@ -106,13 +107,11 @@ setup_vim()
         echo "curl -fLo \$HOME/.vim/autoload/plug.vim --create-dirs \\"
         echo "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
         exit 1
-
-    else
-        install_apps $package_manager
     fi
 
     echo "Setting up vimrc"
 
+    # Copy over vimrc
     cp -b ./vim/vimrc ~/.vim
 }
 
@@ -161,8 +160,7 @@ case $1 in
         ;;
 
     *)
-        echo "No valid options were selected."
-        exit 1
+        echo "No valid options were selected skipping application installs..."
         ;;
 esac
 
