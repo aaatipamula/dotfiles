@@ -10,6 +10,7 @@ export bashrc="$HOME/.bashrc"
 export bashpr="$HOME/.bash_profile"
 export vimrc="$HOME/.vim/vimrc"
 export gitconf="$HOME/.gitconfig"
+export bashal="$HOME/.bash_aliases"
 
 # Useful aliases and shortcuts
 alias ls='ls -lh --color=auto'
@@ -25,6 +26,11 @@ alias mkdirs='mkdir -p'
 alias readme='readme.sh'
 alias cl='clear'
 
+# Machine specific config
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
 # Uncomment below if python 3.10 isn't default
 #alias python3='python3.10'
 #alias p3='python3.10'
@@ -34,10 +40,15 @@ alias vimrc="vim $vimrc"
 alias bashrc="vim $bashrc"
 alias bashpr="vim $bashpr"
 alias gitconf="vim $gitconf"
+alias bashal="vim $bashal"
 alias loadbash="source $bashrc"
 
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
 # Command Prompt
-export PS1="\[$(tput bold)\]\[$(tput setaf 6)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]$machine_name \[$(tput setaf 3)\]\w\[$(tput setaf 6)\]]\n-> \[$(tput sgr0)\]"
+export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]$machine_name \[$(tput setaf 3)\]\w\[$(tput setaf 2)\]]\[$(tput setaf 4)\]\$(parse_git_branch)\[$(tput setaf 6)\]\n-> \[$(tput sgr0)\]"
 
 # Make sure path includes my local bin directory
 export PATH=/home/aaatipamula/.local/bin:$PATH
@@ -48,3 +59,20 @@ shopt -s autocd
 # Use Vi bindings to move around and edit in terminal
 set -o vi
 
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

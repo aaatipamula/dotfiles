@@ -1,5 +1,5 @@
 " set default color
-let g:color = "dracula"
+let g:color = "nord"
 
 " disable compatibility to old-time vi
 set nocompatible 

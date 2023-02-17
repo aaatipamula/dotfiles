@@ -74,7 +74,12 @@ setup_shell()
         mkdir -p ~/.local/bin
     fi
 
-    cat ./config_files/.bashrc >> ~/.bashrc
+    if [ -f ~/.bashrc ]
+    then
+        rm ~/.bashrc
+    fi
+
+    ln ./config_files/.bashrc ~/.bashrc
 
     cp ./config_files/.gitconfig ~
     cp ./config_files/readme.sh ~/.local/bin
@@ -86,7 +91,7 @@ setup_shell()
         mkdir ~/.vim
     fi
 
-    cp -b ./vim/basic.vim ~/.vim/vimrc
+    cp ./vim/basic.vim ~/.vim/vimrc
 
 }
 
@@ -104,7 +109,7 @@ setup_vim()
     then
         echo "Failed to install Vim-Plug."
         echo "Please enter the following lines into your terminal: "
-        echo "curl -fLo \$HOME/.vim/autoload/plug.vim --create-dirs \\"
+        echo "curl -fLo \\$HOME/.vim/autoload/plug.vim --create-dirs \\"
         echo "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
         exit 1
     fi
@@ -112,7 +117,8 @@ setup_vim()
     echo "Setting up vimrc"
 
     # Copy over vimrc
-    cp -b ./vim/vimrc ~/.vim
+    rm ~/.vim/vimrc
+    ln ./vim/vimrc ~/.vim/vimrc
 }
 
 if [ $0 != ./setupscripts/init_setup.sh ]
