@@ -1,10 +1,12 @@
 #!/bin/sh
 
-# General purpose setup script for ubuntu and fedora
+# General purpose setup script for ubuntu and some other distros
 
 # Valid flags:
 # -s: Install apps (requires sudo access)
 # -v: Install vim config with plugins
+
+# Install commonly used apps
 install_apps()
 {
 
@@ -45,6 +47,7 @@ install_apps()
 
 }
 
+# Valid package managers
 get_package_manager()
 {
 
@@ -69,6 +72,7 @@ setup_shell()
 {
     echo "Setting up Bash."
 
+    # Make and remove files/directories
     if  [ ! -d ~/.local/bin ]
     then
         mkdir -p ~/.local/bin
@@ -79,19 +83,29 @@ setup_shell()
         rm ~/.bashrc
     fi
 
+    if [ ! -f ~/.bash_aliases ]
+    then 
+        echo "machine_name=\"name\"" > ~/.bash_aliases
+    fi
+
+
+    # Link bashrc and gitconfig and copy scripts
     ln ./config_files/.bashrc ~/.bashrc
 
-    cp ./config_files/.gitconfig ~
+    ln ./config_files/.gitconfig ~
     cp ./config_files/readme.sh ~/.local/bin
 
     echo "Finished setting up Bash!"
 
+    # Setup basic vim config
     if [ ! -d ~/.vim ]
     then
         mkdir ~/.vim
     fi
 
     cp ./vim/basic.vim ~/.vim/vimrc
+
+    ./dracula_install.sh
 
 }
 
@@ -116,7 +130,13 @@ setup_vim()
 
     echo "Setting up vimrc"
 
-    # Copy over vimrc
+    # Remove dracula theme
+    if [ -d ~/.vim/pack/themes/start/dracula ]
+    then
+        rm -rf ~/.vim/pack/themes/start/dracula
+    fi
+
+    # Link vimrc
     rm ~/.vim/vimrc
     ln ./vim/vimrc ~/.vim/vimrc
 }

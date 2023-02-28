@@ -2,67 +2,67 @@
 set nocompatible 
 
 " show matching 
-set showmatch               
+set showmatch
 
 " case insensitive 
-set ignorecase              
+set ignorecase
 
 " middle-click paste with 
-set mouse=v                 
+set mouse=v
 
 " highlight search 
-set hlsearch                
+set hlsearch
 
 " incremental search
-set incsearch               
+set incsearch
 
 " number of columns occupied by a tab 
-set tabstop=4               
+set tabstop=4
 
 " see multiple spaces as tabstops so <BS> does the right thing 
-set softtabstop=4           
+set softtabstop=4
 
 " converts tabs to white space
-set expandtab               
+set expandtab
 
 " width for autoindents
-set shiftwidth=4            
+set shiftwidth=4
 
 " indent a new line the same amount as the line just typed
-set autoindent              
+set autoindent
 
 " add line numbers
-set number                  
+set number
 
 " get bash-like tab completions
-set wildmode=longest,list   
+set wildmode=longest,list
 
 " allow auto-indenting depending on file type
-filetype plugin indent on   
+filetype plugin indent on
 
 " syntax highlighting
-syntax on                   
+syntax on
 
 " enable mouse click
-set mouse=a                 
+set mouse=a
 
 " using system clipboard
-set clipboard=unnamedplus   
+set clipboard=unnamedplus
 
 " Speed up scrolling in Vim
-set ttyfast                 
+set ttyfast
 
 " wrap text in buffer
-set wrap                    
+set wrap
 
 " numbers relative to current line
-set relativenumber          
+set relativenumber
 
 " smort hehe
-set smartindent             
+set smartindent
 
 " scroll before current hits end of buffer
-set scrolloff=8             
+set scrolloff=8
 
 " use terminal colors when emulating terminal
 set termguicolors
@@ -144,4 +144,13 @@ nmap <leader>tr :term<cr>
 
 " Open new terminal and resize to 10 lines
 nmap <leader>ts :term<cr><C-W>:res10<cr>
+
+" Try and set colorscheme to dracula
+try
+    packadd! dracula
+    syntax enable
+    colorscheme dracula
+catch 
+    colorscheme slate
+endtry
 
