@@ -41,7 +41,7 @@ install_apps()
             sudo $1 install htop vim tmux docker python3 curl
 
             # Install nvm for node version control etc.
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
             ;;
     esac
 
@@ -88,7 +88,6 @@ setup_shell()
         echo "machine_name=\"name\"" > ~/.bash_aliases
     fi
 
-
     # Link bashrc and gitconfig and copy scripts
     ln ./config_files/.bashrc ~/.bashrc
 
@@ -119,7 +118,7 @@ setup_vim()
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     # Check if vim-plug install failed
-    if [ $? -eq "1" ]
+    if [ $? -ne "0" ]
     then
         echo "Failed to install Vim-Plug."
         echo "Please enter the following lines into your terminal: "
@@ -173,7 +172,7 @@ case $1 in
     -sv)
         get_package_manager $2
 
-        if [ $? -eq "1" ]
+        if [ $? -ne "0" ]
         then
             echo "Could not match package manager skipping application install..."
             exit 1
