@@ -25,6 +25,7 @@ alias hist='history'
 alias mkdirs='mkdir -p'
 alias readme='readme.sh'
 alias cl='clear'
+alias size="du -sh"
 
 # Machine specific config
 if [ -f ~/.bash_aliases ]; then
