@@ -11,6 +11,36 @@ export bashpr="$HOME/.bash_profile"
 export vimrc="$HOME/.vim/vimrc"
 export gitconf="$HOME/.gitconfig"
 export bashal="$HOME/.bash_aliases"
+export dotfiles="$HOME/dotfiles"
+
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+cd_git() {
+    if [ -d .git ]
+    then
+        printf "Sync with remote?: "
+        read input
+
+        case $input in
+            y)
+                git pull origin master
+                ;;
+
+            yes)
+                git pull origin master
+                ;;
+
+            *)
+                echo "Skipping..."
+        esac
+    fi
+}
+
+custom_cd() { 
+    cd $1; cd_git
+}
 
 # Useful aliases and shortcuts
 alias ls='ls -lh --color=auto'
@@ -26,6 +56,7 @@ alias mkdirs='mkdir -p'
 alias readme='readme.sh'
 alias cl='clear'
 alias size="du -sh"
+alias cdg='custom_cd'
 
 # Machine specific config
 if [ -f ~/.bash_aliases ]; then
@@ -43,10 +74,7 @@ alias bashpr="vim $bashpr"
 alias gitconf="vim $gitconf"
 alias bashal="vim $bashal"
 alias loadbash="source $bashrc"
-
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
+alias dotfiles="cd $dotfiles"
 
 # Command Prompt
 export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]$machine_name \[$(tput setaf 3)\]\w\[$(tput setaf 2)\]]\[$(tput setaf 4)\]\$(parse_git_branch)\[$(tput setaf 6)\]\n-> \[$(tput sgr0)\]"
