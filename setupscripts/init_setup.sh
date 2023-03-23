@@ -89,8 +89,7 @@ setup_shell()
     fi
 
     # Link bashrc and gitconfig and copy scripts
-    ln ./config_files/.bashrc ~/.bashrc
-
+    ln ./config_files/.bashrc ~
     ln ./config_files/.gitconfig ~
     cp ./config_files/readme.sh ~/.local/bin
 
@@ -103,8 +102,6 @@ setup_shell()
     fi
 
     cp ./vim/basic.vim ~/.vim/vimrc
-
-    ./dracula_install.sh
 
 }
 
@@ -137,7 +134,7 @@ setup_vim()
 
     # Link vimrc
     rm ~/.vim/vimrc
-    ln ./vim/vimrc ~/.vim/vimrc
+    ln ./vim/vimrc ~/.vim/
 }
 
 if [ $0 != ./setupscripts/init_setup.sh ]
@@ -185,7 +182,7 @@ case $1 in
         ;;
 
     *)
-        echo "No valid options were selected skipping application installs..."
+        echo "No valid options were selected skipping application installs and vim setup..."
         ;;
 esac
 

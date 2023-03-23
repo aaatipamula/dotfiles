@@ -46,7 +46,7 @@ sync_dotfiles() {
     if [ -d $dotfiles ]
     then
         cd $dotfiles
-        git pull origin master
+        git pull origin master > /dev/null/ 2>&1
     fi
     cd
 }
