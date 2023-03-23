@@ -42,6 +42,15 @@ custom_cd() {
     cd $1; cd_git
 }
 
+sync_dotfiles() {
+    if [ -d $dotfiles ]
+    then
+        cd $dotfiles
+        git pull origin master
+    fi
+    cd
+}
+
 # Useful aliases and shortcuts
 alias ls='ls -lh --color=auto'
 alias l.='ls -d .*'         # Only hidden directory
@@ -78,6 +87,8 @@ alias dotfiles="cd $dotfiles"
 
 # Command Prompt
 export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]$machine_name \[$(tput setaf 3)\]\w\[$(tput setaf 2)\]]\[$(tput setaf 4)\]\$(parse_git_branch)\[$(tput setaf 6)\]\n-> \[$(tput sgr0)\]"
+
+sync_dotfiles
 
 # Make sure path includes my local bin directory
 export PATH=/home/aaatipamula/.local/bin:$PATH
