@@ -17,36 +17,15 @@ parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-cd_git() {
-    if [ -d .git ]
-    then
-        printf "Sync with remote?: "
-        read input
-
-        case $input in
-            y)
-                git pull origin master
-                ;;
-
-            yes)
-                git pull origin master
-                ;;
-
-            *)
-                echo "Skipping..."
-        esac
-    fi
-}
-
 custom_cd() { 
-    cd $1; cd_git
+    cd $1; git pull origin master
 }
 
 sync_dotfiles() {
     if [ -d $dotfiles ]
     then
         cd $dotfiles
-        git pull origin master > /dev/null/ 2>&1
+        git pull origin master > /dev/null 2>&1
     fi
     cd
 }
