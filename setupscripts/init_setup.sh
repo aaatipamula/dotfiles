@@ -76,12 +76,21 @@ dracula_vim_install()
     if [ ! -d ~/.vim/pack/themes/start ]
     then
         mkdir -p ~/.vim/pack/themes/start
+        cd ~/.vim/pack/themes/start
+        git clone https://github.com/dracula/vim.git dracula
+    else
+        if [ -d ~/.vim/pack/themes/start/dracula ]
+        then
+            echo "Dracula Vim already installed"
+        else
+            cd ~/.vim/pack/themes/start
+            git clone https://github.com/dracula/vim.git dracula
+        fi
     fi
 
-    cd ~/.vim/pack/themes/start
-    git clone https://github.com/dracula/vim.git dracula
 }
 
+# Basic shell setup
 setup_shell()
 {
     echo "Setting up Bash."
@@ -127,7 +136,6 @@ setup_shell()
         else
             rm ~/.gitconfig
             ln ./config_files/.gitconfig ~
-
         fi
 
     else
@@ -142,11 +150,28 @@ setup_shell()
         mkdir ~/.vim
     fi
 
-    cp ./vim/basic.vim ~/.vim/vimrc
+    if [ -f ~/.vim/vimrc ]
+    then
+
+        if cmp -s  ~/.vim/vimrc ./vim/basic.vim
+        then
+            echo "Vim already set up."
+            return
+
+        else
+            rm ~/.vim/vimrc
+            cp ./vim/basic.vim ~/.vim/vimrc
+        fi
+
+    else
+        cp ./vim/basic.vim ~/.vim/vimrc
+    fi
+
     dracula_vim_install
 
 }
 
+# Install vim-plug and 
 setup_vim()
 {
     echo "Installing vim-plug."
@@ -180,7 +205,6 @@ setup_vim()
 # Parent
 main()
 {
-    # Begin script
     if [ $0 != ./setupscripts/init_setup.sh ]
     then
         echo "Please run script in root directory"
@@ -193,7 +217,7 @@ main()
         -s)
             validate_package_manager $2
 
-            if [ $? -eq "1" ]
+            if [ $? -ne "0" ]
             then
                 echo "Could not match package manager skipping application install..."
             else
