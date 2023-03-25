@@ -1,10 +1,10 @@
-name: test-scripts
+name: Test-Scripts
 
 on: push
 
 jobs:
-  test-scripts:
-    name: test on ubuntu
+  vim-dracula:
+    name: Vim Dracula Install
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -13,8 +13,8 @@ jobs:
       - name: test dracula install
         run: ./setupscripts/dracula_install.sh
 
-  test-init-setup0:
-    name: test init_setup with apps and vim install
+  init-setup-vim-apps:
+    name: init_setup.sh With App and Vim Install
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -24,8 +24,8 @@ jobs:
         run: sudo ./setupscripts/init_setup.sh -sv apt
 
 
-  test-init-setup1:
-    name: test init_setup with just application install
+  init-setup-apps:
+    name: init_setup.sh With App Install
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -35,8 +35,8 @@ jobs:
         run: sudo ./setupscripts/init_setup.sh -s apt
 
 
-  test-init-setup3:
-    name: test init_setup with vim install
+  init-setup-vim:
+    name: init_setup.sh With Vim Install
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -52,14 +52,14 @@ jobs:
         run: cat ~/.vim/vimrc
 
 
-  test-init-setup4:
-    name: test init_setup basic
+  init-setup-basic:
+    name: test init_setup.sh With Basic Install
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v3
 
-      - name: test basic 
+      - name: test basic install
         run: ./setupscripts/init_setup.sh 
 
       - name: show contents of bashrc
@@ -68,8 +68,8 @@ jobs:
       - name: show contents of gitconfig
         run: cat ~/.gitconfig
 
-      - name: show bin directory
-        run: ls ~/.local/bin
+      - name: show dracula directory
+        run: ls ~/.vim/pack/themes/start/dracula
 
       - name: show contents of vimrc
         run: cat ~/.vim/vimrc

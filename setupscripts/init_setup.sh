@@ -206,7 +206,7 @@ main()
             ;;
 
         *)
-            echo "No valid options were selected skipping application installs and vim setup..."
+            echo "No valid options were selected, skipping application installs and vim setup..."
             ;;
     esac
 
@@ -214,4 +214,4 @@ main()
 }
 
 # Start script
-main
+main $1 $2
