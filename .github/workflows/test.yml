@@ -3,16 +3,6 @@ name: Test-Scripts
 on: push
 
 jobs:
-  vim-dracula:
-    name: Vim Dracula Install
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v3
-
-      - name: test dracula install
-        run: ./setupscripts/dracula_install.sh
-
   init-setup-vim-apps:
     name: init_setup.sh With App and Vim Install
     runs-on: ubuntu-latest
