@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: test sudo+vim
-        run: sudo ./setupscripts/init_setup.sh -sv ubuntu
+        run: sudo ./setupscripts/init_setup.sh -sv apt
 
 
   test-init-setup1:
@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: test sudo 
-        run: sudo ./setupscripts/init_setup.sh -s ubuntu
+        run: sudo ./setupscripts/init_setup.sh -s apt
 
 
   test-init-setup3:

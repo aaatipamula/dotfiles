@@ -9,7 +9,6 @@
 # Install commonly used apps
 install_apps()
 {
-
     # Check if root
     if [ $(whoami) != "root" ]
     then
@@ -18,54 +17,57 @@ install_apps()
     fi
 
     case $1 in
-
         apt)
             # Add repo for neovim
             sudo add-apt-repository ppa:neovim-ppa/stable
-
-            # update and upgrade
-            sudo $1 update && sudo $1 upgrade
-
-            # install commonly used programs
-            sudo $1 install htop vim tmux docker python3 curl
-
-            # Install nvm for node version control etc.
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-            ;;
-
-        *)
-            # update and upgrade
-            sudo $1 update && sudo $1 upgrade
-
-            # install commonly used programs
-            sudo $1 install htop vim tmux docker python3 curl
-
-            # Install nvm for node version control etc.
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
             ;;
     esac
 
+    # update and upgrade
+    sudo $1 update && sudo $1 upgrade
+
+    if [ $? -ne "0" ]
+    then
+        echo "Something went wrong updating and upgrading the package manager."
+        echo "Please run: "
+        printf "\n\tsudo $1 update && sudo $1 upgrade"
+    fi
+
+    # install commonly used programs
+    sudo $1 install htop vim tmux docker python3 curl
+
+    if [ $? -ne "0" ]
+    then
+        echo "Something went wrong installing programs."
+        echo "Please run: "
+        printf "\n\tsudo $1 install htop vim tmux docker python3 curl"
+    fi
+
+    # Install nvm for node version control etc.
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
+    if [ $? -ne "0" ]
+    then
+        echo "Something went wrong installing nvm."
+        echo "Please run: "
+        printf "\n\tcurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
+    fi
 }
 
 # Valid package managers
-get_package_manager()
+validate_package_manager()
 {
-
     case $1 in
 
-        ubuntu)
-            package_manager="apt"
+        apt)
             ;;
-        fedora)
-            package_manager="dnf"
+        dnf)
             ;;
-        mac)
-            package_manager="brew"
+        brew)
             ;;
         *)
             return 1
     esac
-
 }
 
 setup_shell()
@@ -78,9 +80,22 @@ setup_shell()
         mkdir -p ~/.local/bin
     fi
 
+    # Setup bashrc
     if [ -f ~/.bashrc ]
     then
-        rm ~/.bashrc
+
+        if cmp -s ~/.bashrc ./config_files/.bashc
+        then
+            echo "Bash already set up."
+            return
+
+        else
+            rm ~/.bashrc
+            ln ./config_files/.bashrc ~
+        fi
+
+    else
+        ln ./config_files/.bashrc ~
     fi
 
     if [ ! -f ~/.bash_aliases ]
@@ -88,10 +103,24 @@ setup_shell()
         echo "machine_name=\"name\"" > ~/.bash_aliases
     fi
 
-    # Link bashrc and gitconfig and copy scripts
-    ln ./config_files/.bashrc ~
-    ln ./config_files/.gitconfig ~
-    cp ./config_files/readme.sh ~/.local/bin
+    # Setup gitconfig
+    if [ -f ~/.gitconfig ]
+    then
+
+        if cmp -s  ~/.gitconfig ./config_files/.gitconfig
+        then
+            echo "Git already set up."
+            return
+
+        else
+            rm ~/.gitconfig
+            ln ./config_files/.gitconfig ~
+
+        fi
+
+    else
+        ln ./config_files/.gitconfig ~
+    fi
 
     echo "Finished setting up Bash!"
 
@@ -107,7 +136,6 @@ setup_shell()
 
 setup_vim()
 {
-
     echo "Installing vim-plug."
 
     # Install vim-plug
@@ -121,7 +149,6 @@ setup_vim()
         echo "Please enter the following lines into your terminal: "
         echo "curl -fLo \\$HOME/.vim/autoload/plug.vim --create-dirs \\"
         echo "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-        exit 1
     fi
 
     echo "Setting up vimrc"
@@ -137,53 +164,54 @@ setup_vim()
     ln ./vim/vimrc ~/.vim/
 }
 
-if [ $0 != ./setupscripts/init_setup.sh ]
-then
-    echo "Please run script in root directory"
-    exit 1
-fi
+# Parent
+main()
+{
+    # Begin script
+    if [ $0 != ./setupscripts/init_setup.sh ]
+    then
+        echo "Please run script in root directory"
+        exit 1
+    fi
 
-setup_shell
+    setup_shell
 
-package_manager=""
+    case $1 in
+        -s)
+            validate_package_manager $2
 
-case $1 in
-    -s)
-        get_package_manager $2
+            if [ $? -eq "1" ]
+            then
+                echo "Could not match package manager skipping application install..."
+            else
+                install_apps $2
+            fi
+            ;;
 
-        if [ $? -eq "1" ]
-        then
-            echo "Could not match package manager skipping application install..."
-            exit 1
+        -v)
+            setup_vim
+            ;;
 
-        else
-            install_apps $package_manager
-        fi
+        -sv)
+            get_package_manager $2
 
-        ;;
+            if [ $? -ne "0" ]
+            then
+                echo "Could not match package manager skipping application install..."
+            else
+                install_apps $package_manager
+            fi
 
-    -v)
-        setup_vim
-        ;;
+            setup_vim
+            ;;
 
-    -sv)
-        get_package_manager $2
+        *)
+            echo "No valid options were selected skipping application installs and vim setup..."
+            ;;
+    esac
 
-        if [ $? -ne "0" ]
-        then
-            echo "Could not match package manager skipping application install..."
-            exit 1
+    echo "Setup done! Run 'source ~/.bashrc' to load shell configuration."
+}
 
-        else
-            install_apps $package_manager
-        fi
-
-        setup_vim
-        ;;
-
-    *)
-        echo "No valid options were selected skipping application installs and vim setup..."
-        ;;
-esac
-
-echo "Setup done! Run 'source ~/.bashrc' to load shell configuration."
+# Start script
+main
