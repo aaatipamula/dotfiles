@@ -30,6 +30,19 @@ sync_dotfiles() {
     cd
 }
 
+check_readme() {
+    if [ -f ./README.md ]
+    then
+        vim ./README.md
+    else
+        echo "./README.md does not exist!"
+        return 1
+    fi
+}
+
+# Pull any changes from dotfiles
+sync_dotfiles
+
 # Useful aliases and shortcuts
 alias ls='ls -lh --color=auto'
 alias l.='ls -d .*'         # Only hidden directory
@@ -41,7 +54,7 @@ alias p3='python3'
 alias q='exit'
 alias hist='history'
 alias mkdirs='mkdir -p'
-alias readme='readme.sh'
+alias readme='check_readme'
 alias cl='clear'
 alias size="du -sh"
 alias cdg='custom_cd'
@@ -66,8 +79,6 @@ alias dotfiles="cd $dotfiles"
 
 # Command Prompt
 export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]$machine_name \[$(tput setaf 3)\]\w\[$(tput setaf 2)\]]\[$(tput setaf 4)\]\$(parse_git_branch)\[$(tput setaf 6)\]\n-> \[$(tput sgr0)\]"
-
-sync_dotfiles
 
 # Make sure path includes my local bin directory
 export PATH=/home/aaatipamula/.local/bin:$PATH
