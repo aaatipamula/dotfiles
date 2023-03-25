@@ -70,6 +70,18 @@ validate_package_manager()
     esac
 }
 
+# Dracula Install
+dracula_vim_install()
+{
+    if [ ! -d ~/.vim/pack/themes/start ]
+    then
+        mkdir -p ~/.vim/pack/themes/start
+    fi
+
+    cd ~/.vim/pack/themes/start
+    git clone https://github.com/dracula/vim.git dracula
+}
+
 setup_shell()
 {
     echo "Setting up Bash."
@@ -131,6 +143,7 @@ setup_shell()
     fi
 
     cp ./vim/basic.vim ~/.vim/vimrc
+    dracula_vim_install
 
 }
 
@@ -193,7 +206,7 @@ main()
             ;;
 
         -sv)
-            get_package_manager $2
+            validate_package_manager $2
 
             if [ $? -ne "0" ]
             then
