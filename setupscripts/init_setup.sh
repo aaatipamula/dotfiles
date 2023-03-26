@@ -108,8 +108,6 @@ setup_shell()
         if cmp -s ~/.bashrc ./config_files/.bashc
         then
             echo "Bash already set up."
-            return
-
         else
             rm ~/.bashrc
             ln ./config_files/.bashrc ~
@@ -131,8 +129,6 @@ setup_shell()
         if cmp -s  ~/.gitconfig ./config_files/.gitconfig
         then
             echo "Git already set up."
-            return
-
         else
             rm ~/.gitconfig
             ln ./config_files/.gitconfig ~
@@ -156,8 +152,6 @@ setup_shell()
         if cmp -s  ~/.vim/vimrc ./vim/basic.vim
         then
             echo "Vim already set up."
-            return
-
         else
             rm ~/.vim/vimrc
             cp ./vim/basic.vim ~/.vim/vimrc
