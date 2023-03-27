@@ -73,15 +73,7 @@ setup_vim_plug
 check $? "2"
 
 
-# Check vim plug install
-setup_vim_plug
-check $? "0"
-
-setup_vim_plug
-check $? "2"
-
-
-# Check vim plug install
+# Check vimrc setup
 setup_vimrc
 check $? "0"
 
