@@ -212,6 +212,13 @@ setup_vimrc(){
         rm -rf ~/.vim/pack/themes/start/dracula
     fi
 
+    # Make vim directory if not exists
+    if [ ! -d ~/.vim ]
+    then
+        mkdir ~/.vim
+    fi
+
+
     # Link vimrc
     if [ -f ~/.vim/vimrc ]
     then

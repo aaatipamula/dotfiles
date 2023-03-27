@@ -3,18 +3,8 @@ name: Test-Scripts
 on: push
 
 jobs:
-  test:
-    name: Test Install Functions
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v3
-
-      - name: run test script
-        run: ln ./vim/vimrc ~/.vim/
-
   test-install-functions:
-    name: Test Install Functions
+    name: test install functions
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
