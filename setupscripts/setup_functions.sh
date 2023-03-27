@@ -67,6 +67,8 @@ validate_package_manager()
 # Dracula Install
 dracula_vim_install()
 {
+    echo "Installing Dracula Vim."
+
     if [ ! -d ~/.vim/pack/themes/start ]
     then
         mkdir -p ~/.vim/pack/themes/start
@@ -87,6 +89,8 @@ dracula_vim_install()
 # Make local bin folder and link bashrc
 setup_bash()
 {
+    echo "Setting up bash."
+
     if  [ ! -d ~/.local/bin ]
     then
         mkdir -p ~/.local/bin
@@ -119,6 +123,8 @@ setup_bash()
 # Link gitconfig file
 setup_git()
 {
+    echo "Setting up git."
+
     if [ -f ~/.gitconfig ]
     then
 
@@ -141,6 +147,8 @@ setup_git()
 # Make vim directories and copy over vimrc
 vim_basic_setup()
 {
+    echo "Installing basic vimrc."
+
     if [ ! -d ~/.vim ]
     then
         mkdir ~/.vim
@@ -196,6 +204,8 @@ setup_vim_plug()
 
 # Link vimrc
 setup_vimrc(){
+    echo "Setting up vimrc."
+
     # Remove dracula theme
     if [ -d ~/.vim/pack/themes/start/dracula ]
     then
@@ -217,7 +227,7 @@ setup_vimrc(){
         fi
 
     else
-        ln ./vim/vimrc ~/.vim/vimrc
+        ln ./vim/vimrc ~/.vim/
         return 0
     fi
 }
