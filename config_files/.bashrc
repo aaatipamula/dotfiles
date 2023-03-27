@@ -12,6 +12,7 @@ export vimrc="$HOME/.vim/vimrc"
 export gitconf="$HOME/.gitconfig"
 export bashal="$HOME/.bash_aliases"
 export dotfiles="$HOME/dotfiles"
+export thing="thing"
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -25,8 +26,10 @@ sync_dotfiles() {
     if [ -d $dotfiles ]
     then
         cd $dotfiles
-        git pull origin master > /dev/null 2>&1
+        git pull origin master
+        git push origin master
     fi
+    source ~/.bashrc
     cd
 }
 
@@ -39,9 +42,6 @@ check_readme() {
         return 1
     fi
 }
-
-# Pull any changes from dotfiles
-sync_dotfiles
 
 # Useful aliases and shortcuts
 alias ls='ls -lh --color=auto'
@@ -58,6 +58,7 @@ alias readme='check_readme'
 alias cl='clear'
 alias size="du -sh"
 alias cdg='custom_cd'
+alias sync='sync_dotfiles'
 
 # Machine specific config
 if [ -f ~/.bash_aliases ]; then
