@@ -3,64 +3,54 @@ name: Test-Scripts
 on: push
 
 jobs:
-  init-setup-vim-apps:
-    name: init_setup.sh With App and Vim Install
+  test-install-functions:
+    name: Test Install Functions
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v3
 
-      - name: test sudo+vim
-        run: sudo ./setupscripts/init_setup.sh -sv apt
+      - name: run test script
+        run: sudo ./tests/function_tests.sh
 
 
-  init-setup-apps:
-    name: init_setup.sh With App Install
+  test-preset-main:
+    name: preset main
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v3
 
-      - name: test sudo 
-        run: sudo ./setupscripts/init_setup.sh -s apt
+      - name: test preset main
+        run: sudo ./setupscripts/setup preset main apt
 
-
-  init-setup-vim:
-    name: init_setup.sh With Vim Install
+  test-preset-server:
+    name: preset server
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v3
 
-      - name: test vim 
-        run: ./setupscripts/init_setup.sh -v
+      - name: test preset server
+        run: sudo ./setupscripts/setup preset server apt
 
-      - name: show vim directory
-        run: ls ~/.vim
-
-      - name: show contents of vimrc
-        run: cat ~/.vim/vimrc
-
-
-  init-setup-basic:
-    name: test init_setup.sh With Basic Install
+  test-preset-bare:
+    name: preset bare
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v3
 
-      - name: test basic install
-        run: ./setupscripts/init_setup.sh 
+      - name: test preset bare
+        run: sudo ./setupscripts/setup preset bare apt
 
-      - name: show contents of bashrc
-        run: cat ~/.bashrc
+  test-custom:
+    name: test custom install
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
 
-      - name: show contents of gitconfig
-        run: cat ~/.gitconfig
-
-      - name: show dracula directory
-        run: ls ~/.vim/pack/themes/start/dracula
-
-      - name: show contents of vimrc
-        run: cat ~/.vim/vimrc
+      - name: test custom install
+        run: sudo ./setupscripts/setup bash git fail vim
 
