@@ -70,8 +70,7 @@ dracula_vim_install()
     if [ ! -d ~/.vim/pack/themes/start ]
     then
         mkdir -p ~/.vim/pack/themes/start
-        cd ~/.vim/pack/themes/start
-        git clone https://github.com/dracula/vim.git dracula
+        git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula
         return 0
     else
         if [ -d ~/.vim/pack/themes/start/dracula ]
@@ -79,8 +78,7 @@ dracula_vim_install()
             echo "Dracula Vim already installed"
             return 2
         else
-            cd ~/.vim/pack/themes/start
-            git clone https://github.com/dracula/vim.git dracula
+            git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula
             return 0
         fi
     fi

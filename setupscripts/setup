@@ -72,7 +72,7 @@ then
 else
     for option in $@
     do
-        case option in 
+        case $option in 
 
             apps)
                 shift 
