@@ -38,10 +38,10 @@ set autoindent
 set number
 
 " get bash-like tab completions
-set wildmode=longest,list   
+set wildmode=longest,list
 
 " allow auto-indenting depending on file type
-filetype plugin indent on   
+filetype plugin indent on
 
 " syntax highlighting
 syntax on
@@ -147,6 +147,8 @@ nmap <leader>tr :term<cr>
 
 " Open new terminal and resize to 10 lines
 nmap <leader>ts :term<cr><C-W>:res10<cr>
+
+nnoremap <CR> :noh<CR><CR>
 
 " ====================
 " == Plugin Configs ==

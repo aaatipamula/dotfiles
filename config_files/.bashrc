@@ -12,7 +12,6 @@ export vimrc="$HOME/.vim/vimrc"
 export gitconf="$HOME/.gitconfig"
 export bashal="$HOME/.bash_aliases"
 export dotfiles="$HOME/dotfiles"
-export thing="thing"
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -44,7 +43,8 @@ check_readme() {
 }
 
 # Useful aliases and shortcuts
-alias ls='ls -lh --color=auto'
+# alias ls='ls -lh --color=auto'
+alias ls='exa -lh'
 alias l.='ls -d .*'         # Only hidden directory
 alias ll='ls -rt'           # Organize by date modified
 alias ld='ls -Ud */'        # Only directories
@@ -59,6 +59,8 @@ alias cl='clear'
 alias size="du -sh"
 alias cdg='custom_cd'
 alias sync='sync_dotfiles'
+alias gd='git diff'
+alias gs='git status'
 
 # Machine specific config
 if [ -f ~/.bash_aliases ]; then
