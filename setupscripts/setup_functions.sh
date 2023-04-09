@@ -291,8 +291,8 @@ install_nvchad()
 
     echo "After opening Neovim run the following:"
     echo ":MasonInstallAll"
-    return 0
 
+    return 0
   fi
 }
 
@@ -305,12 +305,12 @@ setup_nvchad()
     echo "NvChad config already exists."
     echo "Backing up old config to ~/.backups/nvchad"
 
-    cp -rf ~/.config/nvim/lua/custom/ ~/.backups/nvchad
+    cp -rf ~/.config/nvim/lua/custom ~/.backups/nvchad
   fi
 
   rm -rf ~/.config/nvim/lua/custom
 
-  cp -r ../nvim/custom ~/.config/nvim/lua/
+  cp -r ./nvim/custom ~/.config/nvim/lua/
 
   return 0
 }
