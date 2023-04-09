@@ -1,7 +1,3 @@
-
-# Name of the Machine
-export machine_name="machine_name"
-
 # VIM export
 export VISUAL="vim"
 
@@ -14,37 +10,46 @@ export bashal="$HOME/.bash_aliases"
 export dotfiles="$HOME/dotfiles"
 
 parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 custom_cd() { 
-    cd $1; git pull origin master
+  cd $1; git pull origin master
 }
 
 sync_dotfiles() {
-    if [ -d $dotfiles ]
-    then
-        cd $dotfiles
-        git pull origin master
-        git push origin master
-    fi
-    source ~/.bashrc
-    cd
+  if [ -d $dotfiles ]
+  then
+    cd $dotfiles
+    git pull origin master
+    git push origin master
+  else
+    echo "No dotfiles present"
+  fi
+  source ~/.bashrc
+
+  rm $bashrc
+  rm $gitconf
+  rm $vimrc
+
+  ln $dotfiles/config_files/.bashrc $bashrc
+  ln $dotfiles/config_files/.gitconfig $gitconf
+
+  cd
 }
 
 check_readme() {
-    if [ -f ./README.md ]
-    then
-        vim ./README.md
-    else
-        echo "./README.md does not exist!"
-        return 1
-    fi
+  if [ -f ./README.md ]
+  then
+    vim ./README.md
+  else
+    echo "./README.md does not exist!"
+    return 1
+  fi
 }
 
 # Useful aliases and shortcuts
-# alias ls='ls -lh --color=auto'
-alias ls='exa -lh'
+alias ls='ls -lh --color=auto'
 alias l.='ls -d .*'         # Only hidden directory
 alias ll='ls -rt'           # Organize by date modified
 alias ld='ls -Ud */'        # Only directories
@@ -62,15 +67,6 @@ alias sync='sync_dotfiles'
 alias gd='git diff'
 alias gs='git status'
 
-# Machine specific config
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# Uncomment below if python 3.10 isn't default
-#alias python3='python3.10'
-#alias p3='python3.10'
-
 # Easy access/edit config files
 alias vimrc="vim $vimrc"
 alias bashrc="vim $bashrc"
@@ -79,6 +75,11 @@ alias gitconf="vim $gitconf"
 alias bashal="vim $bashal"
 alias loadbash="source $bashrc"
 alias dotfiles="cd $dotfiles"
+
+# Machine specific config
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
 # Command Prompt
 export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]$machine_name \[$(tput setaf 3)\]\w\[$(tput setaf 2)\]]\[$(tput setaf 4)\]\$(parse_git_branch)\[$(tput setaf 6)\]\n-> \[$(tput sgr0)\]"
@@ -109,3 +110,4 @@ shopt -s checkwinsize
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
