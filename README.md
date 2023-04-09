@@ -6,6 +6,8 @@
 
 This is a repo to host any files and scripts that help me get a machine set up faster. That way I don't have to go back and manually do all of this configuration again. （。＾▽＾）
 
+## Directories
+
 ### config_files
 
 This is just config files for various programs. They are listed below:
@@ -13,29 +15,28 @@ This is just config files for various programs. They are listed below:
 - Bash
 - Git
 
-This also contains a script that makes it easier to access README.md files
-
 ### vim
 
 This contains two different config files for vim. 
 
-- vimrc
+- vimrc (*deprecated*)
 - basic.vim
 
-The `vimrc` file contains my main fully decked out config for Vim. This is mostly used on any machine that I will regularly code on. 
+The `vimrc` file contains my main fully decked out config for Vim. This is now deprecated as I have switched to neovim.<br> 
 
 The `basic.vim` file is a basic config for Vim that I use on remote machines or machines I don't intend to use regularly.
 
 ### setupscripts
 
-This contains 3 files. 
+This contains 2 files. 
 
-- `dracula_install.sh`
-- `init_setup.sh`
+- `setup_functions.sh`
+- `setup`
 
-The first file is a simple script to install the Dracula theme for vim. I don't intend to use this often however its there if I need it.
+`setup_function.sh` is a collection of functions that each perform a specific install or setup action. <br>
 
-The second file is a setup script where specific parts of setup can be initated. This setup script will add all my prefered shell configurations regardless of any flags present or not. There are also options to install vim and install apps that I use often based on how often I plan on using the machine. 
+The second file is a setup script where specific parts of setup can be initated. This setup script will add all my prefered shell configurations regardless of any flags present or not. There are also options to perform specific actions from `setup_functions.sh` as neeed.
 
-The third file is a setup script for any other Linux machine I may use. Its here just incase the previous file doesn't work for one reason or another
+### test-scripts
 
+This contains a scripts to test the install functions
