@@ -12,6 +12,7 @@ check_return()
   if [ $1 -ne "$2" ]
   then
     echo "Failed."
+    echo "Returned unexpected code of $1."
     exit 1
   else
     echo "Pass."
@@ -24,6 +25,7 @@ check_dir()
   if [ ! -d $1 ]
   then
     echo "Failed"
+    echo "Directory \"$1\" does not exist."
     exit 1
   else
     echo "Pass."

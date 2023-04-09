@@ -72,14 +72,13 @@ dracula_vim_install()
 {
   echo "Installing Dracula Vim."
 
-  if [ ! -d ~/.vim/pack/themes/start ]
+  if ! [ -d ~/.vim/pack/themes/start ]
   then
     mkdir -p ~/.vim/pack/themes/start
     git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula
     return 0
 
   else
-
     if [ -d ~/.vim/pack/themes/start/dracula ]
     then
       echo "Dracula Vim already installed"
@@ -97,9 +96,9 @@ setup_bash()
 {
   echo "Setting up bash."
 
-  for dir in ~/.local/bin /.backups ~/.config
+  for dir in ~/.local/bin ~/.backups ~/.config
   do
-    if [ ! -d $dir]
+    if ! [ -d $dir ]
     then
       mkdir -p $dir
     else
@@ -161,7 +160,7 @@ vim_basic_setup()
 {
   echo "Installing basic vimrc."
 
-  if [ ! -d ~/.vim ]
+  if ! [ -d ~/.vim ]
   then
     mkdir ~/.vim
   fi
@@ -191,7 +190,7 @@ setup_vim_plug()
 {
   echo "Installing vim-plug."
 
-  if [ ! -f ~/.vim/autoload/plug.vim ]
+  if ! [ -f ~/.vim/autoload/plug.vim ]
   then
     # Install vim-plug
     curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
@@ -228,7 +227,7 @@ setup_vimrc()
   fi
 
   # Make vim directory if not exists
-  if [ ! -d ~/.vim ]
+  if ! [ -d ~/.vim ]
   then
       mkdir ~/.vim
   fi
@@ -258,7 +257,7 @@ setup_vimrc()
 # Removes all nvim config if nvchad is not installed
 install_nvchad()
 {
-  if [ -d ~/.config/nvim/.git/]
+  if [ -d ~/.config/nvim/.git/ ]
   then
 
     cd ~/.config/nvim/
