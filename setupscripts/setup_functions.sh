@@ -261,6 +261,8 @@ install_nvchad()
   if [ -d ~/.config/nvim/.git/]
   then
 
+    cd ~/.config/nvim/
+
     if [ $(git config --get remote.origin.url) = "https://github.com/NvChad/NvChad" ] 
     then
       echo "NvChad already installed."
