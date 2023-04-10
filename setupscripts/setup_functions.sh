@@ -304,17 +304,21 @@ install_nvchad()
 # Backs up any existing nvchad config
 setup_nvchad()
 {
+  return_val=0
+
   if [ -f ~/.config/nvim/lua/custom/chadrc.lua ]
   then
     echo "NvChad config already exists."
     echo "Backing up old config to ~/.backups/nvchad"
 
     cp -rf ~/.config/nvim/lua/custom ~/.backups/nvchad
+    
+    return_val=2
   fi
 
   rm -rf ~/.config/nvim/lua/custom
 
   cp -r ./nvim/custom ~/.config/nvim/lua/
 
-  return 0
+  return $return_val
 }
