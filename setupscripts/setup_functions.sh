@@ -260,7 +260,7 @@ install_nvchad()
   if [ -d ~/.config/nvim/.git/ ]
   then
 
-    home = $(pwd)
+    home=$(pwd)
     cd ~/.config/nvim/
 
     if [ $(git config --get remote.origin.url) = "https://github.com/NvChad/NvChad" ] 
