@@ -265,6 +265,7 @@ install_nvchad()
 
     if [ $(git config --get remote.origin.url) = "https://github.com/NvChad/NvChad" ] 
     then
+      cd $home
       echo "NvChad already installed."
       return 2
     fi
