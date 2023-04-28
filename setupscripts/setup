@@ -109,6 +109,11 @@ else
                 vim_basic_setup
                 ;;
 
+            nvchad)
+                install_nvchad
+                setup_nvchad
+                ;;
+
             *)
                 echo "$option is not a valid option."
                 ;;
