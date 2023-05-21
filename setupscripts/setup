@@ -47,13 +47,6 @@ then
             ;;
 
         server)
-            # Check if root
-            if [ $(whoami) != "root" ]
-            then
-                echo Please run this script as root!
-                exit 1
-            fi
-
             validate_package_manager $3
 
             if [ $? -ne "0" ]
