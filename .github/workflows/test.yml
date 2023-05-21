@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: run test script
-        run: sudo ./tests/function_tests.sh
+        run: ./tests/function_tests.sh
 
   test-preset-main:
     name: preset main
@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: test preset main
-        run: sudo ./setupscripts/setup preset main apt
+        run: ./setupscripts/setup preset main apt
 
   test-preset-server:
     name: preset server
@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: test preset server
-        run: sudo ./setupscripts/setup preset server apt
+        run: ./setupscripts/setup preset server apt
 
   test-preset-bare:
     name: preset bare
@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: test preset bare
-        run: sudo ./setupscripts/setup preset bare apt
+        run: ./setupscripts/setup preset bare apt
 
   test-custom:
     name: test custom install
@@ -51,5 +51,5 @@ jobs:
         uses: actions/checkout@v3
 
       - name: test custom install
-        run: sudo ./setupscripts/setup bash git fail vim
+        run: ./setupscripts/setup bash git fail vim
 
