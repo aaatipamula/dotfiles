@@ -3,12 +3,6 @@
 # Install commonly used apps
 install_apps()
 {
-  # Check if root
-  if [ $(whoami) != "root" ]
-  then
-    echo Please run this script as root!
-    exit 1
-  fi
 
   if [ $1 = "apt" ]
   then
