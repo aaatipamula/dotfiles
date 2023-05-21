@@ -5,15 +5,22 @@ if [ -f ./setupscripts/setup_functions.sh ]
 then
     . ./setupscripts/setup_functions.sh
 else 
-    if [ $0 != "./setupscript/setup" ]
+    if [ $0 != "./setupscripts/setup" ]
     then
         echo "Please navigate to the root directory and run ./setupscripts/setup"
         exit 1
-    else
-        echo "Please navigate to the root directory."
-        exit 1
     fi
+    
 fi
+
+if [ $(whoami) = "root" ]
+then
+    echo "Please do not run as root!"
+    exit 1
+fi
+
+echo "WARNING You may need root permissions to run some aspects of this program, procede with caution."
+sleep 6
 
 # parse user input
 if [ $1 = "preset" ]

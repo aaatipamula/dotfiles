@@ -30,7 +30,6 @@ sync_dotfiles() {
 
   rm $bashrc
   rm $gitconf
-  rm $vimrc
 
   ln $dotfiles/config_files/.bashrc $bashrc
   ln $dotfiles/config_files/.gitconfig $gitconf
