@@ -1,28 +1,33 @@
+" If you have a mapping interfering with normal mode run the following to remove or remap those commands
+" :verbose imap <leader>
+"
 " set default color
-let g:color = "nord"
+let s:color = "nord"
+
+let g:mapleader=" "
 
 " disable compatibility to old-time vi
-set nocompatible 
+set nocompatible
 
-" show matching 
+" show matching
 set showmatch
 
-" case insensitive 
+" case insensitive
 set ignorecase
 
 " middle-click paste with mouse
 set mouse=v
 
-" highlight search 
+" highlight search
 set hlsearch
 
 " incremental search
 set incsearch
 
-" number of columns occupied by a tab 
+" number of columns occupied by a tab
 set tabstop=4
 
-" see multiple spaces as tabstops so <BS> does the right thing 
+" see multiple spaces as tabstops so <BS> does the right thing
 set softtabstop=4
 
 " converts tabs to white space
@@ -73,7 +78,7 @@ set termguicolors
 " Show what percentage of page you are down
 set ruler
 
-" smarter vim
+" smarter vim lol
 set smartcase
 
 " set encoding for english
@@ -82,8 +87,8 @@ set encoding=utf-8
 " show tablines
 set showtabline=2
 
+" open split stuff below and to the right
 set splitright
-
 set splitbelow
 
 " No annoying sounds
@@ -100,29 +105,15 @@ else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
 
-" Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
-
+" =====================================
+" == Stolen Commands and Other Stuff ==
+" =====================================
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" Remap Escape key to \i 
-inoremap <leader>i <Esc>
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -133,22 +124,88 @@ map <C-l> <C-W>l
 " Indicate if I am in insert mode
 autocmd InsertEnter,InsertLeave * set cul!
 
-" Escape insert mode in terminal with \t
-tmap <leader>e <C-W>N
+" Enter removes highlighting
+nnoremap <silent> <CR> :noh<CR><CR>
 
-" Switch window in terminal with \w
-tmap <leader>w <C-W><C-W>
+" Useful movement
+nnoremap ge $
+nnoremap gs 0
 
-" Resize terminal to 10 lines
-tmap <leader>c <C-W>:res10<cr>
+" Remap to close easier
+nnoremap <leader>Q :qa<cr>
+nnoremap <leader>X :wq<cr>
+nnoremap <leader>Xx :wqa<cr>
 
-" Open terminal with \t in normal mode
-nmap <leader>tr :term<cr>
 
-" Open new terminal and resize to 10 lines
-nmap <leader>ts :term<cr><C-W>:res10<cr>
+" ======================
+" == Buffer Mappings ==
+" ======================
+" edit new buffer from current buffer path
+nnoremap <leader>e :e! <C-r>=expand("%:p:h")<cr>/
 
-nnoremap <CR> :noh<CR><CR>
+" open buffer with filename
+nnoremap <leader>o :b!
+
+" quit current buffer
+nnoremap <leader>x :bd<cr>
+
+" open buffers 1-9
+nnoremap <leader>1 :b!1<cr>
+nnoremap <leader>2 :b!2<cr>
+nnoremap <leader>3 :b!3<cr>
+nnoremap <leader>4 :b!4<cr>
+nnoremap <leader>5 :b!5<cr>
+nnoremap <leader>6 :b!6<cr>
+nnoremap <leader>7 :b!7<cr>
+nnoremap <leader>8 :b!8<cr>
+nnoremap <leader>9 :b!9<cr>
+
+" next and previous buffers with 
+nnoremap <TAB> :bn!<cr>
+nnoremap <S-TAB> :bp!<cr>
+
+
+" ==================
+" == Tab Mappings ==
+" ==================
+" useful tab mappings
+nnoremap <leader>tn :tabnew<cr>
+nnoremap <leader>tc :tabclose<cr>
+nnoremap <leader>tm :tabmove<cr>
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nnoremap <silent> <Leader>tl :exe "tabn ".g:lasttab<CR>
+autocmd TabLeave * let g:lasttab = tabpagenr()
+
+" Opens a new tab with the current buffer's path (taken from someones's vimrc)
+nnoremap <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
+
+
+" =======================
+" == Terminal Mappings ==
+" =======================
+" open horziontal terminal
+nnoremap <silent> <leader>h :term<cr>
+
+" open vertianl terminal
+nnoremap <silent> <leader>v :vert term<cr>
+
+" open new terminal and resize to 15 lines
+nnoremap <silent> <leader>hs :term<cr><C-W>:res15<cr>
+
+" escape insert mode in terminal ALT-e
+tnoremap <C-e> <C-W>N
+
+" switch windows in terminal easier
+tnoremap <C-j> <C-W>j
+tnoremap <C-k> <C-W>k
+tnoremap <C-h> <C-W>h
+tnoremap <C-l> <C-W>l
+
+" resize terminal to 10 lines
+tnoremap <M-r> <C-W>:res10<cr>
+
 
 " ====================
 " == Plugin Configs ==
@@ -157,62 +214,99 @@ call plug#begin()
  Plug 'dracula/vim'
  Plug 'arcticicestudio/nord-vim'
  Plug 'scrooloose/nerdtree'
- Plug 'preservim/nerdcommenter'
- Plug 'mhinz/vim-startify'
+ Plug 'tpope/vim-commentary'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
- Plug 'jiangmiao/auto-pairs'
  Plug 'sheerun/vim-polyglot'
+ Plug 'jiangmiao/auto-pairs'
  Plug 'ryanoasis/vim-devicons'
- Plug 'thaerkh/vim-indentguides'
 call plug#end()
 
-" Try and set default theme
-try
-    if g:color == "dracula"
-        colorscheme dracula
-    elseif g:color == "nord"
-        colorscheme nord
-    else 
+
+" ===========================
+" == Color Scheme Mappings ==
+" ===========================
+function ChangeColorScheme()
+    try
+        if s:color == "dracula"
+          colorscheme dracula
+        elseif s:color == "nord"
+          colorscheme nord
+        endif
+    catch
         colorscheme slate
+    endtry
+endfunction
+
+function ToggleColorSchemes()
+    if s:color == "dracula"
+        let s:color = "nord"
+        call ChangeColorScheme()
+    elseif s:color == "nord"
+        let s:color = "dracula"
+        call ChangeColorScheme()
     endif
-catch
-    colorscheme slate
-endtry
+endfunction
+
+" Try and set default theme
+call ChangeColorScheme()
 
 " Quick remap colorschemes
-nmap <leader>dr :colorscheme dracula
-nmap <leader>nr :colorscheme nord
+nnoremap <silent> <leader>dr :call ChangeColorScheme()<cr>
+nnoremap <silent> <leader>nr :call ChangeColorScheme()<cr>
 
-" Remap command for NERDTree
-nmap <leader>dir :NERDTree<cr>
+" Toggle colorschemes
+nnoremap <leader>tt :call ToggleColorSchemes()<cr>
 
-" Disable warning from coc plugin for vim < 8.2
+
+" ===========================
+" == NERDTree Mappings ==
+" ===========================
+" NERDTREE bindings
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+
+" =========================
+" == Commentary Mappings ==
+" =========================
+xmap / gc
+nmap C gc
+nmap <leader>/ gcc
+
+
+" ================
+" == Coc Config ==
+" ================
+" Make sure to run the following command after coc is installed
+" :CocInstall coc-tsserver coc-eslint coc-json coc-prettier coc-pyright
+" coc-highlight
+
+" Disable startup warning
 let g:coc_disable_startup_warning = 1
 
-" Add a space after commenting out a line
-let g:NERDTreeSpaceDelims = 2
-let g:NERDDefaultAlign = 'left'
-
-" Make sure to run the following command after coc is installed 
-" :CocInstall coc-tsserver coc-eslint coc-json coc-prettier coc-pyright
-
-" Coc has problems with backup files
+" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
+" utf-8 byte sequence
+set encoding=utf-8
+" Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
 
-" Having longer update time (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
+" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
 set updatetime=300
 
 " Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
+" diagnostics appear/become resolved
 set signcolumn=yes
 
-" Use tab for trigger completion with characters ahead and navigate.
+" Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file.
+" no select by `"suggest.noselect": true` in your configuration file
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+" other plugin before putting this into your config
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -220,7 +314,7 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
+" <C-g>u breaks current undo, please make your own choice
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
@@ -229,24 +323,25 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
+" Use <c-space> to trigger completion
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Highlight the symbol and its references when holding the cursor.
-" Make sure to run ':CocInstall: coc-highlight' to make sure it works
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Goto definition
+" GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
+" Use K to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
@@ -256,3 +351,82 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s)
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying code actions to the selected code block
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying code actions at the cursor position
+nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+" Remap keys for apply code actions affect whole buffer
+nmap <leader>as  <Plug>(coc-codeaction-source)
+" Apply the most preferred quickfix action to fix diagnostic on the current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Remap keys for applying refactor code actions
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
+" Run the Code Lens action on the current line
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> to scroll float windows/popups
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges
+" Requires 'textDocument/selectionRange' support of language server
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+

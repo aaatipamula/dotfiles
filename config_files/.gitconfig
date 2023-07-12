@@ -7,4 +7,6 @@
 	a = add
 	aa = add .
 	co = commit -m
-	pom = push origin master
+  po = push -u origin
+  branch = checkout -b
+	pom = push -u origin master
