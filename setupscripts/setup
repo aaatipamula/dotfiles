@@ -65,6 +65,8 @@ then
 
         bare)
             setup_bash
+
+            setup_git
             ;;
 
         *)

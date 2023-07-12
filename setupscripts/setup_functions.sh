@@ -107,21 +107,18 @@ setup_bash()
     then
       echo "Bash already setup."
       return 2
-
     else
       rm ~/.bashrc
-      ln ./config_files/.bashrc ~
-      return 0
     fi
-
-  else
-    ln ./config_files/.bashrc ~
-    return 0
   fi
+
+  ln -s $(pwd)/config_files/.bashrc ~
+  return 0
+    
 
   if [ ! -f ~/.bash_aliases ]
   then 
-    echo "machine_name=\"\"" > ~/.bash_aliases
+    echo "export machine_name=\"machine_name\"" > ~/.bash_aliases
   fi
 }
 
@@ -133,20 +130,18 @@ setup_git()
   if [ -f ~/.gitconfig ]
   then
 
-  if cmp -s  ~/.gitconfig ./config_files/.gitconfig
-  then
-    echo "Git already setup."
-    return 2
-  else
-    rm ~/.gitconfig
-    ln ./config_files/.gitconfig ~
-    return 0
+    if cmp -s ~/.gitconfig ./config_files/.gitconfig
+    then
+      echo "Git already setup."
+      return 2
+    else
+      rm ~/.gitconfig
+    fi
+
   fi
 
-  else
-    ln ./config_files/.gitconfig ~
-    return 0
-  fi
+  ln -s $(pwd)/config_files/.gitconfig ~
+  return 0
 }
 
 # Make vim directories and copy over vimrc
@@ -168,18 +163,14 @@ vim_basic_setup()
       return 2
     else
       rm ~/.vim/vimrc
-      cp ./vim/basic.vim ~/.vim/vimrc
-      return 0
     fi
-
-  else
-    cp ./vim/basic.vim ~/.vim/vimrc
-    return 0
   fi
+
+  ln -s $(pwd)/vim/basic.vim ~/.vim/vimrc
+  return 0
 }
 
 # Install vim-plug
-# DEPRECATED FUNCTION
 setup_vim_plug()
 {
   echo "Installing vim-plug."
@@ -209,7 +200,6 @@ setup_vim_plug()
 }
 
 # Link vimrc
-# DEPRECATED FUNCTION
 setup_vimrc()
 {
   echo "Setting up vimrc."
@@ -226,7 +216,6 @@ setup_vimrc()
       mkdir ~/.vim
   fi
 
-
   # Link vimrc
   if [ -f ~/.vim/vimrc ]
   then
@@ -237,12 +226,10 @@ setup_vimrc()
       return 2
     else
       rm ~/.vim/vimrc
-      ln ./vim/vimrc ~/.vim/vimrc
-      return 0
     fi
 
   else
-    ln ./vim/vimrc ~/.vim/
+    ln -s $(pwd)/vim/vimrc ~/.vim/
     return 0
   fi
 }
@@ -312,7 +299,7 @@ setup_nvchad()
 
   rm -rf ~/.config/nvim/lua/custom
 
-  cp -r ./nvim/custom ~/.config/nvim/lua/
+  ln -s $(pwd)/nvim/custom ~/.config/nvim/lua/custom
 
   return $return_val
 }
