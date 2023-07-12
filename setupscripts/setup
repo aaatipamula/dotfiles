@@ -32,7 +32,8 @@ then
 
             if [ $? -ne "0" ]
             then
-                echo "Could not match package manager skipping application install..."
+                echo "Could not match package manager, please list a package manager to use."
+                exit 1
             else
                 install_apps $3
             fi
@@ -52,6 +53,7 @@ then
             if [ $? -ne "0" ]
             then
                 echo "Could not match package manager skipping application install..."
+                exit 1
             else
                 sudo $3 install docker
             fi
@@ -80,6 +82,7 @@ else
                 if [ $? -ne "0" ]
                 then
                     echo "Could not match package manager skipping application install..."
+                exit 1
                 else
                     install_apps $1
                 fi
