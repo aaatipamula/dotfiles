@@ -1,9 +1,10 @@
 " If you have a mapping interfering with normal mode run the following to remove or remap those commands
 " :verbose imap <leader>
-"
+
 " set default color
 let s:color = "nord"
 
+" set map leader to space
 let g:mapleader=" "
 
 " disable compatibility to old-time vi
