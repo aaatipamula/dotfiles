@@ -27,13 +27,6 @@ sync_dotfiles() {
     echo "No dotfiles present"
   fi
   source ~/.bashrc
-
-  rm $bashrc
-  rm $gitconf
-
-  ln $dotfiles/config_files/.bashrc $bashrc
-  ln $dotfiles/config_files/.gitconfig $gitconf
-
   cd
 }
 
