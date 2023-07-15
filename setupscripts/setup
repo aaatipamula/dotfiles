@@ -27,50 +27,50 @@ if [ $1 = "preset" ]
 then
     case $2 in
 
-        main)
-            validate_package_manager $3
+      main)
+        validate_package_manager $3
 
-            if [ $? -ne "0" ]
-            then
-                echo "Could not match package manager, please list a package manager to use."
-                exit 1
-            else
-                install_apps $3
-            fi
+        if [ $? -ne "0" ]
+        then
+          echo "Could not match package manager, please list a package manager to use."
+          exit 1
+        else
+          install_apps $3
+        fi
 
-            setup_bash
+        setup_bash
 
-            setup_git
+        setup_git
 
-            setup_vim_plug
+        setup_vim_plug
 
-            setup_vimrc
-            ;;
+        setup_vimrc
+        ;;
 
-        server)
-            validate_package_manager $3
+      server)
+          validate_package_manager $3
 
-            if [ $? -ne "0" ]
-            then
-                echo "Could not match package manager skipping application install..."
-                exit 1
-            else
-                sudo $3 install docker
-            fi
+          if [ $? -ne "0" ]
+          then
+              echo "Could not match package manager skipping application install..."
+              exit 1
+          else
+              sudo $3 install docker
+          fi
 
-            setup_bash
+          setup_bash
 
-            vim_basic_setup
-            ;;
+          vim_basic_setup
+          ;;
 
-        bare)
-            setup_bash
+      bare)
+          setup_bash
 
-            setup_git
-            ;;
+          setup_git
+          ;;
 
-        *)
-            echo "Not a valid preset."
+      *)
+          echo "Not a valid preset."
     esac
 
 else

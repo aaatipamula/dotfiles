@@ -227,11 +227,10 @@ setup_vimrc()
     else
       rm ~/.vim/vimrc
     fi
-
-  else
-    ln -s $(pwd)/vim/vimrc ~/.vim/
-    return 0
   fi
+
+  ln -s $(pwd)/vim/vimrc ~/.vim/
+  return 0
 }
 
 # Install NvChad

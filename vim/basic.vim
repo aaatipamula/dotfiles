@@ -1,8 +1,8 @@
 " If you have a mapping interfering with normal mode run the following to remove or remap those commands
 " :verbose imap <leader>
 
-" set default color
-let s:color = "nord"
+" set colorscheme slate
+colorscheme slate
 
 " set map leader to space
 let g:mapleader=" "
@@ -10,50 +10,44 @@ let g:mapleader=" "
 " disable compatibility to old-time vi
 set nocompatible
 
-" show matching
-set showmatch
-
-" case insensitive
-set ignorecase
-
-" middle-click paste with mouse
-set mouse=v
-
-" highlight search
-set hlsearch
-
 " incremental search
 set incsearch
-
-" number of columns occupied by a tab
-set tabstop=4
-
-" see multiple spaces as tabstops so <BS> does the right thing
-set softtabstop=4
 
 " converts tabs to white space
 set expandtab
 
-" width for autoindents
-set shiftwidth=4
+" number of columns occupied by a tab
+set tabstop=2
+
+" set multiple spaces as tabs stops so <BS> does the right thing
+set softtabstop=2
+
+" width for auto indents
+set shiftwidth=2
 
 " indent a new line the same amount as the line just typed
 set autoindent
 
-" add line numbers
-set number
-
-" get bash-like tab completions
-set wildmode=longest,list
+" smort hehe
+set smartindent
 
 " allow auto-indenting depending on file type
 filetype plugin indent on
+
+" add line numbers
+set number
+
+" numbers relative to current line
+set relativenumber
 
 " syntax highlighting
 syntax on
 
 " enable mouse click
 set mouse=a
+
+" middle-click paste with mouse
+set mouse=v
 
 " using system clipboard
 set clipboard=unnamedplus
@@ -64,11 +58,8 @@ set ttyfast
 " wrap text in buffer
 set wrap
 
-" numbers relative to current line
-set relativenumber
-
-" smort hehe
-set smartindent
+" smarter vim lol
+set smartcase
 
 " scroll before current hits end of buffer
 set scrolloff=8
@@ -79,14 +70,20 @@ set termguicolors
 " Show what percentage of page you are down
 set ruler
 
-" smarter vim lol
-set smartcase
-
 " set encoding for english
 set encoding=utf-8
 
+" get bash-like tab completions
+set wildmode=longest,list
+
 " show tablines
 set showtabline=2
+
+" show commands
+set showcmd
+
+" set spelling suggestion window to 15 lines
+set spellsuggest+=10
 
 " open split stuff below and to the right
 set splitright
@@ -98,7 +95,7 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Ingore complied files
+" Ignore complied files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
     set wildignore+=.git\*,.hg\*,.svn\*
@@ -113,14 +110,14 @@ endif
 " Switch CWD to the directory of the open buffer
 nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Return to last edit position when opening files (You want this!)
+" Return to last edit position when opening files (You want this!) 
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" Smart way to move between windows (ctrl-hjkl)
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
 
 " Indicate if I am in insert mode
 autocmd InsertEnter,InsertLeave * set cul!
@@ -130,12 +127,27 @@ nnoremap <silent> <CR> :noh<CR><CR>
 
 " Useful movement
 nnoremap ge $
-nnoremap gs 0
+nnoremap gb 0
 
 " Remap to close easier
 nnoremap <leader>Q :qa<cr>
 nnoremap <leader>X :wq<cr>
-nnoremap <leader>Xx :wqa<cr>
+nnoremap <leader>xx :wqa<cr>
+
+" toggle spell
+nnoremap <silent> <leader>ss :setlocal spell! spelllang=en_us<cr>
+
+" move highlighed selection up and down in visual (goated)
+" stolen from theprimeagen 
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+
+" keep selection after indenting in visual (goated)
+vnoremap > >gv
+vnoremap < <gv
+
+" spell suggestion remap
+nnoremap <C-.> z=
 
 
 " ======================
@@ -205,5 +217,6 @@ tnoremap <C-h> <C-W>h
 tnoremap <C-l> <C-W>l
 
 " resize terminal to 10 lines
-tnoremap <M-r> <C-W>:res10<cr>
+tnoremap <C-r> <C-W>:res15<cr>
+
 
