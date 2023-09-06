@@ -2,7 +2,7 @@
 " :verbose imap <leader>
 
 " set default color
-let s:color = "nord"
+let s:color = "onedark"
 
 " set map leader to space
 let g:mapleader=" "
@@ -45,9 +45,6 @@ syntax on
 
 " enable mouse click
 set mouse=a
-
-" middle-click paste with mouse
-set mouse=v
 
 " using system clipboard
 set clipboard=unnamedplus
@@ -137,7 +134,7 @@ nnoremap <leader>xx :wqa<cr>
 " toggle spell
 nnoremap <silent> <leader>ss :setlocal spell! spelllang=en_us<cr>
 
-" move highlighed selection up and down in visual (goated)
+" move highlighted selection up and down in visual (goated)
 " stolen from theprimeagen 
 vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
@@ -191,17 +188,17 @@ let g:lasttab = 1
 nnoremap <silent> <Leader>tl :exe "tabn ".g:lasttab<CR>
 autocmd TabLeave * let g:lasttab = tabpagenr()
 
-" Opens a new tab with the current buffer's path (taken from someones's vimrc)
+" Opens a new tab with the current buffer's path (taken from someone's vimrc)
 nnoremap <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 
 
 " =======================
 " == Terminal Mappings ==
 " =======================
-" open horziontal terminal
+" open horizontal terminal
 nnoremap <silent> <leader>h :term<cr>
 
-" open vertianl terminal
+" open vertical terminal
 nnoremap <silent> <leader>v :vert term<cr>
 
 " open new terminal and resize to 15 lines
@@ -224,26 +221,37 @@ tnoremap <C-r> <C-W>:res15<cr>
 " == Plugin Configs ==
 " ====================
 call plug#begin()
- Plug 'dracula/vim'
- Plug 'arcticicestudio/nord-vim'
- Plug 'scrooloose/nerdtree'
- Plug 'tpope/vim-commentary'
- Plug 'neoclide/coc.nvim', {'branch': 'release'}
- Plug 'sheerun/vim-polyglot'
- Plug 'jiangmiao/auto-pairs'
- Plug 'ryanoasis/vim-devicons'
+" Essentials
+  Plug 'tpope/vim-commentary' " Comment out lines
+  Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP
+  Plug 'jiangmiao/auto-pairs' " Auto close brackets and parenthesis
+  Plug 'ryanoasis/vim-devicons' " Fancy icons
+" Nice to Have
+  Plug 'scrooloose/nerdtree' " File explorer
+  Plug 'vim-python/python-syntax' " Better syntax highlighting
+" Aesthetic
+  Plug 'ryanoasis/vim-devicons' " Fancy icons
+  Plug 'dracula/vim' " Dracula theme
+  Plug 'arcticicestudio/nord-vim' " Nord theme
+  Plug 'joshdick/onedark.vim' " One Dark theme
 call plug#end()
 
 
 " ===========================
 " == Color Scheme Mappings ==
 " ===========================
-function ChangeColorScheme()
+function ChangeColorScheme(...)
+    if a:0 > 0
+        let s:color = a:1
+    endif
+
     try
         if s:color == "dracula"
           colorscheme dracula
         elseif s:color == "nord"
           colorscheme nord
+        elseif s:color == "onedark"
+          colorscheme onedark
         endif
     catch
         colorscheme slate
@@ -255,6 +263,9 @@ function ToggleColorSchemes()
         let s:color = "nord"
         call ChangeColorScheme()
     elseif s:color == "nord"
+        let s:color = "onedark"
+        call ChangeColorScheme()
+    elseif s:color == "onedark"
         let s:color = "dracula"
         call ChangeColorScheme()
     endif
@@ -264,20 +275,27 @@ endfunction
 call ChangeColorScheme()
 
 " Quick remap colorschemes
-nnoremap <silent> <leader>dr :call ChangeColorScheme()<cr>
-nnoremap <silent> <leader>nr :call ChangeColorScheme()<cr>
+nnoremap <silent> <leader>dr :call ChangeColorScheme("dracula")<cr>
+nnoremap <silent> <leader>no :call ChangeColorScheme("nord")<cr>
+nnoremap <silent> <leader>od :call ChangeColorScheme("onedark")<cr>
 
 " Toggle colorschemes
 nnoremap <leader>tt :call ToggleColorSchemes()<cr>
 
 
-" ===========================
+" ===================
+" == Python Syntax ==
+" ===================
+let g:python_highlight_all = 1
+
+
+" =======================
 " == NERDTree Mappings ==
-" ===========================
+" =======================
 " NERDTree bindings
-nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
