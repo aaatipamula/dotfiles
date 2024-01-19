@@ -223,12 +223,13 @@ tnoremap <C-r> <C-W>:res15<cr>
 call plug#begin()
 " Essentials
   Plug 'tpope/vim-commentary' " Comment out lines
+  Plug 'tpope/vim-surround' " surround
   Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP
   Plug 'jiangmiao/auto-pairs' " Auto close brackets and parenthesis
   Plug 'ryanoasis/vim-devicons' " Fancy icons
 " Nice to Have
   Plug 'scrooloose/nerdtree' " File explorer
-  Plug 'vim-python/python-syntax' " Better syntax highlighting
+  Plug 'sheerun/vim-polyglot' " Better syntax highlighting
 " Aesthetic
   Plug 'ryanoasis/vim-devicons' " Fancy icons
   Plug 'dracula/vim' " Dracula theme
