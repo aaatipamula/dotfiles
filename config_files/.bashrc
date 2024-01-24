@@ -22,6 +22,8 @@ sync_dotfiles() {
   then
     cd $dotfiles
     git pull origin master
+    git add .
+    git co "Automatic sync $(date)"
     git push origin master
   else
     echo "No dotfiles present"
@@ -58,6 +60,10 @@ alias cdg='custom_cd'
 alias sync='sync_dotfiles'
 alias gd='git diff'
 alias gs='git status'
+alias gl='git log'
+alias httpserve="python3 -m http.server 8000"
+alias qc="quick_compile_c"
+alias qcp="quick_compile_cpp"
 
 # Easy access/edit config files
 alias vimrc="vim $vimrc"
