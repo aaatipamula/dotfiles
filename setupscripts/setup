@@ -3,129 +3,139 @@
 # define functions and check if calling setup correctly
 if [ -f ./setupscripts/setup_functions.sh ]
 then
-    . ./setupscripts/setup_functions.sh
+  # load setup functions
+  . ./setupscripts/setup_functions.sh
 else 
-    if [ $0 != "./setupscripts/setup" ]
-    then
-        echo "Please navigate to the root directory and run ./setupscripts/setup"
-        exit 1
-    fi
-    
+  # check if we are in the right directory
+  if [ $0 != "./setupscripts/setup" ]
+  then
+    echo "Please navigate to the root dotfiles directory and run ./setupscripts/setup"
+    exit 1
+  fi
 fi
 
+# don't run as root, will install programs in root user directory
 if [ $(whoami) = "root" ]
 then
     echo "Please do not run as root!"
     exit 1
 fi
 
+# WARN users of sudo access
 echo "WARNING You may need root permissions to run some aspects of this program, procede with caution."
-sleep 6
+sleep 3
 
 # parse user input
 if [ $1 = "preset" ]
 then
-    case $2 in
+  case $2 in
+    # run for main machine
+    main)
+      validate_package_manager $3
 
-      main)
-        validate_package_manager $3
+      if [ $? -ne "0" ]
+      then
+        echo "Could not match package manager, skipping appliction install..."
+        sleep 2
+      else
+        install_apps $3
+      fi
 
+      setup_bash
+      setup_git
+      setup_vim_plug # need for vim plugins
+      setup_vimrc
+      ;;
+
+    # install docker for servers and run basic setup stuff
+    server)
+      validate_package_manager $3
+
+      if [ $? -ne "0" ]
+      then
+        echo "Could not match package manager skipping application install..."
+        sleep 2
+      else
+        sudo $3 install docker
+      fi
+
+      setup_bash
+      setup_git
+      vim_basic_setup
+      ;;
+
+    # just symlink the bashrc, gitconfig, and basic vimrc
+    bare)
+      setup_bash
+      setup_git
+      vim_basic_setup
+      ;;
+
+    help)
+      echo "help"
+      ;;
+
+    *)
+      echo "Not a valid preset. Choose from [main, server, bare]"
+  esac
+
+elif [ $1 = "help" ]
+then
+  help_command
+
+else
+  # run specific options instead of presets
+  for option in $@
+  do
+    case $option in
+      apps)
+        shift
+        validate_package_manager $1
         if [ $? -ne "0" ]
         then
-          echo "Could not match package manager, please list a package manager to use."
-          exit 1
+          echo "Could not match package manager skipping application install..."
+        sleep 2
         else
-          install_apps $3
+          install_apps $1
         fi
+        ;;
 
+      bash)
         setup_bash
+        ;;
 
+      git)
         setup_git
+        ;;
 
-        setup_vim_plug
-
+      vim)
         setup_vimrc
         ;;
 
-      server)
-          validate_package_manager $3
+      vim-plug)
+        setup_vim_plug
+        ;;
 
-          if [ $? -ne "0" ]
-          then
-              echo "Could not match package manager skipping application install..."
-              exit 1
-          else
-              sudo $3 install docker
-          fi
+      dracula-vim)
+        dracula_vim_install
+        ;;
 
-          setup_bash
+      vimb)
+        vim_basic_setup
+        ;;
 
-          vim_basic_setup
-          ;;
-
-      bare)
-          setup_bash
-
-          setup_git
-          ;;
+      nvchad)
+        install_nvchad
+        setup_nvchad
+        ;;
 
       *)
-          echo "Not a valid preset."
+        echo "$option is not a valid option."
+        ;;
     esac
-
-else
-    for option in $@
-    do
-        case $option in 
-
-            apps)
-                shift 
-                validate_package_manager $1
-                if [ $? -ne "0" ]
-                then
-                    echo "Could not match package manager skipping application install..."
-                exit 1
-                else
-                    install_apps $1
-                fi
-                ;;
-
-            bash)
-                setup_bash
-                ;;
-
-            git)
-                setup_git
-                ;;
-
-            vim)
-                setup_vimrc
-                ;;
-
-            vim-plug)
-                setup_vim_plug
-                ;;
-
-            dracula-vim)
-                dracula_vim_install
-                ;;
-
-            vimb)
-                vim_basic_setup
-                ;;
-
-            nvchad)
-                install_nvchad
-                setup_nvchad
-                ;;
-
-            *)
-                echo "$option is not a valid option."
-                ;;
-        esac
-    done
-    shift
+  done
+  shift # because of the need for package manager specification
 fi
 
-echo "Setup complete, run source ~/.bashrc to load bash configuration."
+echo "Setup complete."
 

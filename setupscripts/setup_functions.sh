@@ -1,5 +1,13 @@
 #!/bin/sh
 
+dotfiles=$HOME/dotfiles
+
+if ! [ -d $dotfiles ]
+then
+  echo "Dotfiles not found exiting setup"
+  exit 1
+fi
+
 # Install commonly used apps
 install_apps()
 {
@@ -12,6 +20,7 @@ install_apps()
   # update and upgrade
   sudo $1 update && sudo $1 upgrade
 
+  # check for errors updating package manager
   if [ $? -ne "0" ]
   then
     echo "Something went wrong updating and upgrading the package manager."
@@ -22,6 +31,7 @@ install_apps()
   # install commonly used programs
   sudo $1 install htop vim tmux docker python3 curl
 
+  # check for errors installing programs
   if [ $? -ne "0" ]
   then
     echo "Something went wrong installing programs."
@@ -32,6 +42,7 @@ install_apps()
   # Install nvm for node version control etc.
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
+  # check for nvm install errors
   if [ $? -ne "0" ]
   then
     echo "Something went wrong installing nvm."
@@ -66,6 +77,9 @@ dracula_vim_install()
 {
   echo "Installing Dracula Vim."
 
+  # check if proper directory exists
+  # make it if not
+  # check for dracula install
   if ! [ -d ~/.vim/pack/themes/start ]
   then
     mkdir -p ~/.vim/pack/themes/start
@@ -102,8 +116,7 @@ setup_bash()
 
   if [ -f ~/.bashrc ]
   then
-
-    if cmp -s ~/.bashrc ./config_files/.bashrc
+    if cmp -s ~/.bashrc $dotfiles/config_files/.bashrc
     then
       echo "Bash already setup."
       return 2
@@ -112,7 +125,7 @@ setup_bash()
     fi
   fi
 
-  ln -s $(pwd)/config_files/.bashrc ~
+  ln -s $dotfiles/config_files/.bashrc ~
   return 0
     
 
@@ -130,7 +143,7 @@ setup_git()
   if [ -f ~/.gitconfig ]
   then
 
-    if cmp -s ~/.gitconfig ./config_files/.gitconfig
+    if cmp -s ~/.gitconfig $dotfiles/config_files/.gitconfig
     then
       echo "Git already setup."
       return 2
@@ -140,7 +153,7 @@ setup_git()
 
   fi
 
-  ln -s $(pwd)/config_files/.gitconfig ~
+  ln -s $dotfiles/config_files/.gitconfig ~
   return 0
 }
 
@@ -157,7 +170,7 @@ vim_basic_setup()
   if [ -f ~/.vim/vimrc ]
   then
 
-    if cmp -s  ~/.vim/vimrc ./vim/basic.vim
+    if cmp -s  ~/.vim/vimrc $dotfiles/vim/basic.vim
     then
       echo "Basic Vim already setup."
       return 2
@@ -166,7 +179,7 @@ vim_basic_setup()
     fi
   fi
 
-  ln -s $(pwd)/vim/basic.vim ~/.vim/vimrc
+  ln -s $dotfiles/vim/basic.vim ~/.vim/vimrc
   return 0
 }
 
@@ -178,7 +191,7 @@ setup_vim_plug()
   if ! [ -f ~/.vim/autoload/plug.vim ]
   then
     # Install vim-plug
-    curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     # Check if vim-plug install failed
@@ -220,7 +233,7 @@ setup_vimrc()
   if [ -f ~/.vim/vimrc ]
   then
 
-    if cmp -s  ~/.vim/vimrc ./vim/vimrc
+    if cmp -s  ~/.vim/vimrc $dotfiles/vim/vimrc
     then
       echo "Vim already setup."
       return 2
@@ -229,7 +242,7 @@ setup_vimrc()
     fi
   fi
 
-  ln -s $(pwd)/vim/vimrc ~/.vim/
+  ln -s $dotfiles/vim/vimrc ~/.vim/
   return 0
 }
 
@@ -240,17 +253,17 @@ install_nvchad()
   if [ -d ~/.config/nvim/.git/ ]
   then
 
-    home=$(pwd)
+    temp_dir=$(pwd)
     cd ~/.config/nvim/
 
     if [ $(git config --get remote.origin.url) = "https://github.com/NvChad/NvChad" ] 
     then
-      cd $home
+      cd $temp_dir
       echo "NvChad already installed."
       return 2
     fi
 
-    cd $home
+    cd $temp_dir
 
   else
     echo "Installing NvChad"
@@ -300,5 +313,31 @@ setup_nvchad()
 
   ln -s $(pwd)/nvim/custom ~/.config/nvim/lua/custom
 
-  return $return_val
+  return $return_val 
 }
+
+help_command()
+{
+  echo "Script to help setup Linux machines.\n"
+
+  echo "Use:"
+  echo "  setup preset [PRESETS]"
+  echo "  setup [INDEPENDENT FUNCS]"
+  echo "  setup help # This page"
+
+  echo "[PRESETS]"
+  echo "  - main: Configures bash, git and full functionality vim, installs all common applications."
+  echo "  - server: Configure bash, git, basic vim setup, and installs docker"
+  echo "  - bare: Configure bash, git, basic vim\n"
+
+  echo "[INDEPENDENT FUNCS]"
+  echo "  - apps <package-manager>: Installs commonly used apps, requires package manager specification"
+  echo "  - bash: Configure bash with bashrc"
+  echo "  - git: Configure git with global gitconfig"
+  echo "  - vim: Configure vim with full vimrc"
+  echo "  - vim-plug: Install vim-plug for plugins"
+  echo "  - dracula-vim: Installs basic dracula theme for vim"
+  echo "  - vimb: Configure vimrc with basic bindings"
+  echo "  - nvchad: Install and setup nvchad for neovim\n"
+}
+

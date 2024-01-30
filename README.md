@@ -19,7 +19,7 @@ This is just config files for various programs. They are listed below:
 
 This contains two different config files for vim. 
 
-- vimrc (*deprecated*)
+- vimrc
 - basic.vim
 
 The `vimrc` file contains my main fully decked out config for Vim. This is now deprecated as I have switched to neovim.<br> 
@@ -37,6 +37,11 @@ This contains 2 files.
 
 The second file is a setup script where specific parts of setup can be initated. This setup script will add all my prefered shell configurations regardless of any flags present or not. There are also options to perform specific actions from `setup_functions.sh` as neeed.
 
-### test-scripts
+### nvim
+
+This contains configurations for nvim and nvchad. (*deprecated*)
+
+### tests
 
 This contains a scripts to test the install functions
+

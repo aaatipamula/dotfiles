@@ -18,24 +18,64 @@ custom_cd() {
 }
 
 sync_dotfiles() {
-  if [ -d $dotfiles ]
+  curr_dir=$(pwd)
+
+  if [[ ! -d $dotfiles ]]
   then
-    cd $dotfiles
-    git pull origin master
-    git add .
-    git co "Automatic sync $(date)"
-    git push origin master
-  else
     echo "No dotfiles present"
+    return 1
   fi
+
+  cd $dotfiles
+
+  if [[ -z "$(git status --porcelain)" ]]
+  then
+    git pull origin master
+  else
+    git status -s
+    read -p "Modified or untracked files found, commit them? [y/n]: " commit
+  fi
+
+  if [[ $commit = 'y' || $commit = "yes" ]]
+  then
+    git stash
+    git pull origin master
+    git stash apply
+    git add .
+    git commit -m "Automatic sync $(date)"
+    git push origin master
+  elif [[ $commit = 'n' || $commit = "no" ]]
+  then
+    echo "Skipping commit"
+    git stash
+    git pull origin master
+    git stash apply
+  else
+    echo "Invalid option, please commit files or skip."
+    cd $cur_dir
+    return 1
+  fi
+
+  rm $bashrc
+  ln -s $dotfiles/config_files/.bashrc ~
+ 
+  if cmp -s $vimrc $dotfiles/vim/vimrc
+  then
+    rm $vimrc
+    ln -s $dotfiles/vim/basic.vim ~/.vim/vimrc
+  else
+    rm $vimrc
+    ln -s $dotfiles/vim/vimrc ~/.vim/
+  fi
+
   source ~/.bashrc
-  cd
+  cd $cur_dir
 }
 
 check_readme() {
-  if [ -f ./README.md ]
+  if [[ -f ./README.md ]]
   then
-    vim ./README.md
+    $VISUAL ./README.md
   else
     echo "./README.md does not exist!"
     return 1
