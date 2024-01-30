@@ -1,14 +1,14 @@
 #!/bin/sh
 
-dotfiles=$HOME/dotfiles
+dotfiles=~/dotfiles
 
-if ! [ -d $dotfiles && -z $1 ]
+if ! [ $1 = "test" ]
+then
+  echo "Skipping dotfile check"
+elif [ -d $dotfiles ]
 then
   echo "Dotfiles not found exiting setup"
   exit 1
-elif [ $1 = "test" ]
-then
-  echo "Skipping dotfile check"
 fi
 
 # Install commonly used apps
