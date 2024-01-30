@@ -62,10 +62,10 @@ sync_dotfiles() {
   if cmp -s $vimrc $dotfiles/vim/vimrc
   then
     rm $vimrc
-    ln -s $dotfiles/vim/basic.vim ~/.vim/vimrc
+    ln -s $dotfiles/vim/vimrc ~/.vim/
   else
     rm $vimrc
-    ln -s $dotfiles/vim/vimrc ~/.vim/
+    ln -s $dotfiles/vim/basic.vim ~/.vim/vimrc
   fi
 
   source ~/.bashrc
