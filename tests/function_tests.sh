@@ -1,9 +1,12 @@
 #!/bin/sh
 
+# To appease my script and setup correct env
+export HOME=$GITHUB_WORKSPACE
+
 # Import module
 if [ -f ./setupscripts/setup_functions.sh ]
 then
-    . ./setupscripts/setup_functions.sh
+  . ./setupscripts/setup_functions.sh
 fi
 
 # Check return status
