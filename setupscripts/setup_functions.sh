@@ -4,10 +4,10 @@ dotfiles=~/dotfiles
 
 if [ $1 = "gh_test" ]
 then
-  dotfiles=${{ github.workspace }}
+  dotfiles=$GITHUB_WORKSPACE
   echo "Entered test mode"
   echo "dotfiles changed to: $dotfiles"
-elif [ -d $dotfiles ]
+elif [ ! -d $dotfiles ]
 then
   echo "Dotfiles not found exiting setup"
   exit 1
