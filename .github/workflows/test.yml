@@ -14,7 +14,8 @@ jobs:
         run: ./tests/function_tests.sh
 
   test-preset-main:
-    name: preset main
+    name: setup preset main
+    needs: test-install-functions
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -24,7 +25,8 @@ jobs:
         run: ./setupscripts/setup preset main apt
 
   test-preset-server:
-    name: preset server
+    name: setup preset server
+    needs: test-install-functions
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -34,7 +36,8 @@ jobs:
         run: ./setupscripts/setup preset server apt
 
   test-preset-bare:
-    name: preset bare
+    name: setup preset bare
+    needs: test-install-functions
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -44,7 +47,8 @@ jobs:
         run: ./setupscripts/setup preset bare apt
 
   test-custom:
-    name: test custom install
+    name: setup custom install
+    needs: test-install-functions
     runs-on: ubuntu-latest
     steps:
       - name: checkout code

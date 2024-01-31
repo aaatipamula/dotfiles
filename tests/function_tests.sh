@@ -3,7 +3,7 @@
 # Import module
 if [ -f ./setupscripts/setup_functions.sh ]
 then
-  . ./setupscripts/setup_functions.sh "test"
+  . ./setupscripts/setup_functions.sh "gh_test"
 fi
 
 # Check return status

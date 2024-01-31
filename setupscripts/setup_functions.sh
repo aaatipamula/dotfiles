@@ -2,9 +2,11 @@
 
 dotfiles=~/dotfiles
 
-if ! [ $1 = "test" ]
+if ! [ $1 = "gh_test" ]
 then
-  echo "Skipping dotfile check"
+  dotfiles=${{ github.workspace }}
+  echo "Entered test mode"
+  echo "dotfiles changed to: $dotfiles"
 elif [ -d $dotfiles ]
 then
   echo "Dotfiles not found exiting setup"
