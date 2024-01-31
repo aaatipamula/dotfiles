@@ -2,7 +2,7 @@
 
 dotfiles=~/dotfiles
 
-if ! [ $1 = "gh_test" ]
+if [ $1 = "gh_test" ]
 then
   dotfiles=${{ github.workspace }}
   echo "Entered test mode"
