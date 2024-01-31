@@ -2,12 +2,16 @@
 
 dotfiles=~/dotfiles
 
-if [ $1 = "gh_test" ]
+# check for test runs
+if [ "$1" = "gh_test" ]
 then
   dotfiles=$GITHUB_WORKSPACE
   echo "Entered test mode"
   echo "dotfiles changed to: $dotfiles"
-elif [ ! -d $dotfiles ]
+fi
+
+# check for dotfiles directory
+if [ ! -d $dotfiles ]
 then
   echo "Dotfiles not found exiting setup"
   exit 1
@@ -17,7 +21,7 @@ fi
 install_apps()
 {
 
-  if [ $1 = "apt" ]
+  if [ "$1" = "apt" ]
   then
     sudo add-apt-repository ppa:neovim-ppa/stable
   fi

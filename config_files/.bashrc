@@ -106,11 +106,11 @@ alias qc="quick_compile_c"
 alias qcp="quick_compile_cpp"
 
 # Easy access/edit config files
-alias vimrc="vim $vimrc"
-alias bashrc="vim $bashrc"
-alias bashpr="vim $bashpr"
-alias gitconf="vim $gitconf"
-alias bashal="vim $bashal"
+alias vimrc="$VISUAL $vimrc"
+alias bashrc="$VISUAL $bashrc"
+alias bashpr="$VISUAL $bashpr"
+alias gitconf="$VISUAL $gitconf"
+alias bashal="$VISUAL $bashal"
 alias loadbash="source $bashrc"
 alias dotfiles="cd $dotfiles"
 

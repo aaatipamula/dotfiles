@@ -7,7 +7,7 @@ then
   . ./setupscripts/setup_functions.sh
 else 
   # check if we are in the right directory
-  if [ $0 != "./setupscripts/setup" ]
+  if [ "$0" != "./setupscripts/setup" ]
   then
     echo "Please navigate to the root dotfiles directory and run ./setupscripts/setup"
     exit 1
@@ -15,7 +15,7 @@ else
 fi
 
 # don't run as root, will install programs in root user directory
-if [ $(whoami) = "root" ]
+if [ "$(whoami)" = "root" ]
 then
     echo "Please do not run as root!"
     exit 1
@@ -26,7 +26,7 @@ echo "WARNING You may need root permissions to run some aspects of this program,
 sleep 3
 
 # parse user input
-if [ $1 = "preset" ]
+if [ "$1" = "preset" ]
 then
   case $2 in
     # run for main machine
@@ -79,7 +79,7 @@ then
       echo "Not a valid preset. Choose from [main, server, bare]"
   esac
 
-elif [ $1 = "help" ]
+elif [ "$1" = "help" ]
 then
   help_command
 
