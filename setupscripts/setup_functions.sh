@@ -2,20 +2,17 @@
 
 dotfiles=~/dotfiles
 
-# check for test runs
-if [ "$1" = "gh_test" ]
-then
-  dotfiles=$GITHUB_WORKSPACE
-  echo "Entered test mode"
-  echo "dotfiles changed to: $dotfiles"
-  exit 0
-fi
-
 # check for dotfiles directory
 if [ ! -d $dotfiles ]
 then
-  echo "Dotfiles not found exiting setup"
-  exit 1
+  # check for github workspace
+  if [ -d $GITHUB_WORKSPACE ]
+  then
+    dotfiles=$GITHUB_WORKSPACE
+  else
+    echo "Dotfiles not found exiting setup"
+    exit 1
+  fi
 fi
 
 # Install commonly used apps
