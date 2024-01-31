@@ -8,6 +8,7 @@ then
   dotfiles=$GITHUB_WORKSPACE
   echo "Entered test mode"
   echo "dotfiles changed to: $dotfiles"
+  exit 0
 fi
 
 # check for dotfiles directory
