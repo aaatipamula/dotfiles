@@ -1,12 +1,10 @@
 [user]
 	email = aaatipamula@gmail.com
-	name = Aniketh
+	name = Aniketh A.
 [alias]
 	ca = commit -am
 	st = status
 	a = add
 	aa = add .
 	co = commit -m
-  po = push -u origin
-  branch = checkout -b
-	pom = push -u origin master
+	pom = push origin master

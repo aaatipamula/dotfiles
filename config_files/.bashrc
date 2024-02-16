@@ -17,6 +17,14 @@ custom_cd() {
   cd $1; git pull origin master
 }
 
+quick_compile_cpp() {
+  g++ $1 -o "exec_$(uname)_$(uname -m)"
+}
+
+quick_compile_c() {
+  gcc $1 -o "exec_$(uname)_$(uname -m)"
+}
+
 sync_dotfiles() {
   curr_dir=$(pwd)
 
@@ -77,8 +85,13 @@ check_readme() {
   then
     $VISUAL ./README.md
   else
-    echo "./README.md does not exist!"
-    return 1
+    read -p "README.md not found, make it? [y/n]: " makeRdme
+    if [[ $makeRdme = 'y' || $makeRdme = "yes" ]]
+    then
+      touch ./README.md && $VISUAL ./README.md
+    else
+      echo "Skipping..."
+    fi
   fi
 }
 
@@ -90,11 +103,9 @@ alias ld='ls -Ud */'        # Only directories
 alias la='ls -a'            # Everything including hidden files
 alias svim="sudo vim"
 alias p3='python3'
-alias q='exit'
 alias hist='history'
 alias mkdirs='mkdir -p'
 alias readme='check_readme'
-alias cl='clear'
 alias size="du -sh"
 alias cdg='custom_cd'
 alias sync='sync_dotfiles'
@@ -138,8 +149,8 @@ shopt -s autocd
 set -o vi
 
 # don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:ignoredups:erasedups
+HISTIGNORE="ls:exit:pwd:clear"
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -153,5 +164,5 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
