@@ -122,9 +122,9 @@ autocmd InsertEnter,InsertLeave * set cul!
 " Enter removes highlighting
 nnoremap <silent> <CR> :noh<CR><CR>
 
-" Useful movement
-nnoremap ge $
-nnoremap gb 0
+" Move to beginning and end of line
+nnoremap aa $
+nnoremap ii 0
 
 " Remap to close easier
 nnoremap <leader>Q :qa<cr>
