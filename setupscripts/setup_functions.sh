@@ -330,7 +330,7 @@ help_command()
   echo "Use:"
   echo "  setup preset [PRESETS]"
   echo "  setup [INDEPENDENT FUNCS]"
-  echo "  setup help # This page"
+  echo "  setup help # This page\n"
 
   echo "[PRESETS]"
   echo "  - main: Configures bash, git and full functionality vim, installs all common applications."
