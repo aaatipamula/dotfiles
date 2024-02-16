@@ -4,9 +4,9 @@
 
 ## About
 
-This is a repo to host any files and scripts that help me get a machine set up faster. That way I don't have to go back and manually do all of this configuration again. （。＾▽＾）
+This repo hosts my [dotfiles](https://missing.csail.mit.edu/2019/dotfiles/). I also have some setup scripts and testing scripts.
 
-## Directories
+## Files
 
 ### config_files
 
@@ -22,7 +22,7 @@ This contains two different config files for vim.
 - vimrc
 - basic.vim
 
-The `vimrc` file contains my main fully decked out config for Vim. This is now deprecated as I have switched to neovim.<br> 
+The `vimrc` file contains my main fully decked out config for Vim.
 
 The `basic.vim` file is a basic config for Vim that I use on remote machines or machines I don't intend to use regularly.
 
@@ -30,18 +30,19 @@ The `basic.vim` file is a basic config for Vim that I use on remote machines or 
 
 This contains 2 files. 
 
-- `setup_functions.sh`
 - `setup`
+- `setup_functions.sh`
+
+The first file is a script that makes running setup funtions easier. This setup script can run a few presets I've defined, (`main`, `server`, `bare`). There are also options to perform specific actions from `setup_functions.sh` as need.
 
 `setup_function.sh` is a collection of functions that each perform a specific install or setup action. <br>
 
-The second file is a setup script where specific parts of setup can be initated. This setup script will add all my prefered shell configurations regardless of any flags present or not. There are also options to perform specific actions from `setup_functions.sh` as neeed.
 
 ### nvim
 
-This contains configurations for nvim and nvchad. (*deprecated*)
+This contains configurations for nvim and nvchad. (**deprecated**)
 
 ### tests
 
-This contains a scripts to test the install functions
+This contains a scripts to test the install functions.
 

@@ -59,6 +59,7 @@ then
         sudo $3 install docker
       fi
 
+      # symlink all my config files for bash git and vim
       setup_bash
       setup_git
       vim_basic_setup
@@ -88,6 +89,7 @@ else
   for option in $@
   do
     case $option in
+      # install main apps
       apps)
         shift
         validate_package_manager $1
@@ -100,30 +102,37 @@ else
         fi
         ;;
 
+      # setup bash
       bash)
         setup_bash
         ;;
 
+      # setup git
       git)
         setup_git
         ;;
 
+      # setup vim
       vim)
         setup_vimrc
         ;;
 
+      # setup vim plug
       vim-plug)
         setup_vim_plug
         ;;
 
+      # download dracula vim
       dracula-vim)
         dracula_vim_install
         ;;
 
+      # setup vim basic config
       vimb)
         vim_basic_setup
         ;;
 
+      # install nvchad
       nvchad)
         install_nvchad
         setup_nvchad
