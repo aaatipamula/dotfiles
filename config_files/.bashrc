@@ -112,7 +112,7 @@ alias sync='sync_dotfiles'
 alias gd='git diff'
 alias gs='git status'
 alias gl='git log'
-alias httpserve="python3 -m http.server 8000"
+alias liveserve="nohup python3 -m http.server 8000 > http.log 2>&1 &"
 alias qc="quick_compile_c"
 alias qcp="quick_compile_cpp"
 
