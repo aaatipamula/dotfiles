@@ -13,10 +13,6 @@ parse_git_branch() {
    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-custom_cd() { 
-  cd $1; git pull origin master
-}
-
 quick_compile_cpp() {
   g++ $1 -o "exec_$(uname)_$(uname -m)"
 }
@@ -26,8 +22,6 @@ quick_compile_c() {
 }
 
 sync_dotfiles() {
-  curr_dir=$(pwd)
-
   if [[ ! -d $dotfiles ]]
   then
     echo "No dotfiles present"
@@ -77,7 +71,7 @@ sync_dotfiles() {
   fi
 
   source ~/.bashrc
-  cd $cur_dir
+  cd -
 }
 
 check_readme() {
@@ -86,7 +80,7 @@ check_readme() {
     $VISUAL ./README.md
   else
     read -p "README.md not found, make it? [y/n]: " makeRdme
-    if [[ $makeRdme = 'y' || $makeRdme = "yes" ]]
+    if [[ "$makeRdme" = 'y' || "$makeRdme" = "yes" ]]
     then
       touch ./README.md && $VISUAL ./README.md
     else
@@ -101,13 +95,11 @@ alias l.='ls -d .*'         # Only hidden directory
 alias ll='ls -rt'           # Organize by date modified
 alias ld='ls -Ud */'        # Only directories
 alias la='ls -a'            # Everything including hidden files
-alias svim="sudo vim"
 alias p3='python3'
 alias hist='history'
 alias mkdirs='mkdir -p'
 alias readme='check_readme'
 alias size="du -sh"
-alias cdg='custom_cd'
 alias sync='sync_dotfiles'
 alias gd='git diff'
 alias gs='git status'

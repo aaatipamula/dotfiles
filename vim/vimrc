@@ -122,13 +122,8 @@ autocmd InsertEnter,InsertLeave * set cul!
 " Enter removes highlighting
 nnoremap <silent> <CR> :noh<CR><CR>
 
-" Move to beginning and end of line
-nnoremap aa $
-nnoremap ii 0
-
 " Remap to close easier
 nnoremap <leader>Q :qa<cr>
-nnoremap <leader>X :wq<cr>
 nnoremap <leader>xx :wqa<cr>
 
 " toggle spell
@@ -143,8 +138,9 @@ vnoremap K :m '<-2<cr>gv=gv
 vnoremap > >gv
 vnoremap < <gv
 
-" remap spell suggest
-nnoremap <C-.> z=
+" toggle hex edit
+nnoremap <leader>hex :%!xxd<cr>
+nnoremap <leader>hed :%!xxd -r<cr>
 
 
 " ======================
@@ -154,7 +150,7 @@ nnoremap <C-.> z=
 nnoremap <leader>e :e! <C-r>=expand("%:p:h")<cr>/
 
 " open buffer with filename
-nnoremap <leader>o :b!
+nnoremap <leader>o :b 
 
 " quit current buffer
 nnoremap <leader>x :bd<cr>
@@ -229,7 +225,6 @@ call plug#begin()
   Plug 'ryanoasis/vim-devicons' " Fancy icons
 " Nice to Have
   Plug 'scrooloose/nerdtree' " File explorer
-  Plug 'sheerun/vim-polyglot' " Better syntax highlighting
 " Aesthetic
   Plug 'ryanoasis/vim-devicons' " Fancy icons
   Plug 'dracula/vim' " Dracula theme
@@ -305,7 +300,6 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " == Commentary Mappings ==
 " =========================
 xmap / gc
-nmap C gc
 nmap <leader>/ gcc
 
 
