@@ -225,6 +225,7 @@ call plug#begin()
   Plug 'ryanoasis/vim-devicons' " Fancy icons
 " Nice to Have
   Plug 'scrooloose/nerdtree' " File explorer
+  Plug 'sheerun/vim-polyglot' " Nicer syntax highlighting
 " Aesthetic
   Plug 'ryanoasis/vim-devicons' " Fancy icons
   Plug 'dracula/vim' " Dracula theme
