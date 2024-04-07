@@ -1,5 +1,6 @@
 # VIM export
 export VISUAL="vim"
+export EDITOR="vim"
 
 # File locations
 export bashrc="$HOME/.bashrc"
@@ -133,7 +134,7 @@ fi
 export PS1="\[$(tput bold)\]\[$(tput setaf 2)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]$NAME \[$(tput setaf 3)\]\w\[$(tput setaf 2)\]]\[$(tput setaf 4)\]\$(parse_git_branch)\[$(tput setaf 6)\]\n-> \[$(tput sgr0)\]"
 
 # Make sure path includes my local bin directory
-export PATH=/home/aaatipamula/.local/bin:$PATH
+export PATH="/home/aaatipamula/.local/bin:$PATH"
 
 # Change directory by just typing in name
 shopt -s autocd

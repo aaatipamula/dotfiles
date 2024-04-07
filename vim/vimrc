@@ -107,7 +107,7 @@ endif
 " Switch CWD to the directory of the open buffer
 nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Return to last edit position when opening files (You want this!) 
+" Return to last edit position when opening files (You want this!)
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Smart way to move between windows (ctrl-hjkl)
@@ -130,7 +130,7 @@ nnoremap <leader>xx :wqa<cr>
 nnoremap <silent> <leader>ss :setlocal spell! spelllang=en_us<cr>
 
 " move highlighted selection up and down in visual (goated)
-" stolen from theprimeagen 
+" stolen from theprimeagen
 vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 
@@ -150,7 +150,7 @@ nnoremap <leader>hed :%!xxd -r<cr>
 nnoremap <leader>e :e! <C-r>=expand("%:p:h")<cr>/
 
 " open buffer with filename
-nnoremap <leader>o :b 
+nnoremap <leader>o :b
 
 " quit current buffer
 nnoremap <leader>x :bd<cr>
@@ -166,7 +166,7 @@ nnoremap <leader>7 :b!7<cr>
 nnoremap <leader>8 :b!8<cr>
 nnoremap <leader>9 :b!9<cr>
 
-" next and previous buffers with 
+" next and previous buffers with
 nnoremap <TAB> :bn!<cr>
 nnoremap <S-TAB> :bp!<cr>
 
@@ -218,19 +218,18 @@ tnoremap <C-r> <C-W>:res15<cr>
 " ====================
 call plug#begin()
 " Essentials
-  Plug 'tpope/vim-commentary' " Comment out lines
-  Plug 'tpope/vim-surround' " surround
+  Plug 'tpope/vim-commentary'  " Comment out lines
+  Plug 'tpope/vim-surround'    " Surround stuff
+  Plug 'jiangmiao/auto-pairs'  " Auto close brackets and parenthesis
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP
-  Plug 'jiangmiao/auto-pairs' " Auto close brackets and parenthesis
-  Plug 'ryanoasis/vim-devicons' " Fancy icons
-" Nice to Have
-  Plug 'scrooloose/nerdtree' " File explorer
-  Plug 'sheerun/vim-polyglot' " Nicer syntax highlighting
 " Aesthetic
-  Plug 'ryanoasis/vim-devicons' " Fancy icons
-  Plug 'dracula/vim' " Dracula theme
+  Plug 'sheerun/vim-polyglot'     " Nicer syntax highlighting
+  Plug 'ryanoasis/vim-devicons'   " Fancy icons
+  Plug 'dracula/vim'              " Dracula theme
+  Plug 'joshdick/onedark.vim'     " One Dark theme
   Plug 'arcticicestudio/nord-vim' " Nord theme
-  Plug 'joshdick/onedark.vim' " One Dark theme
 call plug#end()
 
 
@@ -286,23 +285,28 @@ nnoremap <leader>tt :call ToggleColorSchemes()<cr>
 let g:python_highlight_all = 1
 
 
-" =======================
-" == NERDTree Mappings ==
-" =======================
-" NERDTree bindings
-nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-
-" Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-
 " =========================
 " == Commentary Mappings ==
 " =========================
+
+" Comment out selection
 xmap / gc
+" Comment out a line
 nmap <leader>/ gcc
 
+
+" ==================
+" == fzf Mappings ==
+" ==================
+
+" Find file in cwd
+nnoremap <leader>ff :Files<cr>
+" Look through file history and buffers
+nnoremap <leader>fa :History<cr>
+" Look through files saved to source control
+nnoremap <leader>fg :GFiles<cr>
+" Look through open buffers
+nnoremap <leader>fb :Buffers<cr>
 
 " ================
 " == Coc Config ==
