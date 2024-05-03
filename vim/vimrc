@@ -220,16 +220,13 @@ call plug#begin()
 " Essentials
   Plug 'tpope/vim-commentary'  " Comment out lines
   Plug 'tpope/vim-surround'    " Surround stuff
+  Plug 'tpope/vim-fugitive'    " Better git integration
   Plug 'jiangmiao/auto-pairs'  " Auto close brackets and parenthesis
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP
 " Aesthetic
   Plug 'sheerun/vim-polyglot'     " Nicer syntax highlighting
-  Plug 'ryanoasis/vim-devicons'   " Fancy icons
-  Plug 'dracula/vim'              " Dracula theme
-  Plug 'joshdick/onedark.vim'     " One Dark theme
-  Plug 'arcticicestudio/nord-vim' " Nord theme
+  Plug 'joshdick/onedark.vim'     " Onedark vim theme
 call plug#end()
 
 
