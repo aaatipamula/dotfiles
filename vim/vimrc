@@ -222,6 +222,7 @@ call plug#begin()
   Plug 'tpope/vim-surround'    " Surround stuff
   Plug 'tpope/vim-fugitive'    " Better git integration
   Plug 'jiangmiao/auto-pairs'  " Auto close brackets and parenthesis
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP
 " Aesthetic
