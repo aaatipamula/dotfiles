@@ -305,6 +305,9 @@ nnoremap <leader>fa :History<cr>
 nnoremap <leader>fg :GFiles<cr>
 " Look through open buffers
 nnoremap <leader>fb :Buffers<cr>
+" Grep through files with Ripgrep
+nnoremap <leader>gr :Rg<cr>
+
 
 " ================
 " == Coc Config ==

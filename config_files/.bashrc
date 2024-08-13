@@ -10,18 +10,22 @@ export gitconf="$HOME/.gitconfig"
 export bashal="$HOME/.bash_aliases"
 export dotfiles="$HOME/dotfiles"
 
+# What git branch is checked out
 parse_git_branch() {
    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+# Compile a c++ file
 quick_compile_cpp() {
   g++ $1 -o "exec_$(uname)_$(uname -m)"
 }
 
+# Compile a c file
 quick_compile_c() {
   gcc $1 -o "exec_$(uname)_$(uname -m)"
 }
 
+# Sync my dotfiles with git
 sync_dotfiles() {
   if [[ ! -d $dotfiles ]]
   then
@@ -75,6 +79,7 @@ sync_dotfiles() {
   cd -
 }
 
+# Open a readme if exists, make one if not
 check_readme() {
   if [[ -f ./README.md ]]
   then
@@ -124,6 +129,7 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# Set machine name
 if [ $machine_name ]; then
   NAME=$machine_name
 else
@@ -159,4 +165,36 @@ shopt -s checkwinsize
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+_gen_fzf_default_opts() {
+  # Scheme name: OneDark
+  # Scheme system: base16
+  # Scheme author: Lalit Magant (http://github.com/tilal6991)
+  # Template author: Tinted Theming (https://github.com/tinted-theming)
+
+  local color00='#282c34'
+  local color01='#353b45'
+  local color02='#3e4451'
+  local color03='#545862'
+  local color04='#565c64'
+  local color05='#abb2bf'
+  local color06='#b6bdca'
+  local color07='#c8ccd4'
+  local color08='#e06c75'
+  local color09='#d19a66'
+  local color0A='#e5c07b'
+  local color0B='#98c379'
+  local color0C='#56b6c2'
+  local color0D='#61afef'
+  local color0E='#c678dd'
+  local color0F='#be5046'
+
+  export FZF_DEFAULT_OPTS="--margin 1 --padding 1 --height 85% --border --reverse"\
+  " --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D"\
+  " --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C"\
+  " --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
+
+}
+
+_gen_fzf_default_opts
 
