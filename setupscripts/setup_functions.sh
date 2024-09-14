@@ -253,74 +253,35 @@ setup_vimrc()
   return 0
 }
 
-# Install NvChad
-# Removes all nvim config if nvchad is not installed
-install_nvchad()
+# Set up my neovim config
+setup_nvim()
 {
-  if [ -d ~/.config/nvim/.git/ ]
+  if [ -d ~/.config/nvim/ ]
   then
-
-    temp_dir=$(pwd)
-    cd ~/.config/nvim/
-
-    if [ $(git config --get remote.origin.url) = "https://github.com/NvChad/NvChad" ] 
-    then
-      cd $temp_dir
-      echo "NvChad already installed."
-      return 2
-    fi
-
-    cd $temp_dir
-
-  else
-    echo "Installing NvChad"
-
-    if [ -f ~/.config/nvim/init.lua ]
-    then
-      echo "WARNING nvim config already exists, backing up config to ~/.backups/nvim"
-      cp -rf ~/.config/nvim ~/.backups/
-    fi
-
-    rm -rf ~/.config/nvim
-    rm -rf ~/.local/share/nvim
-
-    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
-
-    if [ $? -ne "0" ]
-    then
-      echo "Something went wrong installing NvChad."
-      echo "Please run: \"git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1\""
-      return 1
-    fi
-
-    echo "After opening Neovim run the following:"
-    echo ":MasonInstallAll"
-
-    return 0
-  fi
-}
-
-# Copies over nvchad config
-# Backs up any existing nvchad config
-setup_nvchad()
-{
-  return_val=0
-
-  if [ -f ~/.config/nvim/lua/custom/chadrc.lua ]
-  then
-    echo "NvChad config already exists."
-    echo "Backing up old config to ~/.backups/nvchad"
-
-    cp -rf ~/.config/nvim/lua/custom ~/.backups/nvchad
-    
-    return_val=2
+    echo "Making directory ~/.config/nvim"
+    mkdir ~/.config/nvim
   fi
 
-  rm -rf ~/.config/nvim/lua/custom
+  if [ -f ~/.config/nvim/init.lua ]
+  then
+    echo "WARNING nvim config already exists, backing up config to ~/.backups/nvim"
+    cp -rf ~/.config/nvim ~/.backups/
+  fi
 
-  ln -s $(pwd)/nvim/custom ~/.config/nvim/lua/custom
+  echo "Removing previous nvim config"
+  rm -rf ~/.config/nvim
+  rm -rf ~/.local/share/nvim
 
-  return $return_val 
+  echo "Installing NvChad"
+
+  cp -r $(pwd)/nvim ~/.config/
+
+  if [ $? -ne "0" ]
+  then
+    return $?
+  fi
+
+  return 0
 }
 
 help_command()
@@ -330,7 +291,7 @@ help_command()
   echo "Use:"
   echo "  setup preset [PRESETS]"
   echo "  setup [INDEPENDENT FUNCS]"
-  echo "  setup help # This page\n"
+  echo "  setup help -- This page\n"
 
   echo "[PRESETS]"
   echo "  - main: Configures bash, git and full functionality vim, installs all common applications."
@@ -345,6 +306,6 @@ help_command()
   echo "  - vim-plug: Install vim-plug for plugins"
   echo "  - dracula-vim: Installs basic dracula theme for vim"
   echo "  - vimb: Configure vimrc with basic bindings"
-  echo "  - nvchad: Install and setup nvchad for neovim\n"
+  echo "  - nvim: Install and setup nvchad for neovim\n"
 }
 

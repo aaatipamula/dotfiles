@@ -108,21 +108,7 @@ setup_vimrc
 check_return $? "2"
 
 
-mkdir -p ~/.config/nvim/ # Make any missing directories
-touch ~/.config/nvim/init.lua   # Backup indicator for nvchad install
-
-# Check nvchad install
-install_nvchad
-check_return_dir ~/.backups/nvim $? "0"
-
-install_nvchad
-check_return $? "2"
-
-
 # Check nvchad setup
-setup_nvchad
+setup_nvim
 check_return $? "0"
-
-setup_nvchad
-check_return_dir ~/.backups/nvchad $? "2"
 

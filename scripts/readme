@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ -f ./README.md ]]
+then
+  $VISUAL ./README.md
+else
+  read -p "README.md not found, make it? [y/n]: " makeRdme
+  if [[ "$makeRdme" = 'y' || "$makeRdme" = "yes" ]]
+  then
+    touch ./README.md && $VISUAL ./README.md
+  else
+    echo "Skipping..."
+  fi
+fi

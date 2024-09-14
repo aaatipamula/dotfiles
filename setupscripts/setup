@@ -133,13 +133,13 @@ else
         ;;
 
       # install nvchad
-      nvchad)
-        install_nvchad
-        setup_nvchad
+      nvim)
+        setup_nvim
         ;;
 
       *)
         echo "$option is not a valid option."
+        help_command
         ;;
     esac
   done
