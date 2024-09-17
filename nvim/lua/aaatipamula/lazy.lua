@@ -22,7 +22,7 @@ require('lazy').setup({
   spec = 'aaatipamula.plugins',
   -- Install window colorscheme
   install = { colorscheme = { 'onedark' } },
-  -- Automatically check for updates
-  checker = { enabled = true },
+  -- Don't notify me of updates
+  change_detection = { notify = false },
 })
 

@@ -60,8 +60,8 @@ vim.keymap.set('n', '<leader>h', ':sp +te term<cr>i', { silent = true })
 -- open vertical terminal
 vim.keymap.set('n', '<leader>v', ':vert te<cr>i', { silent = true })
 
--- escape insert mode in terminal CTRL-e
-vim.keymap.set('t', '<leader><ESC>', '<C-\\><C-n>')
+-- escape insert mode in terminal Shift-ESC
+vim.keymap.set('t', '<S-ESC>', '<C-\\><C-n>')
 
 -- switch windows in terminal easier
 vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-w>j')
@@ -74,16 +74,27 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 local term_commands = augroup('term_commands', {})
+local buf_commands = augroup('buf_commands', {})
 
+-- Turn of line numbers and relative numbers
 autocmd({'TermOpen'}, {
   group = term_commands,
   pattern = '*',
   command = 'setlocal nonumber norelativenumber'
 })
 
+-- Automatically enter insert mode when we enter a terminal
 autocmd({'BufEnter', 'WinEnter'}, {
   group = term_commands,
   pattern = 'term://*',
   command = 'startinsert'
 })
+
+-- Go back to the line we left off at when we reopen a file
+autocmd({'BufReadPost'}, {
+  group = buf_commands,
+  pattern = '*',
+  command = 'if line("\'\\"") > 1 && line("\'\\"") <= line("$") | exe "normal! g\'\\"" | endif'
+})
+
 

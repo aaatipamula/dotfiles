@@ -9,16 +9,57 @@ return {
     'williamboman/mason-lspconfig.nvim', -- Bridge mason with lspconfig
     'hrsh7th/cmp-nvim-lsp',              -- Completion for LSP
     'hrsh7th/nvim-cmp',                  -- Bridge completion with lspconfig
+    'hrsh7th/cmp-buffer',                -- Suggestions from the current buffer
   },
   config = function()
     local lsp_zero = require('lsp-zero')
 
-    -- For the buffer we are attached to try each of these 
+    -- For the buffer we are attached to if there is LSP create these binds
     local lsp_attach = function(client, bufnr)
       local opts = {buffer = bufnr}
       local builtin = require('telescope.builtin')
 
-      vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+      function OpenDiagnostics()
+        vim.b.hover_active = true
+        vim.diagnostic.open_float(0, {
+           scope = "cursor",
+           focusable = false,
+           close_events = {
+             "CursorMoved",
+             "CursorMovedI",
+             "BufHidden",
+             "InsertCharPre",
+             "WinLeave",
+          },
+        })
+      end
+
+      -- Hover pulls up a window with the error
+      vim.api.nvim_create_autocmd({'CursorHold'}, {
+        group = buf_commands,
+        pattern = '*',
+        callback = function()
+          -- Check if a hover window is active
+          local active = vim.b.hover_active
+          if not active then
+            vim.defer_fn(function()
+              OpenDiagnostics()
+            end, 200) -- delay of 200ms
+          end
+        end
+      })
+
+      -- Reset hover if we move
+      vim.api.nvim_create_autocmd({'CursorMoved', 'CursorMovedI'}, {
+        callback = function()
+          vim.b.hover_active = false
+        end
+      })
+
+      vim.keymap.set('n', 'K', function()
+        vim.lsp.buf.hover()
+        vim.b.hover_active = true
+      end, opts)
       vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
       vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
       vim.keymap.set('n', 'gi', builtin.lsp_implementations, opts)
@@ -41,6 +82,7 @@ return {
     require('mason').setup({})
     require('mason-lspconfig').setup({
         ensure_installed = {'eslint', 'pyright', 'gopls'},
+        automatic_installation = true,
         handlers = {
           function(server_name)
             require('lspconfig')[server_name].setup({})
@@ -50,18 +92,31 @@ return {
 
     -- Setup code completion
     local cmp = require('cmp')
+    local cmp_action = require('lsp-zero').cmp_action()
+    local cmp_format = require('lsp-zero').cmp_format({details = true})
+
     cmp.setup({
         sources = {
           {name = 'nvim_lsp'},
+          {name = 'buffer'},
         },
+        formatting = cmp_format,
         snippet = {
           expand = function(args)
             -- You need Neovim v0.10 to use vim.snippet
             vim.snippet.expand(args.body)
           end,
         },
-        mapping = cmp.mapping.preset.insert({}),
+        mapping = cmp.mapping.preset.insert({
+          ['<CR>'] = cmp.mapping.confirm({select = true}),
+          ['<Tab>'] = cmp_action.tab_complete(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
+        }),
       })
+
+    vim.diagnostic.config({
+      virtual_text = false, -- Turn off inline diagnostics
+    })
   end
 }
 
