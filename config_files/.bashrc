@@ -3,12 +3,13 @@ export VISUAL="vim"
 export EDITOR="vim"
 
 # File locations
+export dotfiles="$HOME/dotfiles"
 export bashrc="$HOME/.bashrc"
 export bashpr="$HOME/.bash_profile"
 export vimrc="$HOME/.vim/vimrc"
 export gitconf="$HOME/.gitconfig"
 export bashal="$HOME/.bash_aliases"
-export dotfiles="$HOME/dotfiles"
+export nvimc="$HOME/.config/nvim"
 
 # What git branch is checked out
 parse_git_branch() {
@@ -37,6 +38,7 @@ alias bashrc="$VISUAL $bashrc"
 alias bashpr="$VISUAL $bashpr"
 alias gitconf="$VISUAL $gitconf"
 alias bashal="$VISUAL $bashal"
+alias nvimc="$VISUAL $nvimc"
 alias loadbash="source $bashrc"
 alias dotfiles="cd $dotfiles"
 
@@ -68,18 +70,17 @@ set -o vi
 # append to the history file, don't overwrite it
 shopt -s histappend
 
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth:ignoredups:erasedups
 HISTIGNORE="ls:exit:pwd:clear"
 
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

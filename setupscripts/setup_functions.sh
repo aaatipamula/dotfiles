@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dotfiles=~/dotfiles
+dotfiles=$HOME/dotfiles
 
 # check for dotfiles directory
 if [ ! -d $dotfiles ]
@@ -87,20 +87,20 @@ dracula_vim_install()
   # check if proper directory exists
   # make it if not
   # check for dracula install
-  if ! [ -d ~/.vim/pack/themes/start ]
+  if ! [ -d $HOME/.vim/pack/themes/start ]
   then
-    mkdir -p ~/.vim/pack/themes/start
-    git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula
+    mkdir -p $HOME/.vim/pack/themes/start
+    git clone https://github.com/dracula/vim.git $HOME/.vim/pack/themes/start/dracula
     return 0
 
   else
-    if [ -d ~/.vim/pack/themes/start/dracula ]
+    if [ -d $HOME/.vim/pack/themes/start/dracula ]
     then
       echo "Dracula Vim already installed"
       return 2
 
     else
-      git clone https://github.com/dracula/vim.git ~/.vim/pack/themes/start/dracula
+      git clone https://github.com/dracula/vim.git $HOME/.vim/pack/themes/start/dracula
       return 0
     fi
   fi
@@ -111,7 +111,7 @@ setup_bash()
 {
   echo "Setting up bash."
 
-  for dir in ~/.local/bin ~/.backups ~/.config
+  for dir in $HOME/.local/bin $HOME/.backups $HOME/.config
   do
     if ! [ -d $dir ]
     then
@@ -121,24 +121,24 @@ setup_bash()
     fi
   done
 
-  if [ -f ~/.bashrc ]
+  if [ -f $HOME/.bashrc ]
   then
-    if cmp -s ~/.bashrc $dotfiles/config_files/.bashrc
+    if cmp -s $HOME/.bashrc $dotfiles/config_files/.bashrc
     then
       echo "Bash already setup."
       return 2
     else
-      rm ~/.bashrc
+      rm $HOME/.bashrc
     fi
   fi
 
-  ln -s $dotfiles/config_files/.bashrc ~
+  ln -s $dotfiles/config_files/.bashrc $HOME
   return 0
     
 
-  if [ ! -f ~/.bash_aliases ]
+  if [ ! -f $HOME/.bash_aliases ]
   then 
-    echo "export machine_name=\"machine_name\"" > ~/.bash_aliases
+    echo "export machine_name=\"machine_name\"" > $HOME/.bash_aliases
   fi
 }
 
@@ -147,20 +147,20 @@ setup_git()
 {
   echo "Setting up git."
 
-  if [ -f ~/.gitconfig ]
+  if [ -f $HOME/.gitconfig ]
   then
 
-    if cmp -s ~/.gitconfig $dotfiles/config_files/.gitconfig
+    if cmp -s $HOME/.gitconfig $dotfiles/config_files/.gitconfig
     then
       echo "Git already setup."
       return 2
     else
-      rm ~/.gitconfig
+      rm $HOME/.gitconfig
     fi
 
   fi
 
-  ln -s $dotfiles/config_files/.gitconfig ~
+  ln -s $dotfiles/config_files/.gitconfig $HOME
   return 0
 }
 
@@ -169,24 +169,24 @@ vim_basic_setup()
 {
   echo "Installing basic vimrc."
 
-  if ! [ -d ~/.vim ]
+  if ! [ -d $HOME/.vim ]
   then
-    mkdir ~/.vim
+    mkdir $HOME/.vim
   fi
 
-  if [ -f ~/.vim/vimrc ]
+  if [ -f $HOME/.vim/vimrc ]
   then
 
-    if cmp -s  ~/.vim/vimrc $dotfiles/vim/basic.vim
+    if cmp -s  $HOME/.vim/vimrc $dotfiles/vim/basic.vim
     then
       echo "Basic Vim already setup."
       return 2
     else
-      rm ~/.vim/vimrc
+      rm $HOME/.vim/vimrc
     fi
   fi
 
-  ln -s $dotfiles/vim/basic.vim ~/.vim/vimrc
+  ln -s $dotfiles/vim/basic.vim $HOME/.vim/vimrc
   return 0
 }
 
@@ -195,10 +195,10 @@ setup_vim_plug()
 {
   echo "Installing vim-plug."
 
-  if ! [ -f ~/.vim/autoload/plug.vim ]
+  if ! [ -f $HOME/.vim/autoload/plug.vim ]
   then
     # Install vim-plug
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     # Check if vim-plug install failed
@@ -225,56 +225,56 @@ setup_vimrc()
   echo "Setting up vimrc."
 
   # Remove dracula theme
-  if [ -d ~/.vim/pack/themes/start/dracula ]
+  if [ -d $HOME/.vim/pack/themes/start/dracula ]
   then
-      rm -rf ~/.vim/pack/themes/start/dracula
+      rm -rf $HOME/.vim/pack/themes/start/dracula
   fi
 
   # Make vim directory if not exists
-  if ! [ -d ~/.vim ]
+  if ! [ -d $HOME/.vim ]
   then
-      mkdir ~/.vim
+      mkdir $HOME/.vim
   fi
 
   # Link vimrc
-  if [ -f ~/.vim/vimrc ]
+  if [ -f $HOME/.vim/vimrc ]
   then
 
-    if cmp -s  ~/.vim/vimrc $dotfiles/vim/vimrc
+    if cmp -s  $HOME/.vim/vimrc $dotfiles/vim/vimrc
     then
       echo "Vim already setup."
       return 2
     else
-      rm ~/.vim/vimrc
+      rm $HOME/.vim/vimrc
     fi
   fi
 
-  ln -s $dotfiles/vim/vimrc ~/.vim/
+  ln -s $dotfiles/vim/vimrc $HOME/.vim/
   return 0
 }
 
 # Set up my neovim config
 setup_nvim()
 {
-  if [ -d ~/.config/nvim/ ]
+  if [ -d $HOME/.config/nvim/ ]
   then
-    echo "Making directory ~/.config/nvim"
-    mkdir ~/.config/nvim
+    echo "Making directory $HOME/.config/nvim"
+    mkdir $HOME/.config/nvim
   fi
 
-  if [ -f ~/.config/nvim/init.lua ]
+  if [ -f $HOME/.config/nvim/init.lua ]
   then
-    echo "WARNING nvim config already exists, backing up config to ~/.backups/nvim"
-    cp -rf ~/.config/nvim ~/.backups/
+    echo "WARNING nvim config already exists, backing up config to $HOME/.backups/nvim"
+    cp -rf $HOME/.config/nvim $HOME/.backups/
   fi
 
   echo "Removing previous nvim config"
-  rm -rf ~/.config/nvim
-  rm -rf ~/.local/share/nvim
+  rm -rf $HOME/.config/nvim
+  rm -rf $HOME/.local/share/nvim
 
-  echo "Installing NvChad"
+  echo "Installing nvim config"
 
-  cp -r $(pwd)/nvim ~/.config/
+  cp -r $dotfiles/nvim $HOME/.config/
 
   if [ $? -ne "0" ]
   then
