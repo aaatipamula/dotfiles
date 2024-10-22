@@ -18,7 +18,7 @@ return {
       vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
 
       -- Spell Suggest
-      vim.keymap.set('n', '<C-Enter>', builtin.spell_suggest, {})
+      vim.keymap.set('n', '<leader>z', builtin.spell_suggest, {})
     end
 }
 

@@ -1,6 +1,10 @@
 vim.g.mapleader = ' '
 
+-- Open file finder (netrw)
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+
+-- Toggle spelling
+vim.keymap.set('n', '<leader>ss', ':setlocal spell!<cr>')
 
 -- Smart way to move between windows (ctrl-hjkl)
 vim.keymap.set('n', '<C-j>', '<C-W>j')
