@@ -15,7 +15,7 @@ vim.opt.backup = false   -- no swap files
 vim.opt.undofile = true  -- save undo history
 
 
-vim.opt.wrap = true     -- don't wrap text in buffer
+vim.opt.linebreak = true -- wrap by word
 vim.opt.ttyfast = true   -- speed up scrolling in Vim
 vim.opt.mouse = 'a'      -- enable mouse click
 vim.opt.termguicolors = true -- use terminal gui colors
