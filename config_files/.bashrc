@@ -2,6 +2,9 @@
 export VISUAL="vim"
 export EDITOR="vim"
 
+# Config home
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # File locations
 export dotfiles="$HOME/dotfiles"
 export bashrc="$HOME/.bashrc"
@@ -9,7 +12,8 @@ export bashpr="$HOME/.bash_profile"
 export vimrc="$HOME/.vim/vimrc"
 export gitconf="$HOME/.gitconfig"
 export bashal="$HOME/.bash_aliases"
-export nvimc="$HOME/.config/nvim"
+export nvimc="$XDG_CONFIG_HOME/nvim"
+export tmuxc="$XDG_CONFIG_HOME/tmux/tmux.conf"
 
 # What git branch is checked out
 parse_git_branch() {
@@ -39,6 +43,7 @@ alias bashpr="$VISUAL $bashpr"
 alias gitconf="$VISUAL $gitconf"
 alias bashal="$VISUAL $bashal"
 alias nvimc="$VISUAL $nvimc"
+alias tmuxc="$VISUAL $tmuxc"
 alias loadbash="source $bashrc"
 alias dotfiles="cd $dotfiles"
 

@@ -273,8 +273,41 @@ setup_nvim()
   rm -rf $HOME/.local/share/nvim
 
   echo "Installing nvim config"
+  ln -s $dotfiles/nvim $HOME/.config/
 
-  cp -r $dotfiles/nvim $HOME/.config/
+  if [ $? -ne "0" ]
+  then
+    return $?
+  fi
+
+  return 0
+}
+
+setup_tmux()
+{
+  if [ -d $HOME/.tmux/plugins/tpm ]
+  then
+    echo "TPM already installed..."
+  else
+    git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+  fi
+
+  if [ -f $HOME/.config/tmux/tmux.conf ]
+  then
+    echo "WARNING: tmux.conf already exists, backing up to $HOME/.backups/tmux.conf"
+    cp -f $HOME/.config/tmux/tmux.conf $HOME/.backups/
+  fi
+
+  if [ ! -d $HOME/.config/tmux ]
+  then
+    mkdir -p $HOME/.config/tmux
+  fi
+
+  echo "Removing previous tmux config"
+  rm -f $HOME/.config/tmux/tmux.conf
+
+  echo "Installing tmux config"
+  ln -s $dotfiles/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
 
   if [ $? -ne "0" ]
   then

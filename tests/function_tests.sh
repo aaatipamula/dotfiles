@@ -108,7 +108,11 @@ setup_vimrc
 check_return $? "2"
 
 
-# Check nvchad setup
+# Check nvim setup
 setup_nvim
 check_return $? "0"
 
+
+# Check tmux setup
+setup_tmux
+check_return $? "0"

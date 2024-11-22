@@ -23,7 +23,7 @@ fi
 
 # WARN users of sudo access
 echo "WARNING You may need root permissions to run some aspects of this program, procede with caution."
-sleep 3
+sleep 2
 
 # parse user input
 if [ "$1" = "preset" ]
@@ -45,6 +45,7 @@ then
       setup_git
       setup_vim_plug # need for vim plugins
       setup_vimrc
+      setup_tmux
       ;;
 
     # install docker for servers and run basic setup stuff
@@ -72,12 +73,10 @@ then
       vim_basic_setup
       ;;
 
-    help)
-      echo "help"
-      ;;
-
     *)
       echo "Not a valid preset. Choose from [main, server, bare]"
+      help_command
+      ;;
   esac
 
 elif [ "$1" = "help" ]
@@ -132,9 +131,14 @@ else
         vim_basic_setup
         ;;
 
-      # install nvchad
+      # setup neovim
       nvim)
         setup_nvim
+        ;;
+
+      # setup tmux
+      tmux)
+        setup_tmux
         ;;
 
       *)
