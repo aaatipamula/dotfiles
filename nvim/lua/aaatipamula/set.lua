@@ -26,8 +26,10 @@ vim.opt.splitbelow = true -- open splits below
 vim.opt.errorbells = false
 vim.opt.visualbell = true
 
+-- Scrolling and indication
 vim.opt.signcolumn = 'yes'
 vim.opt.scrolloff = 8
 
+-- Faster update times
 vim.opt.updatetime = 50
 
