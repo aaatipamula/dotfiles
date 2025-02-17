@@ -73,12 +73,28 @@ vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k')
 vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h')
 vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l')
 
--- Don't show line numbers in the terminal
+-- Setup auto commands and groups
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
+-- Create groups
 local term_commands = augroup('term_commands', {})
 local buf_commands = augroup('buf_commands', {})
+
+-- Copy to system clipboad for WSL
+local clip_exe = "/mnt/c/Windows/System32/clip.exe"
+if vim.fn.executable(clip_exe) == 1 then
+  local wsl_yank = augroup('wsl_yank', {clear = true})
+  autocmd("TextYankPost", {
+    group = wsl_yank,
+    pattern = "*",
+    callback = function()
+      if vim.v.event.operator == 'y' then
+        vim.fn.system(clip_exe, vim.fn.getreg('"'))
+      end
+    end,
+  })
+end
 
 -- Turn of line numbers and relative numbers
 autocmd({'TermOpen'}, {

@@ -84,7 +84,7 @@ HISTCONTROL=ignoreboth:ignoredups:erasedups
 HISTIGNORE="ls:exit:pwd:clear"
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
+HISTSIZE=2000
 HISTFILESIZE=2000
 
 # colored GCC warnings and errors
