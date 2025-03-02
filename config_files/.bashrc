@@ -1,11 +1,10 @@
-# VIM export
+# VIM is my default editor
 export VISUAL="vim"
 export EDITOR="vim"
+export XDG_CONFIG_HOME="$HOME/.config" # Config home
+export TERM=xterm-256color             # Correct terminal
 
-# Config home
-export XDG_CONFIG_HOME="$HOME/.config"
-
-# File locations
+# Configuration file locations
 export dotfiles="$HOME/dotfiles"
 export bashrc="$HOME/.bashrc"
 export bashpr="$HOME/.bash_profile"
@@ -15,18 +14,16 @@ export bashal="$HOME/.bash_aliases"
 export nvimc="$XDG_CONFIG_HOME/nvim"
 export tmuxc="$XDG_CONFIG_HOME/tmux/tmux.conf"
 
-# What git branch is checked out
+# Get git branch
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-# Useful aliases and shortcuts
 alias ls='ls -lh --color=auto'
 alias l.='ls -d .*'         # Only hidden directory
 alias ll='ls -rt'           # Organize by date modified
 alias ld='ls -Ud */'        # Only directories
 alias la='ls -a'            # Everything including hidden files
-alias pd='cd -'             # Previous directory
 alias size="du -sh"         # Check folder size
 alias mkdirs='mkdir -p'     # Shortcut create directory if not exists
 alias p3='python3'          # Shortcut python3 bin
@@ -34,7 +31,8 @@ alias hist='history'        # Shortcut history
 alias gd='git diff'         # Quick diff
 alias gs='git status'       # Quick status
 alias gl='git log'          # Quick log
-alias liveserve="nohup python3 -m http.server 8000 > http.log 2>&1 &"
+alias tmn="tmux new -s"     # tmux new session
+alias tma="tmux a -t"       # tmux attach to session
 
 # Easy access/edit config files
 alias vimrc="$VISUAL $vimrc"
@@ -91,5 +89,6 @@ HISTFILESIZE=2000
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # fzf config
-export FZF_DEFAULT_OPTS="--margin 1 --padding 1 --height 85% --border --reverse"
+# export FZF_DEFAULT_OPTS="--margin 1 --padding 1 --height 85% --border --reverse"
+export FZF_DEFAULT_OPTS="--style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
 
