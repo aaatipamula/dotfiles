@@ -33,3 +33,5 @@ vim.opt.scrolloff = 8
 -- Faster update times
 vim.opt.updatetime = 50
 
+-- Set dracula colorscheme
+-- vim.cmd[[colorscheme dracula]]

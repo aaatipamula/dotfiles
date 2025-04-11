@@ -8,11 +8,11 @@ return {
         comments = 'none',
       },
 
-      -- Theme variant
+      -- Theme variant config
       style = 'darker',
+      toggle_style_key = '<leader>tt',
+      toggle_style_list = {'darker',  'deep',  'warmer'},
     }
-
-    require('onedark').load()
   end
 }
 

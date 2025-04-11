@@ -85,7 +85,8 @@ return {
         automatic_installation = true,
         handlers = {
           function(server_name)
-            require('lspconfig')[server_name].setup({})
+            local server_config = (server_name == 'clangd' and {cmd = { "clangd", '--compile-commands-dir=.' }} or {})
+            require('lspconfig')[server_name].setup({server_config})
           end,
         }
       })

@@ -21,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   spec = 'aaatipamula.plugins',
   -- Install window colorscheme
-  install = { colorscheme = { 'onedark' } },
+  install = { colorscheme = { 'tokyonight-night' } },
   -- Don't notify me of updates
   change_detection = { notify = false },
 })

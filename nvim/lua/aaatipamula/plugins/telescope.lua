@@ -16,6 +16,7 @@ return {
       vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
       vim.keymap.set('n', '<leader>rg', builtin.live_grep, {})
       vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
+      vim.keymap.set('n', '<leader>cs', builtin.colorscheme, {})
 
       -- Spell Suggest
       vim.keymap.set('n', '<leader>z', builtin.spell_suggest, {})
