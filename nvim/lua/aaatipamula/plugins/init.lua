@@ -2,6 +2,5 @@
 
 return {
   'tpope/vim-surround',   -- Surround symbols
-  'jiangmiao/auto-pairs', -- Automatically pair stuff TODO: remove this plugin
 }
 

@@ -110,6 +110,18 @@ autocmd({'BufEnter', 'WinEnter'}, {
   command = 'startinsert'
 })
 
+-- Fix Tmux navigator not working when native nvim terminal is opened
+autocmd('TermEnter', {
+  group = term_commands,
+  pattern = '*',
+  callback = function()
+    vim.keymap.set('t', '<C-h>', '<Cmd>TmuxNavigateLeft<CR>', { buffer = 0 })
+    vim.keymap.set('t', '<C-j>', '<Cmd>TmuxNavigateDown<CR>', { buffer = 0 })
+    vim.keymap.set('t', '<C-k>', '<Cmd>TmuxNavigateUp<CR>', { buffer = 0 })
+    vim.keymap.set('t', '<C-l>', '<Cmd>TmuxNavigateRight<CR>', { buffer = 0 })
+  end
+})
+
 -- Go back to the line we left off at when we reopen a file
 autocmd({'BufReadPost'}, {
   group = buf_commands,
