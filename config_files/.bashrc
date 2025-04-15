@@ -16,21 +16,21 @@ export tmuxc="$XDG_CONFIG_HOME/tmux/tmux.conf"
 
 # Get git branch
 parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  git branch 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/ (\1)/"
 }
 
-alias ls='ls -lh --color=auto'
-alias l.='ls -d .*'         # Only hidden directory
-alias ll='ls -rt'           # Organize by date modified
-alias ld='ls -Ud */'        # Only directories
-alias la='ls -a'            # Everything including hidden files
+alias ls="ls -lh --color=auto"
+alias l.="ls -d .*"         # Only hidden directory
+alias ll="ls -rt"           # Organize by date modified
+alias ld="ls -Ud */"        # Only directories
+alias la="ls -a"            # Everything including hidden files
 alias size="du -sh"         # Check folder size
-alias mkdirs='mkdir -p'     # Shortcut create directory if not exists
-alias p3='python3'          # Shortcut python3 bin
-alias hist='history'        # Shortcut history
-alias gd='git diff'         # Quick diff
-alias gs='git status'       # Quick status
-alias gl='git log'          # Quick log
+alias mkdirs="mkdir -p"     # Shortcut create directory if not exists
+alias p3="python3"          # Shortcut python3 bin
+alias hist="history"        # Shortcut history
+alias gd="git diff"         # Quick diff
+alias gs="git status"       # Quick status
+alias gl="git log"          # Quick log
 alias tmn="tmux new -s"     # tmux new session
 alias tma="tmux a -t"       # tmux attach to session
 
@@ -47,7 +47,7 @@ alias dotfiles="cd $dotfiles"
 
 # Machine specific config
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 # Set machine name
@@ -70,23 +70,23 @@ shopt -s autocd
 # Use Vi bindings to move around and edit in terminal
 set -o vi
 
-# append to the history file, don't overwrite it
+# Append to the history file, don't overwrite it
 shopt -s histappend
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+# Check the window size after each command and, if necessary,
+#   update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# don't put duplicate lines or lines starting with space in the history.
+# Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth:ignoredups:erasedups
 HISTIGNORE="ls:exit:pwd:clear"
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=2000
 HISTFILESIZE=2000
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# Colored GCC warnings and errors
+export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
 
 # fzf config
 # export FZF_DEFAULT_OPTS="--margin 1 --padding 1 --height 85% --border --reverse"

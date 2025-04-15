@@ -2,11 +2,11 @@ vim.opt.hlsearch = false  -- don't highlight
 vim.opt.incsearch = true  -- incremental search
 
 vim.opt.expandtab = true   -- converts tabs to white space
-vim.o.autoindent = true    -- carry over the indent from the previous line
 vim.opt.tabstop = 2        -- number of columns occupied by a tab
 vim.opt.softtabstop = 2    -- set spaces as tabs stops so <BS> does the right thing
 vim.opt.shiftwidth = 2     -- width for auto indents
--- vim.opt.smartindent = true -- smort hehe
+-- vim.o.autoindent = true    -- carry over the indent from the previous line
+vim.opt.smartindent = true -- smort hehe
 
 vim.opt.number = true         -- add line numbers
 vim.opt.relativenumber = true -- numbers relative to current line
