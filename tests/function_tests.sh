@@ -1,9 +1,7 @@
 #!/bin/sh
 
 # Import module
-if [ -f ./setupscripts/setup_functions.sh ]
-then
-  ./setupscripts/setup_functions.sh "gh_test"
+if [ -f ./setupscripts/setup_functions.sh ]; then
   . ./setupscripts/setup_functions.sh
 fi
 
@@ -34,16 +32,6 @@ check_dir()
   fi
 }
 
-# Special check for nvchad install 
-check_return_dir()
-{
-  check_dir $1
-  check_return $2 $3
-}
-
-# Try install
-install_apps apt
-
 # Check package manager validator
 validate_package_manager apt
 check_return $? "0"
@@ -57,62 +45,8 @@ check_return $? "0"
 validate_package_manager fail
 check_return $? "1"
 
+for app in ${CONFIG_PROGRAMS[@]}; do
+  eval "setup_$option"
+  check_return $? "0"
+done
 
-# Check dracula vim install
-dracula_vim_install
-check_return $? "0"
-
-dracula_vim_install
-check_return $? "2"
-
-
-# Check bash setup
-setup_bash
-check_return $? "0"
-
-setup_bash
-check_return $? "2"
-
-
-# Check git setup
-setup_git
-check_return $? "0"
-
-setup_git
-check_return $? "2"
-
-
-# Check vim basic setup
-vim_basic_setup
-check_return $? "0"
-
-vim_basic_setup
-check_return $? "2"
-
-
-# Check vim plug install
-# Deprecated function
-setup_vim_plug
-check_return $? "0"
-
-setup_vim_plug
-check_return $? "2"
-
-
-# Check vimrc setup
-# Deprecated function
-setup_vimrc
-check_return $? "0"
-
-setup_vimrc
-check_return $? "2"
-
-
-# Check nvim setup
-setup_nvim
-check_return $? "0"
-
-
-# Check tmux setup
-setup_tmux
-check_return $? "0"

@@ -1,64 +1,91 @@
-#!/bin/sh
+#!/bin/bash
 
-dotfiles=$HOME/dotfiles
+#############################
+### INSTANTIATE VARIABLES ###
+#############################
 
-# check for dotfiles directory
-if [ ! -d $dotfiles ]
+XDG_CONFIG_HOME="$HOME/.config"
+BACKUPS_DIR="$HOME/.backups"
+DOTFILES_DIR="$HOME/dotfiles"
+HOME_CONFIG_DIR="$DOTFILES_DIR/config"
+
+DEV_PROGRAMS=(
+  "tmux"
+  "neovim"
+  "vim"
+  "tree"
+  "python3"
+  "docker"
+  "go"
+  "curl"
+)
+
+CONFIG_PROGRAMS=(
+  "bash"
+  "git"
+  "vim"
+  "nvim"
+  "tmux"
+  "hypr"
+  "waybar"
+  "kitty"
+  "wezterm"
+  "wofi"
+)
+
+###############
+### LOGGING ###
+###############
+
+# Terminal colors
+bold=$(tput bold)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+red=$(tput setaf 9)
+norm=$(tput sgr0)
+
+info()
+{
+  echo "[${blue}INFO${norm}]: $1"
+}
+
+warn()
+{
+  echo "[${yellow}WARN${norm}]: $1"
+}
+
+error()
+{
+  echo "[${red}ERROR${norm}]: $1"
+}
+
+#########################
+### SETUP ENVIRONMENT ###
+#########################
+
+# Check for dotfiles directory in the correct place
+if ! [ -d "$DOTFILES_DIR" ]
 then
   # check for github workspace
-  if [ -d $GITHUB_WORKSPACE ]
+  if [ -d "$GITHUB_WORKSPACE" ]
   then
     dotfiles=$GITHUB_WORKSPACE
   else
-    echo "Dotfiles not found exiting setup"
+    error "Dotfiles not found in $DOTFILES_DIR"
+    info  "Exiting setup"
     exit 1
   fi
 fi
 
-# Install commonly used apps
-install_apps()
-{
+if ! [ -d "$BACKUPS_DIR" ]; then
+  mkdir -p $BACKUPS_DIR
+fi
 
-  if [ "$1" = "apt" ]
-  then
-    sudo add-apt-repository ppa:neovim-ppa/stable
-  fi
+########################
+### HELPER FUNCTIONS ###
+########################
 
-  # update and upgrade
-  sudo $1 update && sudo $1 upgrade
-
-  # check for errors updating package manager
-  if [ $? -ne "0" ]
-  then
-    echo "Something went wrong updating and upgrading the package manager."
-    echo "Please run: "
-    printf "\n\tsudo $1 update && sudo $1 upgrade"
-  fi
-
-  # install commonly used programs
-  sudo $1 install htop vim tmux docker python3 curl
-
-  # check for errors installing programs
-  if [ $? -ne "0" ]
-  then
-    echo "Something went wrong installing programs."
-    echo "Please run: "
-    printf "\n\tsudo $1 install htop vim tmux docker python3 curl"
-  fi
-
-  # Install nvm for node version control etc.
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-
-  # check for nvm install errors
-  if [ $? -ne "0" ]
-  then
-    echo "Something went wrong installing nvm."
-    echo "Please run: "
-    printf "\n\tcurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
-  fi
-}
-
-# Valid package managers
+# Valid package managers for install script
 validate_package_manager()
 {
   case $1 in
@@ -79,138 +106,95 @@ validate_package_manager()
   esac
 }
 
-# Dracula Install
-dracula_vim_install()
+# Install commonly used apps
+install_apps()
 {
-  echo "Installing Dracula Vim."
+  # update and upgrade
+  sudo $1 update && sudo $1 upgrade
 
-  # check if proper directory exists
-  # make it if not
-  # check for dracula install
-  if ! [ -d $HOME/.vim/pack/themes/start ]
+  # check for errors updating package manager
+  if [ $? -ne "0" ]
   then
-    mkdir -p $HOME/.vim/pack/themes/start
-    git clone https://github.com/dracula/vim.git $HOME/.vim/pack/themes/start/dracula
-    return 0
+    error "Something went wrong updating and or upgrading!"
+    echo  "Please run:"
+    printf "\n\tsudo $1 update && sudo $1 upgrade\n"
+  fi
 
-  else
-    if [ -d $HOME/.vim/pack/themes/start/dracula ]
-    then
-      echo "Dracula Vim already installed"
-      return 2
+  # install commonly used developer programs
+  sudo "$1" install ${DEV_PROGRAMS[*]}
 
-    else
-      git clone https://github.com/dracula/vim.git $HOME/.vim/pack/themes/start/dracula
-      return 0
-    fi
+  # check for errors installing programs
+  if [ $? -ne "0" ]
+  then
+    error "Something went wrong installing programs."
+    echo  "Please run: "
+    printf "\n\tsudo $1 install ${DEV_PROGRAMS[*]}\n"
   fi
 }
 
-# Make local bin folder and link bashrc
-setup_bash()
+# Symlink a file to a location
+link_file()
 {
-  echo "Setting up bash."
+  file_name=$(echo $1 | sed 's|.*/||')
+  file_path="$2/$file_name"
 
-  for dir in $HOME/.local/bin $HOME/.backups $HOME/.config
-  do
-    if ! [ -d $dir ]
-    then
-      mkdir -p $dir
-    else
-      echo "$dir already exists!"
-    fi
-  done
+  if [ -f "$file_path" ]; then
+    warn "File ($file_path) already exists!"
+    info "Creating a backup in $BACKUPS_DIR/$file_name and removing old."
 
-  if [ -f $HOME/.bashrc ]
-  then
-    if cmp -s $HOME/.bashrc $dotfiles/config_files/.bashrc
-    then
-      echo "Bash already setup."
-      return 2
-    else
-      rm $HOME/.bashrc
-    fi
+    # info "Running: cp -rf $file_path $BACKUPS_DIR/$file_path"
+    cp -f $file_path "$BACKUPS_DIR/$file_name"
+    # info "Running: rm -rf $file_path"
+    rm -f $file_path
   fi
 
-  ln -s $dotfiles/config_files/.bashrc $HOME
-  return 0
-    
-
-  if [ ! -f $HOME/.bash_aliases ]
-  then 
-    echo "export machine_name=\"machine_name\"" > $HOME/.bash_aliases
-  fi
+  # info "Running: ln -sf $1 $file_path"
+  ln -sf $1 $file_path
 }
 
-# Link gitconfig file
-setup_git()
+# Symlink a directory to a location
+link_directory()
 {
-  echo "Setting up git."
+  directory_name=$(echo $1 | sed 's|.*/||')
+  directory_path="$2/$directory_name"
 
-  if [ -f $HOME/.gitconfig ]
-  then
+  if [ -d "$directory_path" ]; then
+    warn "Directory ($directory_path) already exists!"
+    info "Creating a backup in $BACKUPS_DIR/$directory_name and removing old."
 
-    if cmp -s $HOME/.gitconfig $dotfiles/config_files/.gitconfig
-    then
-      echo "Git already setup."
-      return 2
-    else
-      rm $HOME/.gitconfig
-    fi
+    # info "Running: cp -rf $directory_path $BACKUPS_DIR/$directory_name"
+    cp -rf $directory_path "$BACKUPS_DIR/$directory_name"
+    # info "Running: rm -rf $directory_path"
+    rm -rf $directory_path
 
-  fi
-
-  ln -s $dotfiles/config_files/.gitconfig $HOME
-  return 0
-}
-
-# Make vim directories and copy over vimrc
-vim_basic_setup()
-{
-  echo "Installing basic vimrc."
-
-  if ! [ -d $HOME/.vim ]
-  then
-    mkdir $HOME/.vim
-  fi
-
-  if [ -f $HOME/.vim/vimrc ]
-  then
-
-    if cmp -s  $HOME/.vim/vimrc $dotfiles/vim/basic.vim
-    then
-      echo "Basic Vim already setup."
-      return 2
-    else
-      rm $HOME/.vim/vimrc
+    # Remove nvim plugins too
+    if [ "$directory_name" = "nvim" ]; then
+      rm -rf $HOME/.local/share/nvim
     fi
   fi
 
-  ln -s $dotfiles/vim/basic.vim $HOME/.vim/vimrc
-  return 0
+  # info "Running: ln -sf $1 $directory_path"
+  ln -sf $1 $directory_path
 }
 
 # Install vim-plug
-setup_vim_plug()
+install_vim_plug()
 {
-  echo "Installing vim-plug."
+  info "Installing Vim-Plug."
 
-  if ! [ -f $HOME/.vim/autoload/plug.vim ]
-  then
+  if ! [ -f "$HOME/.vim/autoload/plug.vim" ]; then
     # Install vim-plug
     curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     # Check if vim-plug install failed
-    if [ $? -ne "0" ]
-    then
-      echo "Failed to install Vim-Plug."
+    if [ $? -ne "0" ]; then
+      error "Failed to install Vim-Plug."
       echo "Please enter the following lines into your terminal: "
       echo "curl -fLo \\$HOME/.vim/autoload/plug.vim --create-dirs \\"
       echo "    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
       return 1
     fi
-
     return 0
 
   else
@@ -219,126 +203,176 @@ setup_vim_plug()
   fi
 }
 
-# Link vimrc
-setup_vimrc()
+# Display help command for users
+help_command()
 {
-  echo "Setting up vimrc."
+  echo "${bold}${yellow}Script to help setup Linux machines.${norm}"
 
-  # Remove dracula theme
-  if [ -d $HOME/.vim/pack/themes/start/dracula ]
-  then
-      rm -rf $HOME/.vim/pack/themes/start/dracula
+  echo   "Use:"
+  echo   "  setup preset [${red}PRESETS${norm}]"
+  echo   "  setup [${red}FUNCTION${norm}]"
+  printf "  setup help -- This message\n\n"
+
+  echo   "[${red}PRESETS${norm}]"
+  echo   "  - main:  Configures all programs, installs all common applications."
+  echo   "  - progs: Configures all programs."
+  printf "  - bare:  Configure just bash, git, basic vim.\n\n"
+
+  echo   "[${red}FUNCTION${norm}]"
+  echo   "  - apps [apt, dnf, brew]"
+  for app in ${CONFIG_PROGRAMS[@]}; do
+    echo   "  - $app"
+  done
+  echo ""
+}
+
+#######################
+### SETUP FUNCTIONS ###
+#######################
+
+setup_apps()
+{
+  info "Setting up apps."
+
+  validate_package_manager $1
+
+  if [ $? -ne "0" ]; then
+    error "Could not match package manager skipping application install."
+    sleep 2
+  else
+    install_apps $1
   fi
 
-  # Make vim directory if not exists
-  if ! [ -d $HOME/.vim ]
-  then
-      mkdir $HOME/.vim
-  fi
-
-  # Link vimrc
-  if [ -f $HOME/.vim/vimrc ]
-  then
-
-    if cmp -s  $HOME/.vim/vimrc $dotfiles/vim/vimrc
-    then
-      echo "Vim already setup."
-      return 2
-    else
-      rm $HOME/.vim/vimrc
-    fi
-  fi
-
-  ln -s $dotfiles/vim/vimrc $HOME/.vim/
   return 0
 }
 
-# Set up my neovim config
+setup_bash()
+{
+  info "Setting up bash."
+
+  # Create directories I use often
+  for dir in "$HOME/.local/bin" "$HOME/.backups" "$HOME/.config"; do
+    if ! [ -d $dir ]; then
+      mkdir -p $dir
+    else
+      warn "$dir already exists!"
+    fi
+  done
+
+  # Link Bash config file
+  link_file $HOME_CONFIG_DIR/.bashrc $HOME
+ 
+  # Create a bash_aliases if not exists
+  if ! [ -f "$HOME/.bash_aliases" ]; then 
+    touch $HOME/.bash_aliases
+  fi
+
+  info "Source bash config with: ${bold}source ~/.bashrc${norm}"
+
+  return 0
+}
+
+setup_git()
+{
+  info "Setting up git."
+
+  # Link Git config file
+  link_file $HOME_CONFIG_DIR/.gitconfig $HOME
+
+  return 0
+}
+
+setup_vim()
+{
+  info "Setting up vimrc."
+
+  # Make vim directory if not exists
+  if ! [ -d "$HOME/.vim" ]; then
+    mkdir $HOME/.vim
+  fi
+
+  # Install Vim Plug
+  install_vim_plug
+
+  # Link vim directory
+  link_directory $HOME_CONFIG_DIR/.vim $HOME
+
+  return 0
+}
+
 setup_nvim()
 {
-  if [ -d $HOME/.config/nvim/ ]
-  then
-    echo "Making directory $HOME/.config/nvim"
-    mkdir $HOME/.config/nvim
-  fi
+  info "Installing nvim config."
 
-  if [ -f $HOME/.config/nvim/init.lua ]
-  then
-    echo "WARNING nvim config already exists, backing up config to $HOME/.backups/nvim"
-    cp -rf $HOME/.config/nvim $HOME/.backups/
-  fi
-
-  echo "Removing previous nvim config"
-  rm -rf $HOME/.config/nvim
-  rm -rf $HOME/.local/share/nvim
-
-  echo "Installing nvim config"
-  ln -s $dotfiles/nvim $HOME/.config/
-
-  if [ $? -ne "0" ]
-  then
-    return $?
-  fi
+  # Link nvim directory
+  link_directory $HOME_CONFIG_DIR/nvim $XDG_CONFIG_HOME
 
   return 0
 }
 
 setup_tmux()
 {
-  if [ -d $HOME/.tmux/plugins/tpm ]
-  then
-    echo "TPM already installed..."
+  if [ -d $HOME/.tmux/plugins/tpm ]; then
+    info "TPM already installed."
   else
+    info "Installing TPM."
     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
   fi
 
-  if [ -f $HOME/.config/tmux/tmux.conf ]
-  then
-    echo "WARNING: tmux.conf already exists, backing up to $HOME/.backups/tmux.conf"
-    cp -f $HOME/.config/tmux/tmux.conf $HOME/.backups/
-  fi
+  info "Setting up Tmux config."
 
-  if [ ! -d $HOME/.config/tmux ]
-  then
-    mkdir -p $HOME/.config/tmux
-  fi
-
-  echo "Removing previous tmux config"
-  rm -f $HOME/.config/tmux/tmux.conf
-
-  echo "Installing tmux config"
-  ln -s $dotfiles/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
-
-  if [ $? -ne "0" ]
-  then
-    return $?
-  fi
+  link_directory $HOME_CONFIG_DIR/tmux $XDG_CONFIG_HOME
 
   return 0
 }
 
-help_command()
+setup_hypr()
 {
-  echo "Script to help setup Linux machines.\n"
+  info "Setting up hypr config"
 
-  echo "Use:"
-  echo "  setup preset [PRESETS]"
-  echo "  setup [INDEPENDENT FUNCS]"
-  echo "  setup help -- This page\n"
+  # Link hypr directory
+  link_directory $HOME_CONFIG_DIR/hypr $XDG_CONFIG_HOME
 
-  echo "[PRESETS]"
-  echo "  - main: Configures bash, git and full functionality vim, installs all common applications."
-  echo "  - server: Configure bash, git, basic vim setup, and installs docker"
-  echo "  - bare: Configure bash, git, basic vim\n"
+  return 0
+}
 
-  echo "[INDEPENDENT FUNCS]"
-  echo "  - apps <package-manager>: Installs commonly used apps, requires package manager specification"
-  echo "  - bash: Configure bash with bashrc"
-  echo "  - git: Configure git with global gitconfig"
-  echo "  - vim: Configure vim with full vimrc"
-  echo "  - vim-plug: Install vim-plug for plugins"
-  echo "  - dracula-vim: Installs basic dracula theme for vim"
-  echo "  - vimb: Configure vimrc with basic bindings"
-  echo "  - nvim: Install and setup nvchad for neovim\n"
+setup_waybar()
+{
+  info "Installing waybar config"
+
+  # Link hypr directory
+  link_directory $HOME_CONFIG_DIR/waybar $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_kitty()
+{
+  info "Setting up kitty config"
+
+  # Link hypr directory
+  link_directory $HOME_CONFIG_DIR/kitty $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_wezterm()
+{
+  info "Setting up wezterm."
+
+  # Link Git config file
+  link_file $HOME_CONFIG_DIR/.wezterm.lua $HOME
+
+  return 0
+}
+
+setup_wofi()
+{
+  info "Setting up kitty config"
+
+  # Link hypr directory
+  link_directory $HOME_CONFIG_DIR/wofi $XDG_CONFIG_HOME
+
+  return 0
 }
 
