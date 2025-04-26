@@ -89,6 +89,39 @@ HISTFILESIZE=2000
 export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
 
 # fzf config
-# export FZF_DEFAULT_OPTS="--margin 1 --padding 1 --height 85% --border --reverse"
-export FZF_DEFAULT_OPTS="--style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
+export FZF_CTRL_T_OPTS="
+  --style full
+  --walker-skip .git,node_modules,target
+  --preview 'fzf-preview.sh {}'
+  --bind 'focus:transform-header:file --brief {}'"
+export FZF_ALT_C_OPTS="
+  --style full
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
+export FZF_CTRL_R_OPTS="
+  --reverse
+"
 
+export FZF_DEFAULT_OPTS="--margin 1 --padding 1 --border"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --highlight-line \
+  --info=inline-right \
+  --ansi \
+  --layout=reverse \
+  --border=none \
+  --color=bg+:#283457 \
+  --color=border:#27a1b9 \
+  --color=fg:#c0caf5 \
+  --color=gutter:#16161e \
+  --color=header:#ff9e64 \
+  --color=hl+:#2ac3de \
+  --color=hl:#2ac3de \
+  --color=info:#545c7e \
+  --color=marker:#ff007c \
+  --color=pointer:#ff007c \
+  --color=prompt:#2ac3de \
+  --color=query:#c0caf5:regular \
+  --color=scrollbar:#27a1b9 \
+  --color=separator:#ff9e64 \
+  --color=spinner:#ff007c \
+"
