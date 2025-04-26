@@ -1,0 +1,168 @@
+@import "mocha.css"; 
+
+* {
+  font-family: "FiraCode Nerd Font Bold";
+  font-size: 12px;
+  min-height: 10px;
+  font-weight: bold;
+  color: @text;
+}
+
+window#waybar {
+  all:unset;
+}
+
+.modules-left {
+  padding: 4px;
+  margin: 6px 0px 0px 10px;
+  border-radius: 1em;
+  background: alpha(@crust,.6);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+}
+
+.modules-center {
+  padding: 4px;
+  margin: 6px 0px 0px 0px;
+  border-radius: 1em;
+  background: alpha(@crust,.6);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+}
+
+.modules-right {
+  padding:4px;
+  margin: 6px 10px 0px 0px;
+  border-radius:1em;
+  background: alpha(@crust,.6);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+}
+
+tooltip {
+  background: @crust;
+  color: @text;
+}
+
+#workspaces {
+  padding: 0px 5px;
+}
+
+#workspaces button {
+  all:unset;
+  padding: 0px 5px;
+  color: alpha(@mauve, .4);
+  transition: all .2s ease;
+}
+
+#workspaces button:hover {
+  color: rgba(0,0,0,0);
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+  transition: all 1s ease;
+}
+
+#workspaces button.active {
+  color: @mauve;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+}
+
+#workspaces button.empty {
+  color: rgba(0,0,0,0);
+  border: none;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .2);
+}
+
+#workspaces button.empty:hover {
+  color: rgba(0,0,0,0);
+  border: none;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+  transition: all 1s ease;
+}
+
+#workspaces button.empty.active {
+  color: @color9;
+  border: none;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+}
+
+#pulseaudio,
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#wireplumber,
+#tray,
+#network,
+#mode,
+#scratchpad {
+  background-color: alpha(@crust, 0.8);
+  border-radius: 1em;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+#clock {
+  color: @maroon;
+}
+
+#clock.date {
+  color: @mauve;
+}
+
+#pulseaudio {
+  color: @lavender;
+}
+
+#network {
+  color: @yellow;
+}
+
+#idle_inhibitor {
+  margin-right: 12px;
+  color: #7cb342;
+}
+
+#idle_inhibitor.activated {
+  color: @red;
+}
+
+#battery {
+  color: @green;
+  transition: all .3s ease;
+}
+
+#battery.charging {
+  color: #26A65B;
+}
+
+#battery.warning:not(.charging) {
+  color: #ffbe61;
+}
+
+#battery.critical:not(.charging) {
+  color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#cpu {
+  color: @blue;
+}
+
+#memory {
+  color: @teal;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left>widget:first-child>#workspaces {
+  margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right>widget:last-child>#workspaces {
+  margin-right: 0;
+}
+
