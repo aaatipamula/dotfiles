@@ -31,6 +31,7 @@ CONFIG_PROGRAMS=(
   "kitty"
   "wezterm"
   "wofi"
+  "electron"
 )
 
 ###############
@@ -157,6 +158,11 @@ link_directory()
 {
   directory_name=$(echo $1 | sed 's|.*/||')
   directory_path="$2/$directory_name"
+
+  # Third positional arg indicates if the path specified by the second arg should be used
+  if [ "$3" = "true" ]; then
+    directory_path=$2
+  fi
 
   if [ -d "$directory_path" ]; then
     warn "Directory ($directory_path) already exists!"
@@ -376,3 +382,13 @@ setup_wofi()
   return 0
 }
 
+setup_electron()
+{
+  info "Setting up electron flags"
+
+  # Link into both .config/electron and .config/Electron
+  link_directory $HOME_CONFIG_DIR/electron $XDG_CONFIG_HOME
+  link_directory $HOME_CONFIG_DIR/electron $XDG_CONFIG_HOME/Electron true
+
+  return 0
+}
