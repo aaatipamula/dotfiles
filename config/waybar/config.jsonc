@@ -10,6 +10,7 @@
   ],
   "modules-right": [
     "pulseaudio",
+    "backlight",
     "network",
     "cpu",
     "memory",
@@ -40,7 +41,7 @@
   "clock": {
    "format": "   {:%I:%M %p       %d/%m/%Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}"
+    "format-alt": "   {:%I:%M %p}"
   },
   "cpu": {
     "format": "{usage}% ",
@@ -57,7 +58,7 @@
   "battery": {
     "states": {
       "warning": 30,
-      "critical": 10
+      "critical": 15
     },
     "tooltip": false,
     "format": "{icon}   {capacity}%    󱐌 {power} W",
@@ -79,11 +80,11 @@
     }
   },
   "network": {
-    "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-wifi": "({signalStrength}%) ",
+    "format-ethernet": "",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
+    "tooltip-format": "{ifname} via {gwaddr}\nEthernet: {ipaddr}/{cidr} \nWiFi: {essid} ({signalStrength}%) ",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "pulseaudio": {

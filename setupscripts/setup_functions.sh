@@ -32,6 +32,7 @@ CONFIG_PROGRAMS=(
   "wezterm"
   "wofi"
   "electron"
+  "ghostty"
 )
 
 ###############
@@ -386,9 +387,18 @@ setup_electron()
 {
   info "Setting up electron flags"
 
-  # Link into both .config/electron and .config/Electron
-  link_directory $HOME_CONFIG_DIR/electron $XDG_CONFIG_HOME
+  # Link into both .config/electron-flags.conf and .config/Electron
+  link_file $HOME_CONFIG_DIR/electron/electron-flags.conf $XDG_CONFIG_HOME
   link_directory $HOME_CONFIG_DIR/electron $XDG_CONFIG_HOME/Electron true
+
+  return 0
+}
+
+setup_ghostty()
+{
+  info "Installing Ghostty config"
+
+  link_directory $HOME_CONFIG_DIR/ghostty $XDG_CONFIG_HOME
 
   return 0
 }

@@ -2,7 +2,9 @@
 
 if [ -d "$XDG_CONFIG_HOME/$1" ]; then
   $VISUAL "$XDG_CONFIG_HOME/$1" 
+elif [ -f "$XDG_CONFIG_HOME/$1" ]; then
+  $VISUAL "$XDG_CONFIG_HOME/$1" 
 else
-  echo "No config found for $1"
+  echo "No config found for $1."
 fi
 
