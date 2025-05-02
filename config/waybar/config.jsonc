@@ -25,17 +25,21 @@
     "separate-outputs": true
   },
   "hyprland/workspaces": {
+    "on-click": true,
     "disable-scroll": true,
     "all-outputs": true,
     "warp-on-scroll": false,
-    "persistent-workspaces": {
-      "*": 5
-    },
-    "format": "{icon}",
+    "format": "{name} {icon}",
     "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "󰙯",
+      "5": "",
       "urgent": "",
-      "active": "",
-      "default": ""
+      "default": "",
+      // "active": "",
+      // "default": ""
     }
   },
   "clock": {

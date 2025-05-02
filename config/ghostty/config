@@ -4,8 +4,8 @@ font-family = FiraCode Nerd Font Mono
 # Window style
 theme = tokyonight_night
 background-opacity = 0.9
-window-padding-x = 2
-window-padding-y = 2
+window-padding-x = 10
+window-padding-y = 10
 
 # Cursor
 cursor-style = block
