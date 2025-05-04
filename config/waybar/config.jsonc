@@ -36,16 +36,16 @@
       "3": "",
       "4": "󰙯",
       "5": "",
-      "urgent": "",
-      "default": "",
       // "active": "",
-      // "default": ""
+      "urgent": "",
+      "default": "",
+      "focused": ""
     }
   },
   "clock": {
-   "format": "   {:%I:%M %p       %d/%m/%Y}",
+   "format": " {:%I:%M %p  %d/%m/%Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "   {:%I:%M %p}"
+    "format-alt": " {:%I:%M %p}"
   },
   "cpu": {
     "format": "{usage}% ",
@@ -65,7 +65,7 @@
       "critical": 15
     },
     "tooltip": false,
-    "format": "{icon}   {capacity}%    󱐌 {power} W",
+    "format": "{icon} {capacity}% 󱐌{power} W",
     "format-full": "{capacity}% {icon} {power} W",
     "format-charging": "{capacity}% ",
     "format-plugged": "{capacity}% ",

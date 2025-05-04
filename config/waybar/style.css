@@ -1,7 +1,7 @@
 @import "night.css"; 
 
 * {
-  font-family: "FiraCode Nerd Font Bold";
+  font-family: "FiraCode Nerd Font";
   font-size: 12px;
   min-height: 10px;
   font-weight: bold;
@@ -16,7 +16,7 @@ window#waybar {
   padding: 6px;
   margin: 6px 0px 0px 10px;
   border-radius: 1em;
-  background: alpha(@bg_dark, .7);
+  background: @bg_dark1;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
@@ -24,7 +24,7 @@ window#waybar {
   padding: 6px;
   margin: 6px 0px 0px 0px;
   border-radius: 1em;
-  background: alpha(@bg_dark, .7);
+  background: @bg_dark1;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
@@ -32,25 +32,24 @@ window#waybar {
   padding: 6px;
   margin: 6px 10px 0px 0px;
   border-radius: 1em;
-  background: alpha(@bg_dark, .7);
+  background: @bg_dark1;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
 tooltip {
-  background: @bg_dark;
+  background: @bg_dark1;
   color: @fg;
 }
 
 #workspaces button {
-  background-color: alpha(@bg, 0.7);
   border-radius: 1em;
   padding: 0 12px;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
-  color: @orange;
-  background-color: alpha(@blue7, 0.7);
+  color: @teal;
+  background: alpha(@fg, 0.2);
 }
 
 #pulseaudio,
@@ -66,66 +65,68 @@ tooltip {
 #network,
 #mode,
 #scratchpad {
-  background-color: alpha(@bg, 0.7);
   border-radius: 1em;
   padding: 0 12px;
 }
 
-#idle_inhibitor {
-  margin-right: 12px;
-  color: #7cb342;
-}
-
-#idle_inhibitor.activated {
-  color: @red;
+#backlight {
+  background-color: alpha(@fg, 0.2);
 }
 
 #pulseaudio {
-  color: @green1;
+  color: @blue5;
+  background-color: alpha(@blue5, 0.2);
 }
 
 #network {
   color: @orange;
+  background-color: alpha(@orange, 0.2);
 }
 
 #cpu {
   color: @magenta;
+  background-color: alpha(@magenta, 0.2);
 }
 
 #memory {
-  color: @blue5;
+  color: @blue;
+  background-color: alpha(@blue, 0.2);
 }
 
 #battery {
   color: @green;
-  transition: all .3s ease;
+  background-color: alpha(@green, 0.2);
 }
 
 #battery.charging {
   color: @teal;
+  background-color: alpha(@teal, 0.2);
 }
 
 #battery.warning:not(.charging) {
   color: @yellow;
+  background-color: alpha(@yellow, 0.2);
 }
 
 #battery.critical:not(.charging) {
-  color: #f53c3c;
+  color: @red;
+  background: alpha(@red, 0.2);
   animation-name: blink;
   animation-duration: 0.5s;
-  animation-timing-function: linear;
+  animation-timing-function: steps(12);
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
 
 #clock {
-  color: @blue0;
+  color: @blue1;
+  background-color: alpha(@blue1, 0.2);
 }
 
 #clock.date {
-  color: @blue0;
+  color: @blue1;
+  background-color: alpha(@blue1, 0.2);
 }
-
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left>widget:first-child>#workspaces {

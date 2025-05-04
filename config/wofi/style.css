@@ -40,9 +40,9 @@
 window {
   margin: 0px;
   padding: 10px;
-  border: 2px solid @blue0;
+  border: 2px solid @blue7;
   border-radius: 8px;
-  background-color: @bg;
+  background: @bg;
 }
 
 /* Inner Box */
@@ -50,7 +50,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: @bg;
+  background: @bg;
 }
 
 /* Outer Box */
@@ -58,7 +58,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: @bg;
+  background: @bg;
 }
 
 /* Scroll */
@@ -66,26 +66,27 @@ window {
   margin: 0px;
   padding: 10px;
   border: none;
-  background-color: @bg;
+  background: @bg;
 }
 
 /* Input */
 #input {
   margin: 5px 20px;
   padding: 10px;
-  border: none;
-  border-radius: 0.1em;
   color: @fg;
-  background-color: @bg;
+  background: @bg_dark;
+  border: 0.11em solid @teal;
 }
 
 #input image {
-    border: none;
-    color: @red;
+  border: none;
+  color: @red;
 }
 
-#input * {
-  outline: 4px solid @red!important;
+#input:focus {
+  outline: 4px solid @teal!important;
+  border: 4px solid @teal!important;
+  box-shadow: inset 0 0 0 1px @teal;
 }
 
 /* Text */
@@ -96,7 +97,7 @@ window {
 }
 
 #entry {
-  background-color: @bg;
+  background: @bg;
 }
 
 #entry arrow {
@@ -106,7 +107,7 @@ window {
 
 /* Selected Entry */
 #entry:selected {
-  border: 0.11em solid @teal;
+  border: 0.11em solid @blue0;
 }
 
 #entry:selected #text {
@@ -114,6 +115,6 @@ window {
 }
 
 #entry:drop(active) {
-  background-color: @blue0!important;
+  background: @blue0!important;
 }
 
