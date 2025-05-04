@@ -32,7 +32,7 @@
 @define-color terminal_black #414868;
 
 * {
-  font-family: 'FiraCode Nerd Font', monospace;
+  font-family: 'FiraCode Nerd Font Mono', monospace;
   font-size: 18px;
 }
 
