@@ -21,6 +21,7 @@ DEV_PROGRAMS=(
 )
 
 CONFIG_PROGRAMS=(
+  "zsh"
   "bash"
   "git"
   "vim"
@@ -249,6 +250,32 @@ setup_apps()
   else
     install_apps $1
   fi
+
+  return 0
+}
+
+setup_zsh()
+{
+  info "Setting up zsh."
+
+  # Create directories I use often
+  for dir in "$HOME/.local/bin" "$HOME/.backups" "$HOME/.config"; do
+    if ! [ -d $dir ]; then
+      mkdir -p $dir
+    else
+      warn "$dir already exists!"
+    fi
+  done
+
+  # Link Bash config file
+  link_file $HOME_CONFIG_DIR/.zshrc $HOME
+
+  # Create a bash_aliases if not exists
+  if ! [ -f "$HOME/.zsh_aliases" ]; then
+    touch $HOME/.zsh_aliases
+  fi
+
+  info "Source bash zsh with: ${bold}source ~/.zshrc${norm}"
 
   return 0
 }
