@@ -25,13 +25,17 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
 
 # Add in snippets
 zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
+
+# Completion styling
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Keybindings
 bindkey -e
@@ -43,6 +47,9 @@ bindkey '^[w' kill-region
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
+
+# Autocd
+setopt autocd
 
 # VIM is my default editor
 export VISUAL=vim
@@ -61,8 +68,14 @@ export dotfiles="$HOME/dotfiles"
 export zshrc="$HOME/.zshrc"
 export zshal="$HOME/.zsh_aliases"
 export gitconf="$HOME/.gitconfig"
-export nvimc="$XDG_CONFIG_HOME/nvim"
-export tmuxc="$XDG_CONFIG_HOME/tmux/tmux.conf"
+
+# Easy access/edit config files
+alias zshrc="$VISUAL $zshrc"
+alias zshal="$VISUAL $zshal"
+alias zhist="$VISUAL ~/.zsh_history"
+alias loadzsh="source $zshrc"
+alias gitconf="$VISUAL $gitconf"
+alias dotfiles="cd $dotfiles"
 
 # Aliases
 alias ls="ls -lh --color"
@@ -70,8 +83,6 @@ alias l.="ls -d .*"         # Only hidden directory
 alias ll="ls -rt"           # Organize by date modified
 alias ld="ls -Ud */"        # Only directories
 alias la="ls -a"            # Everything including hidden files
-alias size="du -sh"         # Check folder size
-alias mkdirs="mkdir -p"     # Shortcut create directory if not exists
 alias p3="python3"          # Shortcut python3 bin
 alias hist="history"        # Shortcut history
 alias gd="git diff"         # Quick diff
@@ -79,16 +90,6 @@ alias gs="git status"       # Quick status
 alias gl="git log"          # Quick log
 alias tmn="tmux new -s"     # tmux new session
 alias tma="tmux a -t"       # tmux attach to session
-
-# Easy access/edit config files
-alias vimrc="$VISUAL $vimrc"
-alias zshrc="$VISUAL $zshrc"
-alias zshal="$VISUAL $zshal"
-alias gitconf="$VISUAL $gitconf"
-alias nvimc="$VISUAL $nvimc"
-alias tmuxc="$VISUAL $tmuxc"
-alias loadbash="source $zshrc"
-alias dotfiles="cd $dotfiles"
 
 # Machine specific config
 if [ -f ~/.zsh_aliases ]; then
@@ -149,9 +150,4 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=separator:#ff9e64 \
   --color=spinner:#ff007c \
 "
-
-# Completion styling
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
