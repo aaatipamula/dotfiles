@@ -14,7 +14,6 @@ config.term = "xterm-256color:RGB" -- Set the terminal type
 -- Set font
 config.font = g_font
 -- Color scheme change
-config.bold_brightens_ansi_colors = "BrightOnly"
 config.color_scheme = "tokyonight_night"
 -- Window opacity
 config.window_background_opacity = 0.9
@@ -40,6 +39,7 @@ config.use_fancy_tab_bar = false
 
 -- config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
 config.window_decorations = "NONE | RESIZE"
+-- config.default_prog = { "/usr/bin/zsh" }
 config.default_prog = { "wsl.exe", "~", "-d", "Ubuntu" }
 config.initial_cols = 80
 
