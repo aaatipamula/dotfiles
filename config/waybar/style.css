@@ -42,14 +42,15 @@ tooltip {
 }
 
 #workspaces button {
-  border-radius: 1em;
+  margin: 0 2px;
   padding: 0 12px;
+  border-radius: 1em;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
-  color: @teal;
-  background: alpha(@fg, 0.2);
+  color: @orange;
+  background: @bg_highlight;
 }
 
 #pulseaudio,
@@ -69,18 +70,19 @@ tooltip {
   padding: 0 12px;
 }
 
-#backlight {
-  background-color: alpha(@fg, 0.2);
+#pulseaudio {
+  color: @yellow;
+  background-color: alpha(@yellow, 0.2);
 }
 
-#pulseaudio {
-  color: @blue5;
-  background-color: alpha(@blue5, 0.2);
+#backlight {
+  color: @blue1;
+  background-color: alpha(@blue1, 0.2);
 }
 
 #network {
-  color: @orange;
-  background-color: alpha(@orange, 0.2);
+  color: @blue;
+  background-color: alpha(@blue, 0.2);
 }
 
 #cpu {
@@ -89,8 +91,8 @@ tooltip {
 }
 
 #memory {
-  color: @blue;
-  background-color: alpha(@blue, 0.2);
+  color: @orange;
+  background-color: alpha(@orange, 0.2);
 }
 
 #battery {
@@ -119,13 +121,8 @@ tooltip {
 }
 
 #clock {
-  color: @blue1;
-  background-color: alpha(@blue1, 0.2);
-}
-
-#clock.date {
-  color: @blue1;
-  background-color: alpha(@blue1, 0.2);
+  /* color: @blue5; */
+  /* background: @bg_highlight; */
 }
 
 /* If workspaces is the leftmost module, omit left margin */

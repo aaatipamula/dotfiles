@@ -6,7 +6,7 @@
     "tray",
   ],
   "modules-center": [
-    "hyprland/window"
+    "clock",
   ],
   "modules-right": [
     "pulseaudio",
@@ -15,7 +15,6 @@
     "cpu",
     "memory",
     "battery",
-    "clock",
   ],
   // Modules configuration
   "hyprland/window": {
@@ -32,7 +31,7 @@
     "format": "{name} {icon}",
     "format-icons": {
       "1": "",
-      "2": "",
+      "2": "",
       "3": "",
       "4": "󰙯",
       "5": "",
@@ -43,7 +42,7 @@
     }
   },
   "clock": {
-   "format": " {:%I:%M %p  %d/%m/%Y}",
+   "format": " {:%d/%m/%Y -  %I:%M %p}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": " {:%I:%M %p}"
   },
