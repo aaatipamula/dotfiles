@@ -2,12 +2,44 @@
 font-family = FiraCode Nerd Font Mono
 
 # Window style
-theme = tokyonight_night
 background-opacity = 0.9
+theme = tokyonight_night
 window-padding-x = 10
-window-padding-y = 10
+window-padding-y = 5
 
 # Cursor
 cursor-style = block
 cursor-style-blink = true
+
+# custom-shader = ~/Github/ghostty-shaders/animated-gradient-shader.glsl
+custom-shader = ~/Github/ghostty-shaders/bettercrt.glsl
+custom-shader = ~/Github/ghostty-shaders/bloom.glsl
+# custom-shader = ~/Github/ghostty-shaders/cineShader-Lava.glsl
+# custom-shader = ~/Github/ghostty-shaders/crt.glsl
+# custom-shader = ~/Github/ghostty-shaders/cubes.glsl
+# custom-shader = ~/Github/ghostty-shaders/dither.glsl
+# custom-shader = ~/Github/ghostty-shaders/drunkard.glsl
+# custom-shader = ~/Github/ghostty-shaders/fireworks.glsl
+# custom-shader = ~/Github/ghostty-shaders/fireworks-rockets.glsl
+# custom-shader = ~/Github/ghostty-shaders/galaxy.glsl
+# custom-shader = ~/Github/ghostty-shaders/gears-and-belts.glsl
+# custom-shader = ~/Github/ghostty-shaders/glitchy.glsl
+# custom-shader = ~/Github/ghostty-shaders/glow-rgbsplit-twitchy.glsl
+# custom-shader = ~/Github/ghostty-shaders/gradient-background.glsl
+# custom-shader = ~/Github/ghostty-shaders/in-game-crt.glsl
+# custom-shader = ~/Github/ghostty-shaders/inside-the-matrix.glsl
+# custom-shader = ~/Github/ghostty-shaders/just-snow.glsl
+# custom-shader = ~/Github/ghostty-shaders/matrix-hallway.glsl
+# custom-shader = ~/Github/ghostty-shaders/mnoise.glsl
+# custom-shader = ~/Github/ghostty-shaders/negative.glsl
+# custom-shader = ~/Github/ghostty-shaders/retro-terminal.glsl
+# custom-shader = ~/Github/ghostty-shaders/sin-interference.glsl
+# custom-shader = ~/Github/ghostty-shaders/smoke-and-ghost.glsl
+# custom-shader = ~/Github/ghostty-shaders/sparks-from-fire.glsl
+# custom-shader = ~/Github/ghostty-shaders/spotlight.glsl
+# custom-shader = ~/Github/ghostty-shaders/starfield-colors.glsl
+# custom-shader = ~/Github/ghostty-shaders/starfield.glsl
+custom-shader = ~/Github/ghostty-shaders/tft.glsl
+# custom-shader = ~/Github/ghostty-shaders/underwater.glsl
+# custom-shader = ~/Github/ghostty-shaders/water.glsl
 
