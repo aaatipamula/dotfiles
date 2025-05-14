@@ -21,6 +21,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Keep selection after moving in visual (goated)
+vim.keymap.set('v', '<C-j>', 'J', { noremap = true })
 vim.keymap.set('v', 'J', ':m \'>+1<cr>gv=gv')
 vim.keymap.set('v', 'K', ':m \'<-2<cr>gv=gv')
 
