@@ -144,8 +144,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=spinner:#ff007c \
 "
 
-# Run fastfetch in interactive terminals
-if [[ $- == *i* ]]; then
-    fastfetch
-fi
-# pokeget random --hide-name | fastfetch --file-raw -
+# if [[ $- == *i* ]]; then; fastfetch; fi # Run fastfetch in interactive terminals
+if [ -f ~/.config/fastfetch/random.sh ]; then ~/.config/fastfetch/random.sh; fi # Pick a random preset pokemon
+# pokeget random --hide-name | fastfetch --file-raw - # Use pokeget
