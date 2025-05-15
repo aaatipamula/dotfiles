@@ -21,7 +21,7 @@ if [[ $commit = 'y' || $commit = "yes" ]]
 then
   git stash
   git pull origin master
-  git stash apply
+  git stash pop
   git add .
   git commit -m "Automatic sync $(date)"
   git push origin master
@@ -30,7 +30,7 @@ then
   echo "Skipping commit"
   git stash
   git pull origin master
-  git stash apply
+  git stash pop
 else
   echo "Invalid option, please commit files or skip."
   cd -
