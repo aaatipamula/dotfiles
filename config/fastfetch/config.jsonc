@@ -1,0 +1,133 @@
+//   _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+//  |   __|  _  |   __|_   _|   __|   __|_   _|     |  |  |
+//  |   __|     |__   | | | |   __|   __| | | |   --|     |
+//  |__|  |__|__|_____| |_| |__|  |_____| |_| |_____|__|__|  ASCII-ART
+//
+//  by Bina
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "~/.config/fastfetch/ascii/lucario.txt",
+    "padding": {
+      "top": 2,
+      "right": 6
+    }
+  },
+  "display": {
+    "separator": " •  "
+  },
+  "modules": [
+    {
+      "type": "title",
+      "color": {
+        "user": "32", // = color2
+        "at": "37",
+        "host": "32"
+      }
+    },
+    // {
+    //   "type": "title",
+    //   "format": "{6}{7}{8}"
+    // },
+    {
+      "type": "custom",
+      "format": "---------------------------------------" // `\u001b` is `\033`, or `\e`
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "Hardware           ",
+      "keyColor": "green",
+    },
+    {
+      "key": "├󰌢 Machine      ",
+      "keyColor": "green",
+      "type": "host"
+    },
+    {
+      "key": "├󰻠 CPU          ",
+      "keyColor": "green",
+      "type": "cpu"
+    },
+    {
+      "key": "└󰍛 GPU          ",
+      "keyColor": "green",
+      "type": "gpu"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "System       ",
+      "keyColor": "blue",
+    },
+    {
+      "key": "├ OS           ",
+      "keyColor": "blue",
+      "type": "os"
+    },
+    {
+      "key": "├ Kernel       ",
+      "keyColor": "blue",
+      "type": "kernel"
+    },
+    {
+      "key": "├ Shell        ",
+      "keyColor": "blue",
+      "type": "shell"
+    },
+    {
+      "key": "├ Packages     ",
+      "keyColor": "blue",
+      "type": "packages"
+    },
+    {
+      "key": "└󰅐 Uptime       ",
+      "keyColor": "blue",
+      "type": "uptime"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "Display        ",
+      "keyColor": "magenta",
+    },
+    {
+      "key": "├ WM           ",
+      "keyColor": "magenta",
+      "type": "wm"
+    },
+    {
+      "key": "├ Terminal     ",
+      "keyColor": "magenta",
+      "type": "terminal"
+    },
+    {
+      "key": "└ Font         ",
+      "keyColor": "magenta",
+      "type": "terminalfont"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "Other        ",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "media",
+      "format": "{} ({3})",
+      "key": "└󰝚 Playing      ",
+      "keyColor": "yellow"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "---------------------------------------" // `\u001b` is `\033`, or `\e`
+    },
+    "break",
+    {
+      "type": "colors",
+      "symbol": "circle"
+    },
+    "break"
+  ]
+}

@@ -34,6 +34,7 @@ CONFIG_PROGRAMS=(
   "wofi"
   "electron"
   "ghostty"
+  "fastfetch"
 )
 
 ###############
@@ -426,6 +427,15 @@ setup_ghostty()
   info "Installing Ghostty config"
 
   link_directory $HOME_CONFIG_DIR/ghostty $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_fastfetch()
+{
+  info "Setting up fastfetch config"
+
+  link_directory $HOME_CONFIG_DIR/fastfetch $XDG_CONFIG_HOME
 
   return 0
 }
