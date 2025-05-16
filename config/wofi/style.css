@@ -40,8 +40,8 @@
 window {
   margin: 0px;
   padding: 10px;
-  border: 2px solid @blue7;
-  border-radius: 8px;
+  border: 2px solid @blue0;
+  border-radius: 10px;
   background: @bg;
 }
 
@@ -84,8 +84,8 @@ window {
 }
 
 #input:focus {
-  outline: 4px solid @teal!important;
-  border: 4px solid @teal!important;
+  /* outline: 4px solid @teal; */
+  border: 4px solid @teal;
   box-shadow: inset 0 0 0 1px @teal;
 }
 
@@ -107,7 +107,7 @@ window {
 
 /* Selected Entry */
 #entry:selected {
-  border: 0.11em solid @blue0;
+  background: @bg_highlight;
 }
 
 #entry:selected #text {
@@ -115,6 +115,6 @@ window {
 }
 
 #entry:drop(active) {
-  background: @blue0!important;
+  background: @blue0;
 }
 
