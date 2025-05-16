@@ -17,111 +17,116 @@
     "separator": " •  "
   },
   "modules": [
-    {
-      "type": "title",
-      "color": {
-        "user": "32", // = color2
-        "at": "37",
-        "host": "32"
-      }
-    },
     // {
     //   "type": "title",
-    //   "format": "{6}{7}{8}"
+    //   "color": {
+    //     "user": "32", // = color2
+    //     "at": "37",
+    //     "host": "32"
+    //   }
     // },
     {
+      "type": "title",
+      "format": "{6}{7}{8}"
+    },
+    {
       "type": "custom",
-      "format": "---------------------------------------" // `\u001b` is `\033`, or `\e`
+      "format": "==========================================" // `\u001b` is `\033`, or `\e`
     },
     "break",
     {
       "type": "custom",
-      "format": "Hardware           ",
+      "format": "Hardware   ",
       "keyColor": "green",
     },
     {
-      "key": "├󰌢 Machine      ",
+      "key": "├󰪫 Machine    ",
       "keyColor": "green",
       "type": "host"
     },
     {
-      "key": "├󰻠 CPU          ",
+      "key": "├󰍹 Display    ",
       "keyColor": "green",
-      "type": "cpu"
+      "type": "display"
     },
     {
-      "key": "└󰍛 GPU          ",
+      "key": "├ Memory     ",
+      "keyColor": "green",
+      "type": "memory"
+    },
+    {
+      "key": "├ Disk       ",
+      "keyColor": "green",
+      "type": "disk"
+    },
+    {
+      "key": "├󰍛 GPU        ",
       "keyColor": "green",
       "type": "gpu"
     },
+    {
+      "key": "└󰻠 CPU        ",
+      "keyColor": "green",
+      "type": "cpu"
+    },
     "break",
+
     {
       "type": "custom",
-      "format": "System       ",
+      "format": "System     ",
       "keyColor": "blue",
     },
     {
-      "key": "├ OS           ",
+      "key": "├ OS         ",
       "keyColor": "blue",
       "type": "os"
     },
     {
-      "key": "├ Kernel       ",
+      "key": "├ Kernel     ",
       "keyColor": "blue",
       "type": "kernel"
     },
     {
-      "key": "├ Shell        ",
-      "keyColor": "blue",
-      "type": "shell"
-    },
-    {
-      "key": "├ Packages     ",
+      "key": "├ Packages   ",
       "keyColor": "blue",
       "type": "packages"
     },
     {
-      "key": "└󰅐 Uptime       ",
+      "key": "├ Shell      ",
+      "keyColor": "blue",
+      "type": "shell"
+    },
+    {
+      "key": "└󰅐 Uptime     ",
       "keyColor": "blue",
       "type": "uptime"
     },
     "break",
+
     {
       "type": "custom",
-      "format": "Display        ",
+      "format": "Display    ",
       "keyColor": "magenta",
     },
     {
-      "key": "├ WM           ",
+      "key": "├ Font       ",
+      "keyColor": "magenta",
+      "type": "terminalfont"
+    },
+    {
+      "key": "├ WM         ",
       "keyColor": "magenta",
       "type": "wm"
     },
     {
-      "key": "├ Terminal     ",
+      "key": "└ Terminal   ",
       "keyColor": "magenta",
       "type": "terminal"
     },
-    {
-      "key": "└ Font         ",
-      "keyColor": "magenta",
-      "type": "terminalfont"
-    },
     "break",
     {
       "type": "custom",
-      "format": "Other        ",
-      "keyColor": "yellow"
-    },
-    {
-      "type": "media",
-      "format": "{} ({3})",
-      "key": "└󰝚 Playing      ",
-      "keyColor": "yellow"
-    },
-    "break",
-    {
-      "type": "custom",
-      "format": "---------------------------------------" // `\u001b` is `\033`, or `\e`
+      "format": "==========================================" // `\u001b` is `\033`, or `\e`
     },
     "break",
     {
