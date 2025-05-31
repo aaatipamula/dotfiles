@@ -4,4 +4,7 @@ config/tmux/plugins/*
 
 # Vim
 .netrwhst
-config/.vim/autoload/plug.vim
+plug.vim
+
+# Hyprland
+monitors.conf
