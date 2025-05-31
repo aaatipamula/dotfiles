@@ -326,11 +326,11 @@ setup_vim()
     mkdir $HOME/.vim
   fi
 
-  # Install Vim Plug
-  install_vim_plug
-
   # Link vim directory
   link_directory $HOME_CONFIG_DIR/.vim $HOME
+
+  # Install Vim Plug after in order to persist it
+  install_vim_plug
 
   return 0
 }
@@ -436,6 +436,15 @@ setup_fastfetch()
   info "Setting up fastfetch config"
 
   link_directory $HOME_CONFIG_DIR/fastfetch $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_wsl()
+{
+  info "Setting up WSL"
+
+  link_file $HOME_CONFIG_DIR/wsl/wsl.conf /
 
   return 0
 }
