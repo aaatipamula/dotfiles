@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Load setup functions
 if [ -f "./setupscripts/setup_functions.sh" ]; then
