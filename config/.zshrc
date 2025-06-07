@@ -71,9 +71,9 @@ alias gitconf="$VISUAL $gitconf"
 alias dotfiles="cd $dotfiles"
 
 # Aliases
-alias ls="ls -lh --color"
+alias ls="ls --color"
+alias ll="ls -tlh"         # Organize by date modified
 alias l.="ls -d .*"         # Only hidden directory
-alias ll="ls -rt"           # Organize by date modified
 alias ld="ls -Ud */"        # Only directories
 alias la="ls -a"            # Everything including hidden files
 alias p3="python3"          # Shortcut python3 bin

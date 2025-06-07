@@ -46,7 +46,7 @@ if [ "$1" = "preset" ]; then
       ;;
   esac
 
-elif [ "$1" = "help" ]; then
+elif [[ "$1" = "help" || -z "$1" ]]; then
   help_command
 
 else

@@ -35,6 +35,7 @@ CONFIG_PROGRAMS=(
   "electron"
   "ghostty"
   "fastfetch"
+  "wsl"
 )
 
 ###############
@@ -218,9 +219,14 @@ help_command()
   echo "${bold}${yellow}Script to help setup Linux machines.${norm}"
 
   echo   "Use:"
-  echo   "  setup preset [${red}PRESETS${norm}]"
+  echo   "  setup preset [${red}PRESETS${norm}] [${red}PACKAGE_MANAGER${norm}]"
   echo   "  setup [${red}FUNCTION${norm}]"
   printf "  setup help -- This message\n\n"
+
+  echo   "[${red}PACKAGE_MANAGER${norm}]"
+  echo   "  - brew"
+  echo   "  - apt"
+  printf "  - dnf\n\n"
 
   echo   "[${red}PRESETS${norm}]"
   echo   "  - main:  Configures all programs, installs all common applications."
@@ -228,7 +234,7 @@ help_command()
   printf "  - bare:  Configure just bash, git, basic vim.\n\n"
 
   echo   "[${red}FUNCTION${norm}]"
-  echo   "  - apps [apt, dnf, brew]"
+  echo   "  - apps [${red}PACKAGE_MANAGER${norm}]"
   for app in ${CONFIG_PROGRAMS[@]}; do
     echo   "  - $app"
   done
@@ -326,11 +332,11 @@ setup_vim()
     mkdir $HOME/.vim
   fi
 
-  # Install Vim Plug
-  install_vim_plug
-
   # Link vim directory
   link_directory $HOME_CONFIG_DIR/.vim $HOME
+
+  # Install Vim Plug after in order to persist it
+  install_vim_plug
 
   return 0
 }
@@ -436,6 +442,15 @@ setup_fastfetch()
   info "Setting up fastfetch config"
 
   link_directory $HOME_CONFIG_DIR/fastfetch $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_wsl()
+{
+  info "Setting up WSL"
+
+  link_file $HOME_CONFIG_DIR/wsl/wsl.conf /
 
   return 0
 }

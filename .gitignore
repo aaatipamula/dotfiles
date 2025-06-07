@@ -1,3 +1,10 @@
 # Generated files
 lazy-lock.json
 config/tmux/plugins/*
+
+# Vim
+.netrwhst
+plug.vim
+
+# Hyprland
+monitors.conf
