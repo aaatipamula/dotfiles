@@ -1,6 +1,4 @@
 {
-    "telemetry.feedback.enabled": false,
-
     "editor.renderWhitespace": "none",
     "editor.minimap.enabled": false,
     "editor.lineNumbers": "relative",
@@ -20,7 +18,12 @@
     "workbench.iconTheme": "material-icon-theme",
     "workbench.activityBar.location": "hidden",
     "workbench.tree.indent": 16,
+    "workbench.navigationControl.enabled": false,
+    "workbench.layoutControl.enabled": false,
 
+    "window.commandCenter": false,
+    "telemetry.feedback.enabled": false,
+    "chat.commandCenter.enabled": false,
     "files.trimTrailingWhitespace": true,
     "breadcrumbs.enabled": false,
     "explorer.compactFolders": false,
@@ -53,7 +56,7 @@
         // K shows the definition of the symbol under the cursor
         {
             "before": ["K"],
-            "commands": ["editor.action.showDefinitionPreviewHover"]
+            "commands": ["editor.action.showDefinitionPreviewHover"],
         },
         // ctrl + h/j/k/l to navigate between splits
         {
@@ -72,5 +75,5 @@
             "before": ["<C-l>"],
             "after": ["<C-w>", "l"]
         }
-    ]
+    ],
 }
