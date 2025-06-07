@@ -1,0 +1,76 @@
+{
+    "telemetry.feedback.enabled": false,
+
+    "editor.renderWhitespace": "none",
+    "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+    "editor.wordWrap": "on",
+    "editor.fontFamily": "FiraCode Nerd Font Mono",
+    "editor.cursorStyle": "block",
+    "editor.cursorBlinking": "solid",
+    "editor.fontSize": 14,
+    "editor.fontLigatures": true,
+    "editor.lineHeight": 1.3,
+    "editor.tabSize": 2,
+    "editor.cursorSurroundingLines": 8,
+
+    "workbench.startupEditor": "none",
+    "workbench.tips.enabled": false,
+    "workbench.colorTheme": "Tokyo Night",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.activityBar.location": "hidden",
+    "workbench.tree.indent": 16,
+
+    "files.trimTrailingWhitespace": true,
+    "breadcrumbs.enabled": false,
+    "explorer.compactFolders": false,
+
+    "vim.leader": "<space>",
+    "vim.smartRelativeLine": false,
+    "vim.useSystemClipboard": true,
+    "vim.cursorStylePerMode.insert": "line",
+    "vim.argumentObjectClosingDelimiters": [
+        ")",
+        "]",
+        "}"
+    ],
+    "vim.argumentObjectOpeningDelimiters": [
+        "(",
+        "[",
+        "{"
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // leader x closes the current editor
+        {
+            "before": ["<leader>", "x"],
+            "after": [":", "q", "<CR>"]
+        },
+        // leader ff opens fuzzy file finder
+        {
+            "before": ["<leader>", "f", "f"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        // K shows the definition of the symbol under the cursor
+        {
+            "before": ["K"],
+            "commands": ["editor.action.showDefinitionPreviewHover"]
+        },
+        // ctrl + h/j/k/l to navigate between splits
+        {
+            "before": ["<C-h>"],
+            "after": ["<C-w>", "h"]
+        },
+        {
+            "before": ["<C-j>"],
+            "after": ["<C-w>", "j"]
+        },
+        {
+            "before": ["<C-k>"],
+            "after": ["<C-w>", "k"]
+        },
+        {
+            "before": ["<C-l>"],
+            "after": ["<C-w>", "l"]
+        }
+    ]
+}
