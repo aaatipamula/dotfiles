@@ -1,22 +1,31 @@
 @import "night.css"; 
 
 * {
-  font-family: "FiraCode Nerd Font";
-  font-size: 12px;
-  min-height: 10px;
-  font-weight: bold;
   color: @fg;
+  font-family: "FiraCode Nerd Font";
+  font-size: 98%;
+  font-weight: bold;
+  min-height: 10px;
 }
 
-window#waybar {
-  all:unset;
+
+window#waybar,
+window#waybar.empty,
+window#waybar.empty #window {
+  background-color: transparent;
+  padding: 0px;
+  border: 0px;
+}
+
+tooltip {
+  background-color: alpha(@bg_dark1, 0.8);
 }
 
 .modules-left {
   padding: 6px;
   margin: 6px 0px 0px 10px;
   border-radius: 1em;
-  background: @bg;
+  background-color: alpha(@bg_dark1, 0.8);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
@@ -24,7 +33,7 @@ window#waybar {
   padding: 6px;
   margin: 6px 0px 0px 0px;
   border-radius: 1em;
-  background: @bg;
+  background-color: alpha(@bg_dark1, 0.8);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
@@ -32,23 +41,19 @@ window#waybar {
   padding: 6px;
   margin: 6px 10px 0px 0px;
   border-radius: 1em;
-  background: @bg;
+  background-color: alpha(@bg_dark1, 0.8);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
-tooltip {
-  background: @bg;
-  color: @fg;
-}
-
+#taskbar button,
 #workspaces button {
   margin: 0 2px;
   padding: 0 12px;
   border-radius: 1em;
 }
 
-#workspaces button.active,
-#workspaces button.focused {
+#taskbar button.active,
+#workspaces button.active {
   color: @orange;
   background: @bg_highlight;
 }
@@ -67,52 +72,52 @@ tooltip {
 #mode,
 #scratchpad {
   border-radius: 1em;
-  padding: 0 12px;
+  padding: 0 8px;
 }
 
 #pulseaudio {
   color: @yellow;
-  background-color: alpha(@yellow, 0.2);
+  /* background-color: alpha(@yellow, 0.2); */
 }
 
 #backlight {
   color: @blue1;
-  background-color: alpha(@blue1, 0.2);
+  /* background-color: alpha(@blue1, 0.2); */
 }
 
 #network {
   color: @blue;
-  background-color: alpha(@blue, 0.2);
+  /* background-color: alpha(@blue, 0.2); */
 }
 
 #cpu {
   color: @magenta;
-  background-color: alpha(@magenta, 0.2);
+  /* background-color: alpha(@magenta, 0.2); */
 }
 
 #memory {
   color: @orange;
-  background-color: alpha(@orange, 0.2);
+  /* background-color: alpha(@orange, 0.2); */
 }
 
 #battery {
   color: @green;
-  background-color: alpha(@green, 0.2);
+  /* background-color: alpha(@green, 0.2); */
 }
 
 #battery.charging {
   color: @teal;
-  background-color: alpha(@teal, 0.2);
+  /* background-color: alpha(@teal, 0.2); */
 }
 
 #battery.warning:not(.charging) {
   color: @yellow;
-  background-color: alpha(@yellow, 0.2);
+  /* background-color: alpha(@yellow, 0.2); */
 }
 
 #battery.critical:not(.charging) {
   color: @red;
-  background: alpha(@red, 0.2);
+  /* background-color: alpha(@red, 0.2); */
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: steps(12);
@@ -120,9 +125,10 @@ tooltip {
   animation-direction: alternate;
 }
 
-#clock {
-  /* color: @blue5; */
-  /* background: @bg_highlight; */
+@keyframes blink {
+	to {
+		color: #000000;
+	}
 }
 
 /* If workspaces is the leftmost module, omit left margin */

@@ -140,7 +140,7 @@ install_apps()
 # Symlink a file to a location
 link_file()
 {
-  file_name=$(echo $1 | sed 's|.*/||')
+  file_name=$(basename $1)
   file_path="$2/$file_name"
 
   if [ -f "$file_path" ]; then
