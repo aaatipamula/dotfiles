@@ -48,7 +48,7 @@ tooltip {
 #taskbar button,
 #workspaces button {
   margin: 0 2px;
-  padding: 0 12px;
+  padding: 0 0.5em;
   border-radius: 1em;
 }
 

@@ -17,6 +17,8 @@ return {
       vim.keymap.set('n', '<leader>rg', builtin.live_grep, {})
       vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
       vim.keymap.set('n', '<leader>cs', builtin.colorscheme, {})
+      vim.keymap.set('n', '<leader>tr', builtin.treesitter, {})
+      vim.keymap.set('n', '<leader>jl', builtin.treesitter, {})
 
       -- Spell Suggest
       vim.keymap.set('n', '<leader>z', builtin.spell_suggest, {})
