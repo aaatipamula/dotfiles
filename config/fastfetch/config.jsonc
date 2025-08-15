@@ -29,10 +29,6 @@
       "type": "title",
       "format": "{6}{7}{8}"
     },
-    {
-      "type": "custom",
-      "format": "==========================================" // `\u001b` is `\033`, or `\e`
-    },
     "break",
     {
       "type": "custom",
@@ -122,11 +118,6 @@
       "key": "└ Terminal   ",
       "keyColor": "magenta",
       "type": "terminal"
-    },
-    "break",
-    {
-      "type": "custom",
-      "format": "==========================================" // `\u001b` is `\033`, or `\e`
     },
     "break",
     {
