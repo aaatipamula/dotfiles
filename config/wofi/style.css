@@ -40,9 +40,9 @@
 window {
   margin: 0px;
   padding: 10px;
-  border: 2px solid @blue0;
-  border-radius: 10px;
-  background: @bg;
+  border: 2px solid @blue7;
+  border-radius: 1em;
+  background-color: alpha(@bg, 0.8);
 }
 
 /* Inner Box */
@@ -50,7 +50,6 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background: @bg;
 }
 
 /* Outer Box */
@@ -58,7 +57,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background: @bg;
+  border-radius: 1em;
 }
 
 /* Scroll */
@@ -66,27 +65,21 @@ window {
   margin: 0px;
   padding: 10px;
   border: none;
-  background: @bg;
 }
 
-/* Input */
+/* Input box */
 #input {
   margin: 5px 20px;
   padding: 10px;
   color: @fg;
-  background: @bg_dark;
+  background-color: @bg_dark;
   border: 0.11em solid @teal;
 }
 
+/* Input symbols */
 #input image {
   border: none;
-  color: @red;
-}
-
-#input:focus {
-  /* outline: 4px solid @teal; */
-  border: 4px solid @teal;
-  box-shadow: inset 0 0 0 1px @teal;
+  color: @red1;
 }
 
 /* Text */
@@ -96,18 +89,14 @@ window {
   color: @fg;
 }
 
-#entry {
-  background: @bg;
-}
-
 #entry arrow {
   border: none;
-  color: @blue0;
+  color: @purple;
 }
 
 /* Selected Entry */
 #entry:selected {
-  background: @bg_highlight;
+  background-color: alpha(@bg_highlight, 0.8);
 }
 
 #entry:selected #text {
@@ -115,6 +104,6 @@ window {
 }
 
 #entry:drop(active) {
-  background: @blue0;
+  background-color: alpha(@blue0, 0.8);
 }
 
