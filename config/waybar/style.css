@@ -127,7 +127,7 @@ tooltip {
 
 @keyframes blink {
 	to {
-		color: #000000;
+		color: @bg_dark1;
 	}
 }
 

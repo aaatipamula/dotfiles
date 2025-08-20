@@ -6,5 +6,7 @@
 	st = status
 	a = add
 	aa = add .
-	co = commit -m
-	pom = push origin master
+  co = commit -m
+  rs = restore --staged
+[init]
+	defaultBranch = main

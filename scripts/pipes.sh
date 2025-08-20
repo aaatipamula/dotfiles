@@ -41,8 +41,8 @@ h=24
 # 00 means going up   , then going up   -> ┃
 # 12 means going right, then going down -> ┓
 sets=(
-    "┃┏ ┓┛━┓  ┗┃┛┗ ┏━"
     "│╭ ╮╯─╮  ╰│╯╰ ╭─"
+    "┃┏ ┓┛━┓  ┗┃┛┗ ┏━"
     "│┌ ┐┘─┐  └│┘└ ┌─"
     "║╔ ╗╝═╗  ╚║╝╚ ╔═"
     "|+ ++-+  +|++ +-"

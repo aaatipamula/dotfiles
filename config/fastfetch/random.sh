@@ -7,9 +7,13 @@ if [[  ! -d $ASCII_DIR ]]; then
 fi
 
 ls $ASCII_DIR | sort -R | tail -$N | while read file; do
-  # Something involving $file, or you can leave
-  # off the while to just get the filenames
-  cat "$ASCII_DIR/$file" | fastfetch --file-raw -
+  cmd=$(command -v fastfetch) # Check if fastfetch is executable
+
+  if [[ -z cmd ]]; then
+    cat "$ASCII_DIR/$file" # Just display the pokemon
+  else
+    cat "$ASCII_DIR/$file" | fastfetch --file-raw -
+  fi
   exit 0
 done
 
