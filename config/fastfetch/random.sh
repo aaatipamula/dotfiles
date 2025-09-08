@@ -6,7 +6,7 @@ if [[  ! -d $ASCII_DIR ]]; then
   exit 0
 fi
 
-ls $ASCII_DIR | sort -R | tail -$N | while read file; do
+ls $ASCII_DIR | shuf | while read file; do
   cmd=$(command -v fastfetch) # Check if fastfetch is executable
 
   if [[ -z cmd ]]; then
