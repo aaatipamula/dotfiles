@@ -73,23 +73,41 @@ return {
 
     -- Load up defaults for lspconfig
     lsp_zero.extend_lspconfig({
-        sign_text = true,
-        lsp_attach = lsp_attach,
-        capabilities = require('cmp_nvim_lsp').default_capabilities()
-      })
+      sign_text = true,
+      lsp_attach = lsp_attach,
+      capabilities = require('cmp_nvim_lsp').default_capabilities()
+    })
+
+    -- Setup handlers with borders
+    lsp.setup_handlers({
+      function(server)
+        require("lspconfig")[server].setup({
+          handlers = {
+            ["textDocument/hover"] = vim.lsp.with(
+              vim.lsp.handlers.hover,
+              { border = "rounded" }
+            ),
+            ["textDocument/signatureHelp"] = vim.lsp.with(
+              vim.lsp.handlers.signature_help,
+              { border = "rounded" }
+            ),
+          }
+        })
+      end,
+    })
 
     -- Set up mason for LSP servers (linters, checkers)
     require('mason').setup({})
     require('mason-lspconfig').setup({
-        ensure_installed = {'eslint', 'pyright', 'gopls'},
-        automatic_installation = true,
-        handlers = {
-          function(server_name)
-            local server_config = (server_name == 'clangd' and {cmd = { "clangd", '--compile-commands-dir=.' }} or {})
-            require('lspconfig')[server_name].setup({server_config})
-          end,
-        }
-      })
+      ensure_installed = {'eslint', 'pyright', 'gopls'},
+      automatic_installation = true,
+      handlers = {
+        function(server_name)
+          local server_config = (server_name == 'clangd' and {cmd = { "clangd", '--compile-commands-dir=.' }} or {})
+          require('lspconfig')[server_name].setup({server_config})
+        end,
+      }
+    })
 
     -- Setup code completion
     local cmp = require('cmp')
@@ -97,26 +115,27 @@ return {
     local cmp_format = require('lsp-zero').cmp_format({details = true})
 
     cmp.setup({
-        sources = {
-          {name = 'nvim_lsp'},
-          {name = 'buffer'},
-        },
-        formatting = cmp_format,
-        snippet = {
-          expand = function(args)
-            -- You need Neovim v0.10 to use vim.snippet
-            vim.snippet.expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<CR>'] = cmp.mapping.confirm({select = true}),
-          ['<Tab>'] = cmp_action.tab_complete(),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
-        }),
-      })
+      sources = {
+        {name = 'nvim_lsp'},
+        {name = 'buffer'},
+      },
+      formatting = cmp_format,
+      snippet = {
+        expand = function(args)
+          -- You need Neovim v0.10 to use vim.snippet
+          vim.snippet.expand(args.body)
+        end,
+      },
+      mapping = cmp.mapping.preset.insert({
+        ['<CR>'] = cmp.mapping.confirm({select = true}),
+        ['<Tab>'] = cmp_action.tab_complete(),
+        ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
+      }),
+    })
 
     vim.diagnostic.config({
       virtual_text = false, -- Turn off inline diagnostics
+      float = { border = "rounded" }, -- Global diagnostic borders
     })
   end
 }

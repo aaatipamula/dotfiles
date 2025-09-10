@@ -29,6 +29,9 @@ vim.keymap.set('v', 'K', ':m \'<-2<cr>gv=gv')
 vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
 
+-- Yank selection to clipboard
+vim.keymap.set('v', '<leader>y', '\"+y')
+
 -- Greatest remap ever 
 vim.keymap.set("x", "<leader>p", [["_dP]])
 

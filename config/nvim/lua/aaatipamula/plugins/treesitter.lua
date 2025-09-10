@@ -2,9 +2,26 @@
 
 return {
       'nvim-treesitter/nvim-treesitter',
-
+      lazy = false,
       run = ':TSUpdate',
       config = function()
+
+        require("nvim-treesitter.parsers").get_parser_configs().clam = {
+          install_info = {
+            url = "~/projects/tree-sitter-clam", -- local path or git repo
+            files = {"src/parser.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
+          },
+          filetype = "lam", -- if filetype does not match the parser name
+        }
+
+        vim.filetype.add({
+          extension = {
+            lam = "clam",
+          },
+        })
+
+        vim.treesitter.language.register('clam', { 'lam' })
+
         require('nvim-treesitter.configs').setup {
           -- A list of parser names, or "all" (the listed parsers MUST always be installed)
           ensure_installed = { 
