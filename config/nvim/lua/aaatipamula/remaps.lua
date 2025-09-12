@@ -32,6 +32,9 @@ vim.keymap.set('v', '<', '<gv')
 -- Yank selection to clipboard
 vim.keymap.set('v', '<leader>y', '\"+y')
 
+-- Format markdown tables with column
+vim.keymap.set('v', '<leader>tf', ':! tr -s " " | column -t -s \'|\' -o \'|\'<cr>', { silent = true })
+
 -- Greatest remap ever 
 vim.keymap.set("x", "<leader>p", [["_dP]])
 

@@ -24,6 +24,7 @@ return {
         vim.diagnostic.open_float(0, {
            scope = "cursor",
            focusable = false,
+           border = "rounded", -- ✅ diagnostic float borders
            close_events = {
              "CursorMoved",
              "CursorMovedI",
@@ -57,7 +58,7 @@ return {
       })
 
       vim.keymap.set('n', 'K', function()
-        vim.lsp.buf.hover()
+        vim.lsp.buf.hover({ border = 'rounded' })
         vim.b.hover_active = true
       end, opts)
       vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
@@ -71,29 +72,14 @@ return {
       vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
     end
 
+    require('lspconfig.ui.windows').default_options.border = 'rounded'
+
     -- Load up defaults for lspconfig
     lsp_zero.extend_lspconfig({
       sign_text = true,
       lsp_attach = lsp_attach,
-      capabilities = require('cmp_nvim_lsp').default_capabilities()
-    })
-
-    -- Setup handlers with borders
-    lsp.setup_handlers({
-      function(server)
-        require("lspconfig")[server].setup({
-          handlers = {
-            ["textDocument/hover"] = vim.lsp.with(
-              vim.lsp.handlers.hover,
-              { border = "rounded" }
-            ),
-            ["textDocument/signatureHelp"] = vim.lsp.with(
-              vim.lsp.handlers.signature_help,
-              { border = "rounded" }
-            ),
-          }
-        })
-      end,
+      float_border = 'rounded',
+      capabilities = require('cmp_nvim_lsp').default_capabilities(),
     })
 
     -- Set up mason for LSP servers (linters, checkers)
@@ -104,7 +90,7 @@ return {
       handlers = {
         function(server_name)
           local server_config = (server_name == 'clangd' and {cmd = { "clangd", '--compile-commands-dir=.' }} or {})
-          require('lspconfig')[server_name].setup({server_config})
+          require('lspconfig')[server_name].setup(server_config)
         end,
       }
     })
@@ -131,11 +117,14 @@ return {
         ['<Tab>'] = cmp_action.tab_complete(),
         ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
       }),
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
     })
 
     vim.diagnostic.config({
       virtual_text = false, -- Turn off inline diagnostics
-      float = { border = "rounded" }, -- Global diagnostic borders
     })
   end
 }
