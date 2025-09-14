@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 #############################
 ### INSTANTIATE VARIABLES ###
 #############################
@@ -160,7 +162,7 @@ link_file()
 # Symlink a directory to a location
 link_directory()
 {
-  directory_name=$(echo $1 | sed 's|.*/||')
+  directory_name=$(basename "$1")
   directory_path="$2/$directory_name"
 
   # Third positional arg indicates if the path specified by the second arg should be used
@@ -185,6 +187,7 @@ link_directory()
 
   # info "Running: ln -sf $1 $directory_path"
   ln -sf $1 $directory_path
+  info "Created config at $directory_path"
 }
 
 # Install vim-plug
@@ -317,8 +320,10 @@ setup_git()
 {
   info "Setting up git."
 
-  # Link Git config file
-  link_file $HOME_CONFIG_DIR/.gitconfig $HOME
+  # Legacy single file config
+  # link_file $HOME_CONFIG_DIR/.gitconfig $HOME
+
+  link_directory $HOME_CONFIG_DIR/git $XDG_CONFIG_HOME
 
   return 0
 }

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e # fail on command fail
+
 # Import module
 if [ -f ./setupscripts/setup_functions.sh ]; then
   . ./setupscripts/setup_functions.sh
@@ -46,7 +48,7 @@ validate_package_manager fail
 check_return $? "1"
 
 for app in ${CONFIG_PROGRAMS[@]}; do
-  eval "setup_$option"
+  eval "setup_$app"
   check_return $? "0"
 done
 

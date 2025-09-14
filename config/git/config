@@ -1,0 +1,84 @@
+# User settings
+[user]
+	email = aaatipamula@gmail.com
+	name = Aniketh A.
+
+# Core program settings
+[core]
+  compression  = 9
+  whitespace = error
+  preloadindex = true
+
+# Subcommand settings
+[init]
+	defaultBranch = main
+
+[status]
+  # branch = true
+  showStash = true
+  showUntrackedFiles = all
+
+[diff]
+  context = 3
+  renames = copies
+  innerHunkContext = 10
+
+[push]
+  default = current
+  autoSetupRemote = true
+  followTage = true
+
+[pull]
+  default = current
+  rebase = true
+
+[rebase]
+  autoStash = true
+  missingCommitsCheck = warn
+
+[commit]
+  template = ~/.config/git/template
+  verbose = true
+
+
+# Colors hooray!!
+[color "blame"]
+    highlightRecent = black bold,1 year ago,white,1 month ago,default,7 days ago,blue
+
+[color "branch"]
+    current  = magenta
+    local    = default
+    remote   = yellow
+    upstream = green
+    plain    = blue
+
+[color "diff"]
+    meta       = cyan bold
+    frag       = magenta
+    context    = white
+    whitespace = yellow reverse
+    old        = red
+
+[color.decorate]
+    HEAD = red
+    branch = blue
+    tag = yellow
+    remoteBranch = magenta
+
+# URL aliases
+[url "git@github.com:aaatipmula/"]
+  insteadOf = "aaa:"
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+
+# Command aliases
+[alias]
+  co = commit
+	ca = commit -am
+  com = commit -m
+	st = status
+	a = add
+	aa = add .
+  rs = restore --staged
+

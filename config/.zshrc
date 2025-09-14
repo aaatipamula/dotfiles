@@ -74,13 +74,13 @@ alias dotfiles="cd $dotfiles"
 alias ls="ls --color"
 alias ll="ls -tlh"         # Organize by date modified
 alias l.="ls -d .*"         # Only hidden directory
-alias ld="ls -Ud */"        # Only directories
+alias lD="ls -Ud */"        # Only directories
 alias la="ls -a"            # Everything including hidden files
 alias p3="python3"          # Shortcut python3 bin
 alias hist="history"        # Shortcut history
-alias gd="git diff"         # Quick diff
+# alias gd="git diff"         # Quick diff
 alias gs="git status"       # Quick status
-alias gl="git log"          # Quick log
+# alias gl="git log"          # Quick log
 alias tmn="tmux new -s"     # tmux new session
 alias tma="tmux a -t"       # tmux attach to session
 
