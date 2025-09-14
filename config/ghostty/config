@@ -3,17 +3,20 @@ font-family = FiraCode Nerd Font Mono
 
 # Window style
 background-opacity = 0.9
+background-blur = true
 theme = tokyonight_night
-window-padding-x = 10
+window-padding-x = 8
 window-padding-y = 5
 
 # Cursor
 cursor-style = block
 cursor-style-blink = true
 
+# custom-shader = ~/Github/ghostty-shaders/bettercrt.glsl
+# custom-shader = ~/Github/ghostty-shaders/bloom.glsl
+# custom-shader = ~/Github/ghostty-shaders/tft.glsl
+
 # custom-shader = ~/Github/ghostty-shaders/animated-gradient-shader.glsl
-custom-shader = ~/Github/ghostty-shaders/bettercrt.glsl
-custom-shader = ~/Github/ghostty-shaders/bloom.glsl
 # custom-shader = ~/Github/ghostty-shaders/cineShader-Lava.glsl
 # custom-shader = ~/Github/ghostty-shaders/crt.glsl
 # custom-shader = ~/Github/ghostty-shaders/cubes.glsl
@@ -39,7 +42,6 @@ custom-shader = ~/Github/ghostty-shaders/bloom.glsl
 # custom-shader = ~/Github/ghostty-shaders/spotlight.glsl
 # custom-shader = ~/Github/ghostty-shaders/starfield-colors.glsl
 # custom-shader = ~/Github/ghostty-shaders/starfield.glsl
-custom-shader = ~/Github/ghostty-shaders/tft.glsl
 # custom-shader = ~/Github/ghostty-shaders/underwater.glsl
 # custom-shader = ~/Github/ghostty-shaders/water.glsl
 
