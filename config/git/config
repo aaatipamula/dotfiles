@@ -18,9 +18,13 @@
   showStash = true
   showUntrackedFiles = all
 
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
 [diff]
   context = 3
   renames = copies
+  tool = nvimdiff
   innerHunkContext = 10
 
 [push]
@@ -39,7 +43,6 @@
 [commit]
   template = ~/.config/git/template
   verbose = true
-
 
 # Colors hooray!!
 [color "blame"]
@@ -66,7 +69,7 @@
     remoteBranch = magenta
 
 # URL aliases
-[url "git@github.com:aaatipmula/"]
+[url "git@github.com:aaatipamula/"]
   insteadOf = "aaa:"
 
 [url "git@github.com:"]
@@ -80,5 +83,6 @@
 	st = status
 	a = add
 	aa = add .
-  rs = restore --staged
+  rs = restore
+  rss = restore --staged
 
