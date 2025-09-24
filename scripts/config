@@ -1,10 +1,42 @@
 #!/bin/bash
 
-if [ -d "$XDG_CONFIG_HOME/$1" ]; then
-  $VISUAL "$XDG_CONFIG_HOME/$1" 
-elif [ -f "$XDG_CONFIG_HOME/$1" ]; then
-  $VISUAL "$XDG_CONFIG_HOME/$1" 
+# Null check
+if [[ -z "$1" ]]; then
+  echo "No directory passed to config" >& 2
+  exit 1
+fi
+
+if [[ "$1" = "mv" ]]; then
+  shift
+  path="$XDG_CONFIG_HOME/$1"
+
+  # Directory check
+  if [[ ! -d "$path" ]]; then
+    echo "$path does not exist!"
+    exit 1
+  fi
+
+  mv "$path" "$dotfiles/config"
+  echo "Moved $path to $dotfiles/config"
+  exit
+fi
+
+path="$XDG_CONFIG_HOME/$1"
+
+# Open config
+if [ -d "$path" ]; then
+  $VISUAL "$path" 
+elif [ -f "$path" ]; then
+  $VISUAL "$path" 
 else
-  echo "No config found for $1."
+  echo -n "No config for $1 found, create directory? [y/n]: "
+  read -r choice
+
+  if [[ "$choice" =~ [yY] ]]; then
+    mkdir "$path"
+    $VISUAL "$path"
+  elif [[ "$choice" =~ [nN] ]]; then
+    echo "Skipping..."
+  fi
 fi
 
