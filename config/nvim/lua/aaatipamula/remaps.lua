@@ -20,8 +20,10 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- Keep selection after moving in visual (goated)
+-- Use Ctrl + j to join all lines
 vim.keymap.set('v', '<C-j>', 'J', { noremap = true })
+
+-- Keep selection after moving in visual (goated)
 vim.keymap.set('v', 'J', ':m \'>+1<cr>gv=gv')
 vim.keymap.set('v', 'K', ':m \'<-2<cr>gv=gv')
 
@@ -141,5 +143,37 @@ autocmd({'BufReadPost'}, {
   group = buf_commands,
   pattern = '*',
   command = 'if line("\'\\"") > 1 && line("\'\\"") <= line("$") | exe "normal! g\'\\"" | endif'
+})
+
+-- Use quick compile if a makefile isn't found (c, cpp)
+autocmd({'FileType'}, {
+  pattern = {'c', 'cpp'},
+  callback = function (args)
+    -- Move up recursively to find the makefile with ".;"
+    if vim.fn.findfile("Makefile", ".;") == "" then
+      if args.match == "cpp" then
+        -- Use custom script to compile cpp "+" and run "-r"
+        vim.opt_local.makeprg = "qc -r + %"
+      else
+        vim.opt_local.makeprg = "qc -r %"
+      end
+    end
+  end
+})
+
+-- Python3 make program
+autocmd({'FileType'}, {
+  pattern = 'python',
+  callback = function ()
+    vim.opt_local.makeprg = "python3 %"
+  end
+})
+
+-- Node make program
+autocmd({'FileType'}, {
+  pattern = {'js', 'ts'},
+  callback = function ()
+    vim.opt_local.makeprg = "node %"
+  end
 })
 
