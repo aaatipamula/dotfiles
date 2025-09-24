@@ -38,6 +38,7 @@ CONFIG_PROGRAMS=(
   "ghostty"
   "fastfetch"
   "wsl"
+  "bat"
 )
 
 ###############
@@ -459,3 +460,16 @@ setup_wsl()
 
   return 0
 }
+
+setup_bat()
+{
+  info "Setting up bat"
+
+  link_directory $HOME_CONFIG_DIR/bat $XDG_CONFIG_HOME
+
+  # Build step to compile theme
+  bat cache --build
+  
+  return 0
+}
+
