@@ -18,7 +18,12 @@ if [[ "$1" = "mv" ]]; then
 
   mv "$path" "$dotfiles/config"
   echo "Moved $path to $dotfiles/config"
-  exit
+  exit 0
+fi
+
+if [[ "$1" = "ls" ]]; then
+  ls -l $XDG_CONFIG_HOME
+  exit 0
 fi
 
 path="$XDG_CONFIG_HOME/$1"
