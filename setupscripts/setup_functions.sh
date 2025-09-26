@@ -39,6 +39,8 @@ CONFIG_PROGRAMS=(
   "fastfetch"
   "wsl"
   "bat"
+  "i3"
+  "polybar"
 )
 
 ###############
@@ -470,6 +472,24 @@ setup_bat()
   # Build step to compile theme
   bat cache --build
   
+  return 0
+}
+
+setup_i3()
+{
+  info "Setting up i3"
+
+  link_directory $HOME_CONFIG_DIR/i3 $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_polybar()
+{
+  info "Setting up polybar"
+
+  link_directory $HOME_CONFIG_DIR/polybar $XDG_CONFIG_HOME
+
   return 0
 }
 
