@@ -4,13 +4,18 @@ font-family = FiraCode Nerd Font Mono
 # Window style
 background-opacity = 0.9
 background-blur = true
-theme = tokyonight_night
 window-padding-x = 8
 window-padding-y = 5
+window-decoration = none
+
+# Look
+# theme = tokyonight_night
+theme = catppuccin-mocha
 
 # Cursor
 cursor-style = block
 cursor-style-blink = true
+
 
 # custom-shader = ~/Github/ghostty-shaders/bettercrt.glsl
 # custom-shader = ~/Github/ghostty-shaders/bloom.glsl
