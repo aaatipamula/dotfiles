@@ -22,7 +22,7 @@ if [[ "$1" = "mv" ]]; then
 fi
 
 if [[ "$1" = "ls" ]]; then
-  ls -l $XDG_CONFIG_HOME
+  ls -l --color $XDG_CONFIG_HOME
   exit 0
 fi
 
