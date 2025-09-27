@@ -42,6 +42,7 @@ CONFIG_PROGRAMS=(
   "i3"
   "polybar"
   "env"
+  "dunst"
 )
 
 ###############
@@ -503,3 +504,12 @@ setup_env()
   return 0
 }
 
+setup_dunst
+{
+
+  info "Setting up dunst"
+
+  link_directory $HOME_CONFIG_DIR/dunst $XDG_CONFIG_HOME
+
+  return 0
+}
