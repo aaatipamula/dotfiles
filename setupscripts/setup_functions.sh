@@ -43,6 +43,7 @@ CONFIG_PROGRAMS=(
   "polybar"
   "env"
   "dunst"
+  "picom"
 )
 
 ###############
@@ -504,12 +505,22 @@ setup_env()
   return 0
 }
 
-setup_dunst
+setup_dunst()
 {
 
   info "Setting up dunst"
 
   link_directory $HOME_CONFIG_DIR/dunst $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_picom()
+{
+
+  info "Setting up picom"
+
+  link_directory $HOME_CONFIG_DIR/picom $XDG_CONFIG_HOME
 
   return 0
 }
