@@ -10,12 +10,17 @@ window-decoration = none
 
 # Look
 # theme = tokyonight_night
-theme = catppuccin-mocha
+# theme = TokyoNight Night
+# theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 # Cursor
 cursor-style = block
 cursor-style-blink = true
 
+# Systemd integration
+quit-after-last-window-closed = true
+quit-after-last-window-closed-delay = 5m
 
 # custom-shader = ~/Github/ghostty-shaders/bettercrt.glsl
 # custom-shader = ~/Github/ghostty-shaders/bloom.glsl

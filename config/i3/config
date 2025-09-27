@@ -7,7 +7,9 @@
 
 set $mod Mod1
 set $modAlt Mod4
-set $termProgram ghostty
+# set $termProgram kitty
+# set $termProgram ghostty
+set $termProgram "ghostty +new-window"
 set $dpi 220
 
 ####################
@@ -28,7 +30,7 @@ exec_always --no-startup-id picom
 exec_always --no-startup-id dunst
 
 # Start a custom bar
-exec_always --no-startup-id $XDG_CONFIG_HOME/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 ############
 # Keybinds #
