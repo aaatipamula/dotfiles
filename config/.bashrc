@@ -5,11 +5,6 @@ export EDITOR="vim"
 # Correct terminal
 export TERM=xterm-256color
 
-# Directories
-export XDG_CONFIG_HOME="$HOME/.config" # Config home
-export XDG_PICTURES_DIR="$HOME/Pictures"
-export XDG_DOWNLOADS_DIR="$HOME/Downloads"
-
 # Configuration file locations
 export dotfiles="$HOME/dotfiles"
 export bashrc="$HOME/.bashrc"

@@ -41,6 +41,7 @@ CONFIG_PROGRAMS=(
   "bat"
   "i3"
   "polybar"
+  "env"
 )
 
 ###############
@@ -489,6 +490,15 @@ setup_polybar()
   info "Setting up polybar"
 
   link_directory $HOME_CONFIG_DIR/polybar $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_env()
+{
+  info "Setting up environment.d"
+
+  link_directory $HOME_CONFIG_DIR/environment.d $XDG_CONFIG_HOME
 
   return 0
 }
