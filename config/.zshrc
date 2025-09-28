@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 # zinit home directory
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -136,7 +138,12 @@ FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=spinner:#ff007c \
 "
 
+# Prepend local bins to path
+PATH="$HOME/.local/bin:$HOME/dotfiles/scripts:$PATH"
 
 # if [[ $- == *i* ]]; then; fastfetch; fi # Run fastfetch in interactive terminals
 if [ -f ~/.config/fastfetch/random.sh ]; then ~/.config/fastfetch/random.sh; fi # Pick a random preset pokemon
 # pokeget random --hide-name | fastfetch --file-raw - # Use pokeget
+
+# zprof
+
