@@ -6,6 +6,7 @@ if [[ -z "$1" ]]; then
   exit 1
 fi
 
+# Move a directory
 if [[ "$1" = "mv" ]]; then
   shift
   path="$XDG_CONFIG_HOME/$1"
@@ -21,8 +22,26 @@ if [[ "$1" = "mv" ]]; then
   exit 0
 fi
 
+# List items in the config directory
 if [[ "$1" = "ls" ]]; then
   ls -l --color $XDG_CONFIG_HOME
+  exit 0
+fi
+
+
+# Remove a config directory if its symlinked
+if [[ "$1" = "rm" ]]; then
+  shift
+  path="$XDG_CONFIG_HOME/$1"
+
+  # Directory check
+  if [[ ! -L "$path" ]]; then
+    echo "$path is not a symlinked directory, refusing to remove."
+    exit 1
+  fi
+
+  rm "$path"
+  echo "Removed path $path"
   exit 0
 fi
 

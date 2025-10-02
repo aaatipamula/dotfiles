@@ -22,10 +22,13 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab # Use fzf for tab completions
 
+FZF_COLOR_OPTS="--color=fg:white,fg+:white,hl:cyan,bg+:black,hl+:yellow,pointer:red,marker:green,info:white,separator:bright-black"
+
 # Completion styling
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:*' fzf-flags "$FZF_COLOR_OPTS" --bind=tab:accept
 
 # Keybindings
 bindkey -e  # Emacs keybinds
@@ -121,21 +124,7 @@ FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --ansi \
   --layout=reverse \
   --border=none \
-  --color=bg+:#283457 \
-  --color=border:#27a1b9 \
-  --color=fg:#c0caf5 \
-  --color=gutter:#16161e \
-  --color=header:#ff9e64 \
-  --color=hl+:#2ac3de \
-  --color=hl:#2ac3de \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#2ac3de \
-  --color=query:#c0caf5:regular \
-  --color=scrollbar:#27a1b9 \
-  --color=separator:#ff9e64 \
-  --color=spinner:#ff007c \
+  $FZF_COLOR_OPTS
 "
 
 # Prepend local bins to path

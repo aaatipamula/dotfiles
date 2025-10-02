@@ -10,9 +10,9 @@ window-decoration = none
 
 # Look
 # theme = tokyonight_night
-theme = TokyoNight Night
+# theme = TokyoNight Night
 # theme = catppuccin-mocha
-# theme = Catppuccin Mocha
+theme = Catppuccin Mocha
 
 # Cursor
 cursor-style = block

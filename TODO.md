@@ -1,8 +1,8 @@
 # Add Config For
 
-- [ ] i3
+- [x] i3
 - [ ] i3status
-- [ ] polybar
-- [ ] dunst
+- [x] polybar
+- [x] dunst
 - [ ] rofi
-- [ ] picom
+- [x] picom

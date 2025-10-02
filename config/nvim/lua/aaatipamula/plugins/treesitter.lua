@@ -6,25 +6,25 @@ return {
       run = ':TSUpdate',
       config = function()
 
-        require("nvim-treesitter.parsers").get_parser_configs().clam = {
-          install_info = {
-            url = "~/projects/tree-sitter-clam", -- local path or git repo
-            files = {"src/parser.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
-          },
-          filetype = "lam", -- if filetype does not match the parser name
-        }
+        -- require("nvim-treesitter.parsers").get_parser_configs().clam = {
+        --   install_info = {
+        --     url = "~/projects/tree-sitter-clam", -- local path or git repo
+        --     files = {"src/parser.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
+        --   },
+        --   filetype = "lam", -- if filetype does not match the parser name
+        -- }
 
-        vim.filetype.add({
-          extension = {
-            lam = "clam",
-          },
-        })
+        -- vim.filetype.add({
+        --   extension = {
+        --     lam = "clam",
+        --   },
+        -- })
 
-        vim.treesitter.language.register('clam', { 'lam' })
+        -- vim.treesitter.language.register('clam', { 'lam' })
 
         require('nvim-treesitter.configs').setup {
           -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-          ensure_installed = { 
+          ensure_installed = {
             "c",
             "lua",
             "vim",
@@ -46,6 +46,16 @@ return {
           -- Indent my files
           indent = {
             enable = true,
+          },
+
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = "<C-space>",
+              node_incremental = "<C-space>",
+              scope_incremental = false,
+              node_decremental = "<bs>",
+            },
           },
 
           highlight = {
