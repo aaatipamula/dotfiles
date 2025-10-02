@@ -42,7 +42,7 @@ window {
   padding: 10px;
   border: 2px solid @blue7;
   border-radius: 1em;
-  background-color: alpha(@bg, 0.8);
+  background-color: @bg;
 }
 
 /* Inner Box */
