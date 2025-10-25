@@ -15,6 +15,7 @@
     "cpu",
     "memory",
     "battery",
+    "custom/powermenu"
   ],
   // Modules configuration
   "hyprland/window": {
@@ -126,11 +127,11 @@
     "format-alt": " {:%I:%M %p}"
   },
   "cpu": {
-    "format": "{usage}% ",
+    "format": "{usage}%  ",
     "tooltip": true
   },
   "memory": {
-    "format": "{}% "
+    "format": "{}%  "
   },
   "backlight": {
     // "device": "acpi_video1",
@@ -162,18 +163,18 @@
     }
   },
   "network": {
-    "format-wifi": "({signalStrength}%) ",
-    "format-ethernet": "",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "Disconnected ⚠",
+    "format-wifi": "({signalStrength}%)  ",
+    "format-ethernet": " ",
+    "format-linked": "{ifname} (No IP)  ",
+    "format-disconnected": "Disconnected ⚠ ",
     "tooltip-format": "{ifname} via {gwaddr}\nEthernet: {ipaddr}/{cidr} \nWiFi: {essid} ({signalStrength}%) ",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "pulseaudio": {
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
+    "format": "{volume}% {icon} {format_source} ",
+    "format-bluetooth": "{volume}% {icon} {format_source} ",
+    "format-bluetooth-muted": " {icon} {format_source} ",
+    "format-muted": "  {format_source} ",
     "format-source": "{volume}% ",
     "format-source-muted": "",
     "format-icons": {
@@ -186,6 +187,11 @@
       "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
+  },
+  "custom/powermenu": {
+    "format": "󰐥",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/powermenu.sh"
   }
 }
 

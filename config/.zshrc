@@ -71,8 +71,8 @@ alias loadzsh="source $zshrc"
 alias dotfiles="cd $dotfiles"
 
 # Aliases
-alias ls="ls --color"
-alias ll="ls -tlh"      # Organize by date modified
+alias ls="ls --color -h"
+alias ll="ls -tl"       # Organize by date modified
 alias l.="ls -d .*"     # Only hidden directory
 alias lD="ls -Ud */"    # Only directories
 alias la="ls -a"        # Everything including hidden files

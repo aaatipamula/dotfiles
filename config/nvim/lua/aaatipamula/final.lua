@@ -1,5 +1,5 @@
-local cs = "catppuccin"
--- local cs = "tokyonight"
+-- local cs = "catppuccin"
+local cs = "tokyonight"
 
 require('lualine').setup {
   options = {
