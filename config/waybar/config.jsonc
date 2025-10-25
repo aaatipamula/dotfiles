@@ -18,6 +18,10 @@
     "custom/powermenu"
   ],
   // Modules configuration
+  "tray" :{
+    "show-passive-items": true,
+    "spacing": 10
+  },
   "hyprland/window": {
     "format": "{class}",
     "tooltip": true,
@@ -146,9 +150,9 @@
     "tooltip": false,
     "format": "{icon} {capacity}% 󱐌{power} W",
     "format-full": "{capacity}% {icon} {power} W",
-    "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
-    "format-alt": "{time} {icon}",
+    "format-charging": "{capacity}%  ",
+    "format-plugged": "{capacity}%  ",
+    "format-alt": "{time} {icon} ",
     "format-icons": ["", "", "", "", ""]
   },
   "power-profiles-daemon": {

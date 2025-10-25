@@ -21,11 +21,9 @@ tooltip {
 }
 
 .modules-left {
-  padding: 6px;
-  margin: 6px 0px 0px 10px;
-  border-radius: 1em;
-  background-color: alpha(@bg_dark1, 0.8);
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+  padding: 0;
+  margin: 0;
+  margin-left: 10px;
 }
 
 .modules-center {
@@ -39,6 +37,16 @@ tooltip {
 .modules-right {
   padding: 0;
   margin: 0;
+  margin-right: 10px;
+}
+
+#taskbar,
+#workspaces {
+  padding: 6px;
+  margin: 6px 0px 0px 10px;
+  border-radius: 1em;
+  background-color: alpha(@bg_dark1, 0.8);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
 #taskbar button,
@@ -68,11 +76,11 @@ tooltip {
 #mode,
 #custom-powermenu,
 #scratchpad {
-  border-radius: 1em;
-  background-color: alpha(@bg_dark1, 0.8);
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
   padding: 6px 10px;
   margin: 6px 5px 0px 0px;
+  border-radius: 1em;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+  background-color: alpha(@bg_dark1, 0.8);
 }
 
 #pulseaudio {
