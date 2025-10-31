@@ -44,6 +44,7 @@ CONFIG_PROGRAMS=(
   "env"
   "dunst"
   "picom"
+  "p10k"
 )
 
 ###############
@@ -521,6 +522,15 @@ setup_picom()
   info "Setting up picom"
 
   link_directory $HOME_CONFIG_DIR/picom $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_p10k()
+{
+  info "Setting up p10k"
+
+  link_file $HOME_CONFIG_DIR/.p10k.zsh $HOME
 
   return 0
 }
