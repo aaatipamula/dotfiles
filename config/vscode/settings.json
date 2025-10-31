@@ -22,6 +22,10 @@
     "workbench.layoutControl.enabled": false,
 
     "window.commandCenter": false,
+    "window.titleBarStyle": "custom",
+    "window.customTitleBarVisibility": "never",
+
+
     "telemetry.feedback.enabled": false,
     "chat.commandCenter.enabled": false,
     "files.trimTrailingWhitespace": true,
@@ -48,32 +52,63 @@
             "before": ["<leader>", "x"],
             "after": [":", "q", "<CR>"]
         },
-        // leader ff opens fuzzy file finder
+        // Open file picker (Space + f f)
         {
-            "before": ["<leader>", "f", "f"],
+            "before": ["leader", "f", "f"],
             "commands": ["workbench.action.quickOpen"]
         },
-        // K shows the definition of the symbol under the cursor
+        // Toggle File Explorer (Space + p v)
         {
-            "before": ["K"],
-            "commands": ["editor.action.showDefinitionPreviewHover"],
+            "before": ["leader", "p", "v"],
+            "commands": ["workbench.explorer.fileView.focus"]
         },
-        // ctrl + h/j/k/l to navigate between splits
+        // Toggle Git tab (Source Control) (Space + g f)
+        {
+            "before": ["leader", "g", "f"],
+            "commands": ["workbench.view.scm"]
+        },
+        // Toggle Side Bar visibility (Space + t t)
+        {
+            "before": ["leader", "t", "t"],
+            "commands": ["workbench.action.toggleSidebarVisibility"]
+        },
+        // Open Extensions tab (Space + e x)
+        {
+            "before": ["leader", "e", "x"],
+            "commands": ["workbench.view.extensions"]
+        },
+        // Move focus to the left (Ctrl + h)
         {
             "before": ["<C-h>"],
-            "after": ["<C-w>", "h"]
+            "commands": ["workbench.action.focusSideBar"]
         },
-        {
-            "before": ["<C-j>"],
-            "after": ["<C-w>", "j"]
-        },
-        {
-            "before": ["<C-k>"],
-            "after": ["<C-w>", "k"]
-        },
+        // Move focus to the right (Ctrl + l)
         {
             "before": ["<C-l>"],
-            "after": ["<C-w>", "l"]
-        }
+            "commands": ["workbench.action.focusActiveEditorGroup"]
+        },
+        // Show hover documentation (K)
+        {
+            "before": ["K"],
+            "commands": ["editor.action.showHover"]
+        },
+        // ctrl + h/j/k/l to navigate between splits
+        // {
+        //     "before": ["<C-h>"],
+        //     "after": ["<C-w>", "h"]
+        // },
+        // {
+        //     "before": ["<C-j>"],
+        //     "after": ["<C-w>", "j"]
+        // },
+        // {
+        //     "before": ["<C-k>"],
+        //     "after": ["<C-w>", "k" ]
+        // },
+        // {
+        //     "before": ["<C-l>"],
+        //     "after": ["<C-w>", "l"]
+        // }
     ],
+    "window.newWindowProfile": "Default"
 }
