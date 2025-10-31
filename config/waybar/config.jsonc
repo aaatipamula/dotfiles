@@ -149,9 +149,9 @@
     },
     "tooltip": false,
     "format": "{icon} {capacity}% 󱐌{power} W",
-    "format-full": "{capacity}% {icon} {power} W",
-    "format-charging": "{capacity}%  ",
-    "format-plugged": "{capacity}%  ",
+    "format-full": "{capacity}% {icon} 󱐌{power} W",
+    "format-charging": "{capacity}%   {power} W",
+    "format-plugged": "{capacity}%   {power} W",
     "format-alt": "{time} {icon} ",
     "format-icons": ["", "", "", "", ""]
   },
