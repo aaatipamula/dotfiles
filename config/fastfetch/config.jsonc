@@ -14,53 +14,53 @@
     }
   },
   "display": {
-    "separator": " "
+    "separator": "  "
   },
   "modules": [
     // Hardware section
     {
       "type": "custom",
-      "format": "╭───────────╮",
-      "outputColor": "green",
+      "format": "Hardware",
+      "outputColor": "bright_white",
     },
     {
       "type": "custom",
-      "format": "Hardware    │",
+      "format": "╭────────────╮",
       "outputColor": "green",
     },
     {
-      "key": "│󰪫 Machine  │",
+      "key": "│󰪫  Machine  │",
       "keyColor": "green",
       "type": "host"
     },
     {
-      "key": "│󰍹 Display  │",
+      "key": "│󰍹  Display  │",
       "keyColor": "green",
       "type": "display"
     },
     {
-      "key": "│ Memory   │",
+      "key": "│  Memory   │",
       "keyColor": "green",
       "type": "memory"
     },
     {
-      "key": "│ Disk     │",
+      "key": "│  Disk     │",
       "keyColor": "green",
       "type": "disk"
     },
     {
-      "key": "│󰍛 GPU      │",
+      "key": "│󰍛  GPU      │",
       "keyColor": "green",
       "type": "gpu"
     },
     {
-      "key": "│󰻠 CPU      │",
+      "key": "│󰻠  CPU      │",
       "keyColor": "green",
       "type": "cpu"
     },
     {
       "type": "custom",
-      "format": "╰───────────╯",
+      "format": "╰────────────╯",
       "outputColor": "green",
     },
     "break",
@@ -68,47 +68,47 @@
     // System section
     {
       "type": "custom",
-      "format": "╭───────────╮",
-      "outputColor": "blue",
+      "format": "System",
+      "outputColor": "bright_white",
     },
     {
       "type": "custom",
-      "format": "System      │",
+      "format": "╭────────────╮",
       "outputColor": "blue",
     },
     {
-      "key": "│ OS       │",
+      "key": "│  OS       │",
       "keyColor": "blue",
       "type": "os"
     },
     {
-      "key": "│ Kernel   │",
+      "key": "│  Kernel   │",
       "keyColor": "blue",
       "type": "kernel"
     },
     {
-      "key": "│ Packages │",
+      "key": "│  Packages │",
       "keyColor": "blue",
       "type": "packages"
     },
     {
-      "key": "│ Shell    │",
+      "key": "│  Shell    │",
       "keyColor": "blue",
       "type": "shell"
     },
     {
-      "key": "│󱩛 Host     │",
+      "key": "│󱩛  Host     │",
       "keyColor": "blue",
       "type": "host"
     },
     {
-      "key": "│󰅐 Uptime   │",
+      "key": "│󰅐  Uptime   │",
       "keyColor": "blue",
       "type": "uptime"
     },
     {
       "type": "custom",
-      "format": "╰───────────╯",
+      "format": "╰────────────╯",
       "outputColor": "blue",
     },
     "break",
@@ -116,32 +116,32 @@
     // Display Section
     {
       "type": "custom",
-      "format": "╭───────────╮",
-      "outputColor": "magenta",
+      "format": "Display",
+      "outputColor": "bright_white",
     },
     {
       "type": "custom",
-      "format": "Display     │",
+      "format": "╭────────────╮",
       "outputColor": "magenta",
     },
     {
-      "key": "│ Font     │",
+      "key": "│  Font     │",
       "keyColor": "magenta",
       "type": "terminalfont"
     },
     {
-      "key": "│ WM       │",
+      "key": "│  WM       │",
       "keyColor": "magenta",
       "type": "wm"
     },
     {
-      "key": "│ Terminal │",
+      "key": "│  Terminal │",
       "keyColor": "magenta",
       "type": "terminal"
     },
     {
       "type": "custom",
-      "format": "╰───────────╯",
+      "format": "╰────────────╯",
       "outputColor": "magenta",
     },
     "break",
