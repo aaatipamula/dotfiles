@@ -6,7 +6,13 @@ set -e
 ### INSTANTIATE VARIABLES ###
 #############################
 
-XDG_CONFIG_HOME="$HOME/.config"
+# XDG Directories
+XDG_CONFIG_HOME=$HOME/.config
+XDG_CACHE_HOME=$HOME/.cache
+XDG_DATA_HOME=$HOME/.local/share
+XDG_PICTURES_DIR=$HOME/Pictures
+XDG_DOWNLOADS_DIR=$HOME/Downloads
+
 BACKUPS_DIR="$HOME/.backups"
 DOTFILES_DIR="$HOME/dotfiles"
 HOME_CONFIG_DIR="$DOTFILES_DIR/config"
@@ -91,9 +97,6 @@ then
   fi
 fi
 
-if ! [ -d "$BACKUPS_DIR" ]; then
-  mkdir -p $BACKUPS_DIR
-fi
 
 ########################
 ### HELPER FUNCTIONS ###
@@ -249,6 +252,27 @@ help_command()
     echo   "  - $app"
   done
   echo ""
+}
+
+# Create commonly used directories if not exists
+create_dirs()
+{
+  all_dirs=(
+    "$XDG_CONFIG_HOME"
+    "$XDG_CACHE_HOME"
+    "$XDG_DATA_HOME"
+    "$XDG_PICTURES_DIR"
+    "$XDG_PICTURES_DIR/screenshots"
+    "$XDG_DOWNLOADS_DIR"
+    "$BACKUPS_DIR"
+  )
+
+  for dir in ${all_dirs[@]}; do
+    if ! [ -d "$dir" ]; then
+      info "Creating directory $dir"
+      mkdir -p "$dir"
+    fi
+  done
 }
 
 #######################

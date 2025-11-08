@@ -18,6 +18,9 @@ fi
 echo "WARNING You may need root permissions to run some aspects of this program, procede with caution."
 sleep 1
 
+# Create commonly used directories if they don't already exist
+create_dirs
+
 # Parse user input
 if [ "$1" = "preset" ]; then
   case $2 in
