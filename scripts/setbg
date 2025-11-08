@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -i
 
 # Set background images folder
 BG_IMAGES_FOLDER="$HOME/Pictures/backgrounds"
@@ -18,11 +18,15 @@ imgpick()
   | fzf --preview 'fzf-preview.sh {}'
 }
 
-# Pick image
-img=$(imgpick "$BG_IMAGES_FOLDER")
+# Pick image if there is not one provided
+if [ -z "$1" ]; then
+  img=$(imgpick "$BG_IMAGES_FOLDER")
+else
+  img=$(realpath "$1")
+fi
 
 # Post img
-if [ -n "$img" ]; then
+if [ -n "$img" ] && [ -f "$img" ]; then
   ln -sf "$img" ~/.hyprbg
   hyprctl hyprpaper reload ,"$img"
 else
