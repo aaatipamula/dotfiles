@@ -58,6 +58,4 @@ Use:
 # TODO
 
 - [ ] Add Arch Linux post-install scripts
-- [ ] Update `ghostty` config with systemd setup ??
-- [ ] Swaync config ??
 
