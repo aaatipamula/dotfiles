@@ -51,6 +51,7 @@ CONFIG_PROGRAMS=(
   "dunst"
   "picom"
   "p10k"
+  "swaync"
 )
 
 ###############
@@ -555,6 +556,15 @@ setup_p10k()
   info "Setting up p10k"
 
   link_file $HOME_CONFIG_DIR/.p10k.zsh $HOME
+
+  return 0
+}
+
+setup_swaync()
+{
+  info "Setting up swaync"
+
+  link_directory $HOME_CONFIG_DIR/swaync $XDG_CONFIG_HOME
 
   return 0
 }
