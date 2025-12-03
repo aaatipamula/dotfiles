@@ -18,14 +18,16 @@
   showStash = true
   showUntrackedFiles = all
 
-[difftool "nvimdiff"]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-
 [diff]
   context = 3
   renames = copies
-  tool = nvimdiff
   innerHunkContext = 10
+  # tool = diff-so-fancy
+
+[pager]
+    branch = false  # no need to use pager for git branch
+    tag = false
+    diff = diff-so-fancy | less  # diff-so-fancy as diff pager
 
 [push]
   default = current
