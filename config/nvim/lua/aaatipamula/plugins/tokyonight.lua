@@ -8,7 +8,12 @@ return {
       style = "night",
       transparent = true,
       lualine_bold = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      }
     })
+
     vim.cmd[[colorscheme tokyonight-night]]
   end,
 }

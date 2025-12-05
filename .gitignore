@@ -6,5 +6,8 @@ config/tmux/plugins/*
 .netrwhst
 plug.vim
 
+# Nvim
+_*.lua
+
 # Hyprland
 monitors.conf
