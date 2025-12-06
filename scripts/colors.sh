@@ -6,9 +6,27 @@ echo -e "----------------\n"
 
 # Standard colors (0-7)
 for i in {0..7}; do
+  echo -en "$i  "
+done
+
+echo
+
+# Standard colors (0-7)
+for i in {0..7}; do
     echo -en "\e[48;5;${i}m  \e[0m "
 done
 echo -e "\n"
+
+# Standard colors (8-15)
+for i in {8..15}; do
+  if [ $i -gt 9 ]; then
+    echo -en "$i "
+  else
+    echo -en "$i  "
+  fi
+done
+
+echo
 
 # Bright colors (8-15)
 for i in {8..15}; do
