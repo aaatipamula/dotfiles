@@ -51,11 +51,9 @@ vim.keymap.set('n', '<leader>o', ':b')
 -- Quit current buffer
 vim.keymap.set('n', '<leader>x', ':bd<cr>')
 
-
 -- Next and previous buffers with
 vim.keymap.set('n', '<TAB>', ':bn!<cr>', { silent = true })
 vim.keymap.set('n', '<S-TAB>', ':bp!<cr>', { silent = true })
-
 
 -- Open horizontal terminal
 vim.keymap.set('n', '<leader>h', ':sp +te term<cr>i', { silent = true })
@@ -71,6 +69,16 @@ vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-w>j')
 vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k')
 vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h')
 vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l')
+
+-- Insert date where cursor is exactly
+vim.keymap.set("i", "<C-d>", function()
+  local cmd = "date"
+  local out = vim.fn.system(cmd):gsub("\n$", "")
+  vim.api.nvim_put({ out }, "c", true, true)
+end)
+
+-- Insert the date at the current line
+vim.keymap.set("n", "<leader>id", ":.r !date<cr>", { silent = true })
 
 -- Go to a buffer by index
 function BufferGoto(index)

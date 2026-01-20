@@ -72,7 +72,7 @@
       "title<.*facebook.*>": " ",
       "title<.*reddit.*>": " ",
 
-
+      "title<.*Claude.*>": "󰚩 ",
       "title<.*ChatGPT.*>": "󰚩 ",
       "title<.*deepseek.*>": "󰚩 ",
       "title<.*qwen.*>": "󰚩 ",
