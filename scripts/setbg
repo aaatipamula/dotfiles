@@ -3,21 +3,6 @@
 # Set background images folder
 BG_IMAGES_FOLDER="$HOME/Pictures/backgrounds"
 
-# Fzf image picker with a preview
-imgpick()
-{
-  local dir="${1:-\.}"
-  find "$dir" -type f \( \
-       -iname "*.jpg" -o \
-       -iname "*.jpeg" -o \
-       -iname "*.png" -o \
-       -iname "*.gif" -o \
-       -iname "*.webp" -o \
-       -iname "*.svg" \
-     \) \
-  | fzf --preview 'fzf-preview.sh {}'
-}
-
 # Pick image if there is not one provided
 if [ -z "$1" ]; then
   img=$(imgpick "$BG_IMAGES_FOLDER")

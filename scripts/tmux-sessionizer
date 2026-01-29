@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SEARCH_DIRECTORIES=(
+  "$HOME/projects/"
+  "$HOME/eecs/"
+  "$HOME/dotfiles/config/"
+)
+
+PICKER=fzf
+# PICKER=wofi
+
+check_tmux()
+{
+  if command -v tmux >/dev/null 2>&1;then
+    return 0
+  else
+    return 1
+  fi
+}
+
+collect_directories()
+{
+  for dir in ${SEARCH_DIRECTORIES[@]}; do
+  done
+}

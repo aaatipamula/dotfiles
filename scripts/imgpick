@@ -1,0 +1,19 @@
+#!/bin/bash -i
+
+# Fzf image picker with a preview
+if [[ -z "$1" ]]; then
+  dir="."
+else
+  dir="${1:-\.}"
+fi
+
+find "$dir" -type f \( \
+     -iname "*.jpg" -o \
+     -iname "*.jpeg" -o \
+     -iname "*.png" -o \
+     -iname "*.gif" -o \
+     -iname "*.webp" -o \
+     -iname "*.svg" \
+   \) \
+| fzf --preview 'fzf-preview.sh {}'
+
