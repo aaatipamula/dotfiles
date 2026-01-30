@@ -1,7 +1,7 @@
 name: Test-Scripts
-
 on: push
-
+env:
+  TERM: xterm
 jobs:
   test-install-functions:
     name: test install functions

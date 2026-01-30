@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if [[ ! -d $dotfiles ]]
 then
   echo "No dotfiles present"
