@@ -13,7 +13,8 @@ fi
 # Post img
 if [ -n "$img" ] && [ -f "$img" ]; then
   ln -sf "$img" ~/.hyprbg
-  hyprctl hyprpaper reload ,"$img"
+  # hyprctl hyprpaper reload ,"$img"
+  hyprctl hyprpaper wallpaper ,"$img"
 else
   echo "No image selected"
 fi
