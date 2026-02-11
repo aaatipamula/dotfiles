@@ -269,7 +269,7 @@ create_dirs()
   )
 
   for dir in ${all_dirs[@]}; do
-    if ! [ -d "$dir" ]; then
+    if [[ ! -d "$dir" ]]; then
       info "Creating directory $dir"
       mkdir -p "$dir"
     fi

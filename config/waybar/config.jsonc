@@ -1,8 +1,10 @@
 // -*- mode: jsonc -*-
 {
   "spacing": 4,
+  "layer": "top",
   "modules-left": [
     "hyprland/workspaces",
+    "niri/workspaces",
     "tray",
   ],
   "modules-center": [
@@ -22,11 +24,8 @@
     "show-passive-items": true,
     "spacing": 10
   },
-  "hyprland/window": {
-    "format": "{class}",
-    "tooltip": true,
-    "tooltip-format": "{title}",
-    "separate-outputs": true
+  "niri/workspaces": {
+    "format": "{value}",
   },
   "hyprland/workspaces": {
     "disable-scroll": true,

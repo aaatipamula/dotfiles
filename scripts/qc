@@ -8,9 +8,10 @@ flags="-Wall -Wextra"
 run=false
 
 # Process flags
-while [[ $# -gt 0 ]]; do
+while [[ "$#" -gt 0 ]]; do
   case "$1" in
     -r|--run)
+      echo "Set run true"
       run=true
       shift
       ;;
@@ -51,7 +52,8 @@ fi
 $compiler $input $flags -o $target
 
 # Run target if asked
-if [[ run ]]; then
+if [[ "$run" = true ]]; then
+  echo "Running..."
   ./$target
 fi
 

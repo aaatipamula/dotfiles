@@ -31,6 +31,12 @@ elif [[ "$remote_url" =~ ^https?://github\.com/(.+)$ ]]; then
     # Remove .git suffix if present
     repo_path="${repo_path%.git}"
     github_url="https://github.com/${repo_path}"
+# Handle personal urls
+elif [[ "$remote_url" =~ ^aaa:(.+)$ ]]; then
+    repo_path="${BASH_REMATCH[1]}"
+    # Remove .git suffix if present
+    repo_path="${repo_path%.git}"
+    github_url="https://github.com/aaatipamula/${repo_path}"
 else
     echo "Remote URL is not a GitHub repository: $remote_url"
     exit 0
