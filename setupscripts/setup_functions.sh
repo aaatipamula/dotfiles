@@ -14,6 +14,7 @@ XDG_PICTURES_DIR=$HOME/Pictures
 XDG_DOWNLOADS_DIR=$HOME/Downloads
 
 BACKUPS_DIR="$HOME/.backups"
+LOCAL_BIN_DIR="$HOME/.local/bin"
 DOTFILES_DIR="$HOME/dotfiles"
 HOME_CONFIG_DIR="$DOTFILES_DIR/config"
 
@@ -256,8 +257,13 @@ help_command()
 }
 
 # Create commonly used directories if not exists
-create_dirs()
+setup_shell()
 {
+  if [[ -f "$HOME/.touched" ]]; then
+    info "Shell has already been setup"
+    return 0
+  fi
+
   all_dirs=(
     "$XDG_CONFIG_HOME"
     "$XDG_CACHE_HOME"
@@ -266,6 +272,7 @@ create_dirs()
     "$XDG_PICTURES_DIR/screenshots"
     "$XDG_DOWNLOADS_DIR"
     "$BACKUPS_DIR"
+    "$LOCAL_BIN_DIR"
   )
 
   for dir in ${all_dirs[@]}; do
@@ -274,6 +281,13 @@ create_dirs()
       mkdir -p "$dir"
     fi
   done
+
+  link_file "$HOME_CONFIG_DIR/.backup_exclude" "$HOME"
+
+  # Indicate that we have already set up our shell environment
+  touch "$HOME/.touched"
+
+  return 0
 }
 
 #######################
@@ -300,15 +314,6 @@ setup_zsh()
 {
   info "Setting up zsh."
 
-  # Create directories I use often
-  for dir in "$HOME/.local/bin" "$HOME/.backups" "$HOME/.config"; do
-    if ! [ -d $dir ]; then
-      mkdir -p $dir
-    else
-      warn "$dir already exists!"
-    fi
-  done
-
   # Link Bash config file
   link_file $HOME_CONFIG_DIR/.zshrc $HOME
 
@@ -325,15 +330,6 @@ setup_zsh()
 setup_bash()
 {
   info "Setting up bash."
-
-  # Create directories I use often
-  for dir in "$HOME/.local/bin" "$HOME/.backups" "$HOME/.config"; do
-    if ! [ -d $dir ]; then
-      mkdir -p $dir
-    else
-      warn "$dir already exists!"
-    fi
-  done
 
   # Link Bash config file
   link_file $HOME_CONFIG_DIR/.bashrc $HOME
