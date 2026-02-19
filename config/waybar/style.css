@@ -61,6 +61,7 @@ tooltip {
 }
 
 /* #clock, */
+#wireplumber,
 #pulseaudio,
 #battery,
 #cpu,
@@ -81,6 +82,7 @@ tooltip {
   background-color: alpha(@bg_dark1, 0.8);
 }
 
+#wireplumber,
 #pulseaudio {
   color: @yellow;
   /* background-color: alpha(@yellow, 0.2); */

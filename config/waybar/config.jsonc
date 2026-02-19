@@ -4,14 +4,15 @@
   "layer": "top",
   "modules-left": [
     "hyprland/workspaces",
-    "niri/workspaces",
+    // "niri/workspaces",
     "tray",
   ],
   "modules-center": [
     "clock",
   ],
   "modules-right": [
-    "pulseaudio",
+    "wireplumber",
+    // "pulseaudio",
     "backlight",
     "network",
     "cpu",
@@ -172,6 +173,24 @@
     "format-disconnected": "Disconnected ⚠ ",
     "tooltip-format": "{ifname} via {gwaddr}\nEthernet: {ipaddr}/{cidr} \nWiFi: {essid} ({signalStrength}%) ",
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "wireplumber": {
+    "format": "{volume}% {icon} {format_source} ",
+    "format-bluetooth": "{volume}% {icon} {format_source} ",
+    "format-bluetooth-muted": " {icon} {format_source} ",
+    "format-muted": "  {format_source} ",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    // "on-click": "helvum"
   },
   "pulseaudio": {
     "format": "{volume}% {icon} {format_source} ",
