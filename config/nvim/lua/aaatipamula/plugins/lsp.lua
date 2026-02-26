@@ -85,14 +85,27 @@ return {
     -- Set up mason for LSP servers (linters, checkers)
     require('mason').setup({})
     require('mason-lspconfig').setup({
-      ensure_installed = {'eslint', 'pyright', 'gopls'},
-      automatic_installation = true,
-      handlers = {
-        function(server_name)
-          local server_config = (server_name == 'clangd' and {cmd = { "clangd", '--compile-commands-dir=.' }} or {})
-          require('lspconfig')[server_name].setup(server_config)
-        end,
-      }
+      ensure_installed = { 'eslint', 'pyright', 'arduino_language_server', 'clangd' },
+      automatic_enable = true,
+    })
+
+    vim.lsp.config('arduino_language_server', {
+      cmd = {
+        "arduino-language-server",
+        "-clangd", vim.fn.exepath("clangd"),
+        "-cli", vim.fn.exepath("arduino-cli"),
+        "-cli-config", vim.fn.expand("~/.arduino15/arduino-cli.yaml"),
+        "-fqbn", "esp32:esp32:esp32"
+      },
+    })
+
+    vim.lsp.config('clangd', {
+      cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+        "--completion-style=detailed",
+      },
     })
 
     -- Setup code completion
