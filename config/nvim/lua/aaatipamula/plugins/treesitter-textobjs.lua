@@ -18,6 +18,8 @@ return {
             ["ac"] = "@class.outer",
             ["ia"] = "@parameter.inner",
             ["aa"] = "@parameter.outer",
+            ["aC"] = "@comment.outer",
+            ["iC"] = "@comment.outer",
             -- You can optionally set descriptions to the mappings (used in the desc parameter of
             -- nvim_buf_set_keymap) which plugins like which-key display
             -- You can also use captures from other query groups like `locals.scm`

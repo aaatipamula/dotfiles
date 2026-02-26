@@ -37,9 +37,10 @@ vim.keymap.set('v', '<leader>y', '\"+y')
 -- Format markdown tables with column
 vim.keymap.set('v', '<leader>tf', ':! tr -s " " | column -t -s \'|\' -o \'|\'<cr>', { silent = true })
 
--- Greatest remap ever 
+-- Paste without copying to register
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
+-- Delete without copying to register
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 -- Edit new buffer from current buffer path
