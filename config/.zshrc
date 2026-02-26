@@ -16,6 +16,9 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Use history AND completions as suggestion source
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
@@ -83,6 +86,7 @@ alias gs="git status"   # Quick status
 # alias gl="git log"    # Quick log
 alias tmn="tmux new -s" # tmux new session
 alias tma="tmux a -t"   # tmux attach to session
+alias httpserv="nohup python3 -m http.server 2>&1 > http.log"
 
 # History
 HISTSIZE=5000

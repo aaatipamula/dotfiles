@@ -24,6 +24,8 @@ return {
     vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
     vim.keymap.set('n', '<leader>cs', builtin.colorscheme, {})
     vim.keymap.set('n', '<leader>tr', builtin.treesitter, {})
+    vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols, {})
+    vim.keymap.set('n', '<leader>ws', builtin.lsp_workspace_symbols, {})
     vim.keymap.set('n', '<leader>jl', builtin.jumplist, {})
 
     -- Spell Suggest
