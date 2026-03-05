@@ -1,0 +1,111 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+[directory]
+style = 'bold fg:blue'
+format = '[$path ]($style)'
+truncation_length = 3
+truncation_symbol = '…/'
+truncate_to_repo = false
+
+[directory.substitutions]
+'Documents' = '󰈙'
+'Downloads' = ' '
+'Music' = ' '
+'Pictures' = ' '
+
+[git_branch]
+style = 'fg:green'
+symbol = ' '
+format = '[on](white) [$symbol$branch ]($style)'
+
+# ── Git Status ──────────────────────────────────────────────────
+# Shows icons for each state; counts are colored individually.
+[git_status]
+format = '([\[](bold white)[$ahead_behind]($style)[$all_status](white)[\]](bold white) )'
+
+# ahead / behind use the $count variable injected by git_metrics instead;
+# here we keep symbols only (counts come from git_metrics below)
+ahead  = "[⇡$count](bold green)"
+behind = "[⇣$count](bold red)"
+diverged = "[⇡$ahead_count](bold green)[⇣$behind_count](bold red)"
+
+# Staged  ── green
+staged = "[+$count](bold green)"
+
+# Modified ── yellow
+modified = "[!$count](bold blue)"
+
+# Untracked ── cyan
+untracked = "[?$count](bold yellow)"
+
+# Renamed  ── blue
+renamed = "[»$count](bold cyan)"
+
+# Deleted  ── red
+deleted = "[✘$count](bold red)"
+
+# Stashed  ── magenta
+stashed = "[󰏗 $count](bold magenta)"
+
+# Conflicted ── bright red
+conflicted = "[=$count](bold bright-red)"
+
+[fill]
+symbol = ' '
+
+[python]
+style = 'blue'
+symbol = ' '
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+pyenv_version_name = true
+pyenv_prefix = ''
+
+[lua]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[nodejs]
+style = 'blue'
+symbol = ' '
+
+[golang]
+style = 'blue'
+symbol = ' '
+
+[haskell]
+style = 'purple'
+symbol = ' '
+
+[rust]
+style = 'orange'
+symbol = ' '
+
+[package]
+symbol = '󰏗 '
+
+[docker_context]
+symbol = ' '
+style = 'fg:#06969A'
+format = '[$symbol]($style) $path'
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+detect_extensions = ['Dockerfile']
+
+[jobs]
+symbol = ' '
+style = 'red'
+number_threshold = 1
+format = '[$symbol]($style)'
+
+[cmd_duration]
+min_time = 500
+style = 'fg:gray'
+format = '[$duration]($style)'
+
+# ── Prompt Character ────────────────────────────────────────────
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol   = "[❯](bold red)"
+vimcmd_symbol  = "[❮](bold yellow)"

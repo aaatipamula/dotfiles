@@ -53,6 +53,8 @@ CONFIG_PROGRAMS=(
   "picom"
   "p10k"
   "swaync"
+  "niri"
+  "starship"
 )
 
 ###############
@@ -561,6 +563,24 @@ setup_swaync()
   info "Setting up swaync"
 
   link_directory $HOME_CONFIG_DIR/swaync $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_niri()
+{
+  info "Setting up niri"
+
+  link_directory $HOME_CONFIG_DIR/niri $XDG_CONFIG_HOME
+
+  return 0
+}
+
+setup_starship()
+{
+  info "Setting up starship"
+
+  link_file $HOME_CONFIG_DIR/starship.toml $XDG_CONFIG_HOME
 
   return 0
 }

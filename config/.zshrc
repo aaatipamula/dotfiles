@@ -10,12 +10,6 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 # Source zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Load in powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # Use history AND completions as suggestion source
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
@@ -24,6 +18,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab # Use fzf for tab completions
+zinit light jeffreytse/zsh-vi-mode
 
 FZF_COLOR_OPTS="--color=fg:white,fg+:white,hl:cyan,bg+:black,hl+:yellow,pointer:red,marker:green,info:white,separator:bright-black"
 
