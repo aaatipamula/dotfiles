@@ -95,7 +95,7 @@ return {
         "-clangd", vim.fn.exepath("clangd"),
         "-cli", vim.fn.exepath("arduino-cli"),
         "-cli-config", vim.fn.expand("~/.arduino15/arduino-cli.yaml"),
-        "-fqbn", "esp32:esp32:esp32"
+        "-fqbn", os.getenv("ARDUINO_FQBN") or "esp32:esp32:esp32"
       },
     })
 
