@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check for config env variable
+if [[ -z "$XDG_CONFIG_HOME" ]]; then
+  echo "WARNING: XDG_CONFIG_HOME is not set in environment!" >& 2
+  exit 1
+fi
+
 # Null check
 if [[ -z "$1" ]]; then
   echo "No directory passed to config" >& 2
@@ -12,7 +18,7 @@ if [[ "$1" = "mv" ]]; then
   path="$XDG_CONFIG_HOME/$1"
 
   # Directory check
-  if [[ ! -d "$path" ]]; then
+  if [[ ! -f "$path" ]]; then
     echo "$path does not exist!"
     exit 1
   fi

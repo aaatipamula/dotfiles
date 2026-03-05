@@ -1,3 +1,15 @@
+#!/bin/bash
+
+# Load setup functions
+if [ -f "./setupscripts/setup_functions.sh" ]; then
+  . ./setupscripts/setup_functions.sh
+elif [ "$0" != "./setupscripts/setup" ]; then
+  error "Please navigate to the root dotfiles directory and run ./setupscripts/setup"
+  exit 1
+fi
+
+# Update README.md
+cat << EOF > README.md
 # Dotfiles
 
 [![test-scripts](https://github.com/aaatipamula/dotfiles/actions/workflows/test.yml/badge.svg)](https://github.com/aaatipamula/dotfiles/actions/workflows/test.yml)
@@ -21,37 +33,6 @@ cd ~/dotfiles && ./setupscripts/setup
 The following options are availabile for `setup`:
 
 ```
-Use:
-  setup preset [PRESETS] [PACKAGE_MANAGER]
-  setup [FUNCTION]
-  setup help -- This message
-
-[PACKAGE_MANAGER]
-  - brew
-  - apt
-  - dnf
-
-[PRESETS]
-  - main:  Configures all programs, installs all common applications.
-  - progs: Configures all programs.
-  - bare:  Configure just bash, git, basic vim.
-
-[FUNCTION]
-  - apps [PACKAGE_MANAGER]
-  - zsh
-  - bash
-  - git
-  - vim
-  - nvim
-  - tmux
-  - hypr
-  - waybar
-  - kitty
-  - wezterm
-  - wofi
-  - electron
-  - ghostty
-  - fastfetch
-  - wsl
+$(help_command nocolor)
 ```
-
+EOF

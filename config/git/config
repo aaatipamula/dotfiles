@@ -8,6 +8,7 @@
   compression  = 9
   whitespace = error
   preloadindex = true
+  hooksPath = .githooks # Hooks should exist in .githooks
 
 # Subcommand settings
 [init]
