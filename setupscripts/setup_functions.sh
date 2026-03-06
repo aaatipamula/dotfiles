@@ -233,29 +233,55 @@ install_vim_plug()
 # Display help command for users
 help_command()
 {
-  echo "${bold}${yellow}Script to help setup Linux machines.${norm}"
+  if [[ "$1" = "nocolor" ]]; then
+    printf "Script to help setup Linux machines.\n"
 
-  echo   "Use:"
-  echo   "  setup preset [${red}PRESETS${norm}] [${red}PACKAGE_MANAGER${norm}]"
-  echo   "  setup [${red}FUNCTION${norm}]"
-  printf "  setup help -- This message\n\n"
+    echo   "Use:"
+    echo   "  setup preset [PRESETS] [PACKAGE_MANAGER]"
+    echo   "  setup [FUNCTION]"
+    printf "  setup help -- This message\n\n"
 
-  echo   "[${red}PACKAGE_MANAGER${norm}]"
-  echo   "  - brew"
-  echo   "  - apt"
-  printf "  - dnf\n\n"
+    echo   "[PACKAGE_MANAGER]"
+    echo   "  - brew"
+    echo   "  - apt"
+    printf "  - dnf\n\n"
 
-  echo   "[${red}PRESETS${norm}]"
-  echo   "  - main:  Configures all programs, installs all common applications."
-  echo   "  - progs: Configures all programs."
-  printf "  - bare:  Configure just bash, git, basic vim.\n\n"
+    echo   "[PRESETS]"
+    echo   "  - main:  Configures all programs, installs all common applications."
+    echo   "  - progs: Configures all programs."
+    printf "  - bare:  Configure just bash, git, basic vim.\n\n"
 
-  echo   "[${red}FUNCTION${norm}]"
-  echo   "  - apps [${red}PACKAGE_MANAGER${norm}]"
-  for app in ${CONFIG_PROGRAMS[@]}; do
-    echo   "  - $app"
-  done
-  echo ""
+    echo   "[FUNCTION]"
+    echo   "  - apps [PACKAGE_MANAGER]"
+    for app in ${CONFIG_PROGRAMS[@]}; do
+      echo   "  - $app"
+    done
+    echo ""
+  else 
+    printf "${bold}${yellow}Script to help setup Linux machines.\n${norm}"
+
+    echo   "Use:"
+    echo   "  setup preset [${red}PRESETS${norm}] [${red}PACKAGE_MANAGER${norm}]"
+    echo   "  setup [${red}FUNCTION${norm}]"
+    printf "  setup help -- This message\n\n"
+
+    echo   "[${red}PACKAGE_MANAGER${norm}]"
+    echo   "  - brew"
+    echo   "  - apt"
+    printf "  - dnf\n\n"
+
+    echo   "[${red}PRESETS${norm}]"
+    echo   "  - main:  Configures all programs, installs all common applications."
+    echo   "  - progs: Configures all programs."
+    printf "  - bare:  Configure just bash, git, basic vim.\n\n"
+
+    echo   "[${red}FUNCTION${norm}]"
+    echo   "  - apps [${red}PACKAGE_MANAGER${norm}]"
+    for app in ${CONFIG_PROGRAMS[@]}; do
+      echo   "  - $app"
+    done
+    echo ""
+  fi
 }
 
 # Create commonly used directories if not exists
