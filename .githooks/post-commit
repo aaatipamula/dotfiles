@@ -42,9 +42,6 @@ $(help_command nocolor)
 \`\`\`
 EOF
 
-cat "$TEMP"
-exit 1
-
 # Only update and re-stage if content changed
 if ! diff -q "$README" "$TEMP" > /dev/null 2>&1; then
   mv "$TEMP" "README.md"
