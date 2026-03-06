@@ -14,7 +14,7 @@ fi
 # Write README to temp first
 TEMP=$(mktemp)
 
-cat << 'EOF' > "$TEMP"
+cat << EOF > "$TEMP"
 # Dotfiles
 
 [![test-scripts](https://github.com/aaatipamula/dotfiles/actions/workflows/test.yml/badge.svg)](https://github.com/aaatipamula/dotfiles/actions/workflows/test.yml)
@@ -41,6 +41,9 @@ The following options are availabile for \`setup\`:
 $(help_command nocolor)
 \`\`\`
 EOF
+
+cat "$TEMP"
+exit 1
 
 # Only update and re-stage if content changed
 if ! diff -q "$README" "$TEMP" > /dev/null 2>&1; then
