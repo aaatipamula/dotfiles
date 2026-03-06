@@ -13,13 +13,55 @@ This repo hosts my [dotfiles](https://missing.csail.mit.edu/2019/dotfiles/) for 
 
 Run the two following commands to get started.
 
-\`\`\`bash
+```bash
 git clone https://github.com/aaatipamula/dotfiles.git ~
 cd ~/dotfiles && ./setupscripts/setup
-\`\`\`
+```
 
-The following options are availabile for \`setup\`:
+The following options are availabile for `setup`:
 
-\`\`\`
-$(help_command nocolor)
-\`\`\`
+```
+Script to help setup Linux machines.
+Use:
+  setup preset [PRESETS] [PACKAGE_MANAGER]
+  setup [FUNCTION]
+  setup help -- This message
+
+[PACKAGE_MANAGER]
+  - brew
+  - apt
+  - dnf
+
+[PRESETS]
+  - main:  Configures all programs, installs all common applications.
+  - progs: Configures all programs.
+  - bare:  Configure just bash, git, basic vim.
+
+[FUNCTION]
+  - apps [PACKAGE_MANAGER]
+  - zsh
+  - bash
+  - git
+  - vim
+  - nvim
+  - tmux
+  - hypr
+  - waybar
+  - kitty
+  - wezterm
+  - wofi
+  - electron
+  - ghostty
+  - fastfetch
+  - wsl
+  - bat
+  - i3
+  - polybar
+  - env
+  - dunst
+  - picom
+  - p10k
+  - swaync
+  - niri
+  - starship
+```
