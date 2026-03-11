@@ -1,0 +1,8 @@
+# vim: set filetype=gitignore
+
+*.log      # log files
+*.bak      # backup files
+go         # go directory
+Downloads
+Arduino
+node_modules
