@@ -17,6 +17,8 @@ BACKUPS_DIR="$HOME/.backups"
 LOCAL_BIN_DIR="$HOME/.local/bin"
 DOTFILES_DIR="$HOME/dotfiles"
 HOME_CONFIG_DIR="$DOTFILES_DIR/config"
+HOME_MACHINE_DIR="$DOTFILES_DIR/machines"
+HOME_SHELL_SETUP="$HOME/.touched"
 
 DEV_PROGRAMS=(
   "tmux"
@@ -80,7 +82,7 @@ warn()
 
 error()
 {
-  echo "[${red}ERROR${norm}]: $1"
+  echo "[${red}ERROR${norm}]: $1" >&2
 }
 
 #########################
@@ -159,7 +161,7 @@ link_file()
   file_name=$(basename $1)
   file_path="$2/$file_name"
 
-  if [ -f "$file_path" ]; then
+  if [[ -f "$file_path" && ! -L "$file_path" ]]; then
     warn "File ($file_path) already exists!"
     info "Creating a backup in $BACKUPS_DIR/$file_name and removing old."
 
@@ -184,7 +186,7 @@ link_directory()
     directory_path=$2
   fi
 
-  if [ -d "$directory_path" ]; then
+  if [[ -d "$directory_path" && ! -L "$directory_path" ]]; then
     warn "Directory ($directory_path) already exists!"
     info "Creating a backup in $BACKUPS_DIR/$directory_name and removing old."
 
@@ -284,10 +286,31 @@ help_command()
   fi
 }
 
+# Check for hostname and mark shell as set up
+setup_machine()
+{
+  if [[ -z "$HOSTNAME" ]]; then
+    error "No host set! Please set a host!"
+    exit 1
+  fi
+
+  machine_dir="$HOME_MACHINE_DIR/$HOSTNAME"
+
+  if [[ -d "$machine_dir" ]]; then
+    info "Found configs for $HOSTNAME"
+  else
+    info "No config found for $HOSTNAME"
+    info "Making config at $machine_dir"
+    mkdir "$HOME_MACHINE_DIR/$HOSTNAME" 
+  fi
+
+  echo "$HOSTNAME" > "$HOME_SHELL_SETUP"
+}
+
 # Create commonly used directories if not exists
 setup_shell()
 {
-  if [[ -f "$HOME/.touched" ]]; then
+  if [[ -f "$HOME_SHELL_SETUP" ]]; then
     info "Shell has already been setup"
     return 0
   fi
@@ -312,8 +335,7 @@ setup_shell()
 
   link_file "$HOME_CONFIG_DIR/.backup_exclude" "$HOME"
 
-  # Indicate that we have already set up our shell environment
-  touch "$HOME/.touched"
+  setup_machine
 
   return 0
 }
@@ -343,12 +365,16 @@ setup_zsh()
   info "Setting up zsh."
 
   # Link Bash config file
-  link_file $HOME_CONFIG_DIR/.zshrc $HOME
+  link_file "$HOME_CONFIG_DIR/.zshrc" "$HOME"
 
-  # Create a bash_aliases if not exists
-  if ! [ -f "$HOME/.zsh_aliases" ]; then
-    touch $HOME/.zsh_aliases
+  zsh_aliases="$HOME_MACHINE_DIR/$HOSTNAME/.zsh_aliases" 
+
+  # Create a zsh_aliases if not exists
+  if [[ ! -f "$zsh_aliases" ]]; then
+    touch "$zsh_aliases"
   fi
+
+  link_file "$zsh_aliases" "$HOME"
 
   info "Source bash zsh with: ${bold}source ~/.zshrc${norm}"
 
@@ -360,12 +386,16 @@ setup_bash()
   info "Setting up bash."
 
   # Link Bash config file
-  link_file $HOME_CONFIG_DIR/.bashrc $HOME
+  link_file "$HOME_CONFIG_DIR/.bashrc" "$HOME"
  
+  bash_aliases="$HOME_MACHINE_DIR/$HOSTNAME/.bash_aliases" 
+
   # Create a bash_aliases if not exists
-  if ! [ -f "$HOME/.bash_aliases" ]; then 
-    touch $HOME/.bash_aliases
+  if [[ ! -f "$bash_aliases" ]]; then
+    touch "$bash_aliases"
   fi
+
+  link_file "$bash_aliases" "$HOME"
 
   info "Source bash config with: ${bold}source ~/.bashrc${norm}"
 

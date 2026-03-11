@@ -1,0 +1,44 @@
+# Lazy load nvm
+export NVM_DIR="$HOME/.nvm"
+
+zinit ice wait"1" lucid \
+  trigger-load"node;npm;npx;nvm" \
+  atload"source $NVM_DIR/nvm.sh"
+zinit light nvm-sh/nvm
+
+# Load zoxide (better cd)
+eval "$(zoxide init zsh)"
+alias cd=z
+
+# Load starship (prompt)
+eval "$(starship init zsh)"
+
+# Make neovim my default editor
+export VISUAL=nvim
+export EDITOR=nvim
+alias vim=nvim
+
+# Find files
+alias ff='find /home/aaatipamula -type f | grep '
+
+# Hyprland and suspend
+alias hypr=hyprland
+alias sus='systemctl suspend'
+
+# Better defaults for tree
+alias tree='tree --gitignore'
+
+# Python venv shortcuts
+alias venvl='source .venv/bin/activate'
+alias venvs='python3 -m venv .venv'
+
+# Status of laptop
+asus-status() {
+	echo "$(tput setaf 9)Current CPU Power Profile$(tput sgr0): $(asusctl profile get)"
+	echo "$(tput setaf 9)Avaliable CPU Power Profiles$(tput sgr0): [$(asusctl profile list | tr '\n' ' ')]"
+	printf "$(tput setaf 9)Set CPU With$(tput sgr0): asusctl profile set <profile>\n\n"
+	echo "$(tput setaf 9)Current GPU Status$(tput sgr0): $(supergfxctl -S)"
+	echo "$(tput setaf 9)Current GPU Power Profile$(tput sgr0): $(supergfxctl -g)"
+	echo "$(tput setaf 9)Avaliable GPU Power Profiles$(tput sgr0): [Integrated, Hybrid, AsusMuxDgpu]"
+	echo "$(tput setaf 9)Set GPU With$(tput sgr0): supergfxctl -m <profile>"
+}
