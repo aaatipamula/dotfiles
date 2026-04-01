@@ -1,25 +1,125 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-SEARCH_DIRECTORIES=(
-  "$HOME/projects/"
-  "$HOME/eecs/"
-  "$HOME/dotfiles/config/"
-)
+# tmux-sessionizer — spin up a named tmux sesson from a config file or CLI flags
+# Usage:
+#   tmux-sessionizer                    # reads .tmux-sessionizer.yaml in CWD
+#   tmux-sessionizer -n myapp -w "editor:nvim" -w "server:npm run dev" -w "shell"
+#   tmux-sessionizer --file path/to/config.yaml
+#   tmux-sessionizer --kill             # kill the session for this project
+#   tmux-sessionizer --list             # list all tmux-sessionizer sessions
 
-PICKER=fzf
-# PICKER=wofi
+set -euo pipefail
 
-check_tmux()
-{
-  if command -v tmux >/dev/null 2>&1;then
-    return 0
+# ── helpers ──────────────────────────────────────────────────────────────────
+die()  { echo "error: $*" >&2; exit 1; }
+info() { echo "  → $*"; }
+
+# ── defaults ─────────────────────────────────────────────────────────────────
+CONFIG_FILE=".tmux-sessionizer.yaml"
+SESSION_NAME=""
+declare -a WINDOWS=()
+KILL_SESSION=false
+LIST_SESSIONS=false
+ROOT_DIR="$(pwd)"
+
+# ── arg parsing ───────────────────────────────────────────────────────────────
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -n|--name)    SESSION_NAME="$2"; shift 2 ;;
+    -w|--window)  WINDOWS+=("$2");   shift 2 ;;
+    -f|--file)    CONFIG_FILE="$2";  shift 2 ;;
+    --kill)       KILL_SESSION=true; shift ;;
+    --list)       LIST_SESSIONS=true; shift ;;
+    -h|--help)
+      sed -n '/^# tmux-sessionizer/,/^set -euo/{ /^set -euo/d; s/^# \{0,1\}//; p }' "$0"
+      exit 0 ;;
+    *) die "unknown option: $1" ;;
+  esac
+done
+
+# ── list mode ─────────────────────────────────────────────────────────────────
+if $LIST_SESSIONS; then
+  echo "Active tmux-sessionizer sessions:"
+  tmux list-sessions -F "  #{session_name}" 2>/dev/null || echo "  (none)"
+  exit 0
+fi
+
+# ── parse yaml config (pure bash, no deps) ───────────────────────────────────
+parse_config() {
+  local file="$1"
+  [[ -f "$file" ]] || die "config file not found: $file"
+
+  local in_windows=false name cmd
+
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    # strip comments
+    line="${line%%#*}"
+    [[ -z "${line// }" ]] && continue
+
+    if [[ "$line" =~ ^name:[[:space:]]*(.+)$ ]]; then
+      [[ -z "$SESSION_NAME" ]] && SESSION_NAME="${BASH_REMATCH[1]}"
+
+    elif [[ "$line" =~ ^root:[[:space:]]*(.+)$ ]]; then
+      ROOT_DIR="${BASH_REMATCH[1]/#\~/$HOME}"
+
+    elif [[ "$line" =~ ^windows: ]]; then
+      in_windows=true
+
+    elif $in_windows && [[ "$line" =~ ^[[:space:]]*-[[:space:]]*name:[[:space:]]*(.+)$ ]]; then
+      name="${BASH_REMATCH[1]}"
+      cmd=""
+
+    elif $in_windows && [[ "$line" =~ ^[[:space:]]*cmd:[[:space:]]*(.+)$ ]]; then
+      cmd="${BASH_REMATCH[1]}"
+      WINDOWS+=("${name}:${cmd}")
+      name=""; cmd=""
+
+    elif $in_windows && [[ "$line" =~ ^[[:space:]]*-[[:space:]]*([^:]+):[[:space:]]*(.*)$ ]]; then
+      # shorthand  - editor: nvim
+      WINDOWS+=("${BASH_REMATCH[1]}:${BASH_REMATCH[2]}")
+    fi
+  done < "$file"
+}
+
+# load config file if no CLI windows were given
+if [[ ${#WINDOWS[@]} -eq 0 ]]; then
+  parse_config "$CONFIG_FILE"
+fi
+
+# ── derive session name from directory if still unset ────────────────────────
+[[ -z "$SESSION_NAME" ]] && SESSION_NAME="$(basename "$ROOT_DIR")"
+
+# ── kill mode ─────────────────────────────────────────────────────────────────
+if $KILL_SESSION; then
+  tmux kill-session -t "$SESSION_NAME" 2>/dev/null && info "killed session: $SESSION_NAME" || info "no session named: $SESSION_NAME"
+  exit 0
+fi
+
+# ── guard: session already exists ─────────────────────────────────────────────
+if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+  info "session '$SESSION_NAME' already exists — attaching"
+  exec tmux attach-session -t "$SESSION_NAME"
+fi
+
+# ── create session ────────────────────────────────────────────────────────────
+echo "Starting tmux session: $SESSION_NAME"
+
+first=true
+for entry in "${WINDOWS[@]}"; do
+  win_name="${entry%%:*}"
+  win_cmd="${entry#*:}"
+
+  if $first; then
+    tmux new-session -d -s "$SESSION_NAME" -n "$win_name" -c "$ROOT_DIR"
+    [[ -n "$win_cmd" ]] && tmux send-keys -t "$SESSION_NAME:$win_name" "$win_cmd" Enter
+    first=false
   else
-    return 1
+    tmux new-window -t "$SESSION_NAME" -n "$win_name" -c "$ROOT_DIR"
+    [[ -n "$win_cmd" ]] && tmux send-keys -t "$SESSION_NAME:$win_name" "$win_cmd" Enter
   fi
-}
+  info "window: $win_name${win_cmd:+ → $win_cmd}"
+done
 
-collect_directories()
-{
-  for dir in ${SEARCH_DIRECTORIES[@]}; do
-  done
-}
+# select first window before attaching
+tmux select-window -t "$SESSION_NAME:1"
+exec tmux attach-session -t "$SESSION_NAME"
