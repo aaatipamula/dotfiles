@@ -72,7 +72,7 @@ vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h')
 vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l')
 
 -- Insert date where cursor is exactly
-vim.keymap.set("i", "<C-d>", function()
+vim.keymap.set("i", "<A-d>", function()
   local cmd = "date"
   local out = vim.fn.system(cmd):gsub("\n$", "")
   vim.api.nvim_put({ out }, "c", true, true)

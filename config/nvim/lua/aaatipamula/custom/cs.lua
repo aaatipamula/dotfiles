@@ -8,7 +8,4 @@ require('lualine').setup {
   }
 }
 
--- set colorscheme
-vim.cmd.colorscheme(cs)
-
 
