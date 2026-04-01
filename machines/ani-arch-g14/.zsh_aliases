@@ -1,10 +1,9 @@
 # Lazy load nvm
-export NVM_DIR="$HOME/.nvm"
+zinit ice wait lucid
+zinit snippet OMZP::nvm
 
-zinit ice wait"1" lucid \
-  trigger-load"node;npm;npx;nvm" \
-  atload"source $NVM_DIR/nvm.sh"
-zinit light nvm-sh/nvm
+# Load fzf completions
+source <(fzf --zsh)
 
 # Load zoxide (better cd)
 eval "$(zoxide init zsh)"
@@ -19,7 +18,7 @@ export EDITOR=nvim
 alias vim=nvim
 
 # Find files
-alias ff='find /home/aaatipamula -type f | grep '
+alias ff='find /home/aaatipamula -type f | fzf'
 
 # Hyprland and suspend
 alias hypr=hyprland
@@ -31,6 +30,15 @@ alias tree='tree --gitignore'
 # Python venv shortcuts
 alias venvl='source .venv/bin/activate'
 alias venvs='python3 -m venv .venv'
+
+# Systemctl
+alias systemctlu='systemctl --user'
+
+# Mac style open
+alias open=xdg-open
+
+# Fix Ghidra on Wayland
+_JAVA_AWT_WM_NONREPARENTING=1
 
 # Status of laptop
 asus-status() {
