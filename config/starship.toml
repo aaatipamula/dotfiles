@@ -26,7 +26,7 @@ format = '[on](white) [$symbol$branch ]($style)'
 # ── Git Status ──────────────────────────────────────────────────
 # Shows icons for each state; counts are colored individually.
 [git_status]
-format = '[\[](bold white)$ahead_behind$all_status[\]](bold white)'
+format = '[\[](bold white)$ahead_behind$all_status[\]](bold white) '
 
 # ahead / behind use the $count variable injected by git_metrics instead;
 # here we keep symbols only (counts come from git_metrics below)
@@ -73,7 +73,7 @@ style = 'red'
 symbol = ' '
 
 [package]
-style = 'blue6'
+style = 'comment'
 symbol = '󰏗 '
 
 [docker_context]
