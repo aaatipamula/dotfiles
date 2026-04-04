@@ -79,8 +79,9 @@ alias hist="history"    # Shortcut history
 # alias gd="git diff"   # Quick diff
 alias gs="git status"   # Quick status
 # alias gl="git log"    # Quick log
-alias tmn="tmux new -s" # tmux new session
-alias tma="tmux a -t"   # tmux attach to session
+alias tmn="tmux new-session -s" # tmux new session
+alias tma="tmux attach-session -t"   # tmux attach to session
+alias tmk="tmux kill-session -t "
 alias httpserv="nohup python3 -m http.server 2>&1 > http.log"
 
 # History

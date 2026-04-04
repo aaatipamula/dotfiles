@@ -27,6 +27,8 @@ return {
     vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols, {})
     vim.keymap.set('n', '<leader>ws', builtin.lsp_workspace_symbols, {})
     vim.keymap.set('n', '<leader>jl', builtin.jumplist, {})
+    vim.keymap.set('n', '<leader>of', builtin.oldfiles, {})
+    vim.keymap.set('n', '<leader>ts', builtin.treesitter, {})
 
     -- Spell Suggest
     vim.keymap.set('n', '<leader>z', builtin.spell_suggest, {})
