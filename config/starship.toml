@@ -2,6 +2,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
+right_format = '$cmd_duration'
+palette = 'tokyonight_night'
 
 [directory]
 style = 'bold fg:blue'
@@ -24,7 +26,7 @@ format = '[on](white) [$symbol$branch ]($style)'
 # ── Git Status ──────────────────────────────────────────────────
 # Shows icons for each state; counts are colored individually.
 [git_status]
-format = '([\[](bold white)[$ahead_behind]($style)[$all_status](white)[\]](bold white) )'
+format = '[\[](bold white)$ahead_behind$all_status[\]](bold white)'
 
 # ahead / behind use the $count variable injected by git_metrics instead;
 # here we keep symbols only (counts come from git_metrics below)
@@ -32,25 +34,12 @@ ahead  = "[⇡$count](bold green)"
 behind = "[⇣$count](bold red)"
 diverged = "[⇡$ahead_count](bold green)[⇣$behind_count](bold red)"
 
-# Staged  ── green
 staged = "[+$count](bold green)"
-
-# Modified ── yellow
 modified = "[!$count](bold blue)"
-
-# Untracked ── cyan
 untracked = "[?$count](bold yellow)"
-
-# Renamed  ── blue
 renamed = "[»$count](bold cyan)"
-
-# Deleted  ── red
 deleted = "[✘$count](bold red)"
-
-# Stashed  ── magenta
-stashed = "[󰏗 $count](bold magenta)"
-
-# Conflicted ── bright red
+stashed = "[󰏗$count](bold orange)"
 conflicted = "[=$count](bold bright-red)"
 
 [fill]
@@ -68,7 +57,7 @@ format = '[$symbol($version )]($style)'
 symbol = ' '
 
 [nodejs]
-style = 'blue'
+style = 'green'
 symbol = ' '
 
 [golang]
@@ -80,10 +69,11 @@ style = 'purple'
 symbol = ' '
 
 [rust]
-style = 'orange'
+style = 'red'
 symbol = ' '
 
 [package]
+style = 'blue6'
 symbol = '󰏗 '
 
 [docker_context]
@@ -101,11 +91,46 @@ format = '[$symbol]($style)'
 
 [cmd_duration]
 min_time = 500
-style = 'fg:gray'
+style = 'fg:yellow'
 format = '[$duration]($style)'
 
-# ── Prompt Character ────────────────────────────────────────────
 [character]
 success_symbol = "[❯](bold green)"
 error_symbol   = "[❯](bold red)"
 vimcmd_symbol  = "[❮](bold yellow)"
+
+[palettes.tokyonight_night]
+bg = '#1a1b26'
+bg_dark = '#16161e'
+bg_dark1 = '#0C0E14'
+bg_highlight = '#292e42'
+
+fg = '#c0caf5'
+fg_dark = '#a9b1d6'
+fg_gutter = '#3b4261'
+
+blue =    '#7aa2f7'
+blue0 =   '#3d59a1'
+blue1 =   '#2ac3de'
+blue2 =   '#0db9d7'
+blue5 =   '#89ddff'
+blue6 =   '#b4f9f8'
+blue7 =   '#394b70'
+cyan =    '#7dcfff'
+green =   '#9ece6a'
+green1 =  '#73daca'
+green2 =  '#41a6b5'
+magenta = '#ff007c'
+orange =  '#ff9e64'
+purple =  '#9d7cd8'
+red =     '#f7768e'
+red1 =    '#db4b4b'
+teal =    '#1abc9c'
+yellow =  '#e0af68'
+lilac =   '#bb9af7'
+
+dark3 = '#545c7e'
+dark5 = '#737aa2'
+terminal_black = '#414868'
+comment = '#565f89'
+
