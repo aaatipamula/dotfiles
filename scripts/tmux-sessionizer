@@ -2,11 +2,12 @@
 
 # tmux-sessionizer — spin up a named tmux sesson from a config file or CLI flags
 # Usage:
-#   tmux-sessionizer                    # reads .tmux-sessionizer.yaml in CWD
+#   tmux-sessionizer                             # reads .tmux-sessionizer.yaml in CWD
 #   tmux-sessionizer -n myapp -w "editor:nvim" -w "server:npm run dev" -w "shell"
 #   tmux-sessionizer --file path/to/config.yaml
-#   tmux-sessionizer --kill             # kill the session for this project
-#   tmux-sessionizer --list             # list all tmux-sessionizer sessions
+#   tmux-sessionizer --pre-start "nvm use"       # run command before session is created
+#   tmux-sessionizer --kill                      # kill the session for this project
+#   tmux-sessionizer --list                      # list all tmux-sessionizer sessions
 
 set -euo pipefail
 
@@ -21,15 +22,17 @@ declare -a WINDOWS=()
 KILL_SESSION=false
 LIST_SESSIONS=false
 ROOT_DIR="$(pwd)"
+PRE_START_CMD=""
 
 # ── arg parsing ───────────────────────────────────────────────────────────────
 while [[ $# -gt 0 ]]; do
   case $1 in
-    -n|--name)    SESSION_NAME="$2"; shift 2 ;;
-    -w|--window)  WINDOWS+=("$2");   shift 2 ;;
-    -f|--file)    CONFIG_FILE="$2";  shift 2 ;;
-    --kill)       KILL_SESSION=true; shift ;;
-    --list)       LIST_SESSIONS=true; shift ;;
+    -n|--name)       SESSION_NAME="$2"; shift 2 ;;
+    -w|--window)     WINDOWS+=("$2");   shift 2 ;;
+    -f|--file)       CONFIG_FILE="$2";  shift 2 ;;
+    -p|--pre-start)  PRE_START_CMD="$2"; shift 2 ;;
+    --kill)          KILL_SESSION=true; shift ;;
+    --list)          LIST_SESSIONS=true; shift ;;
     -h|--help)
       sed -n '/^# tmux-sessionizer/,/^set -euo/{ /^set -euo/d; s/^# \{0,1\}//; p }' "$0"
       exit 0 ;;
@@ -61,6 +64,9 @@ parse_config() {
 
     elif [[ "$line" =~ ^root:[[:space:]]*(.+)$ ]]; then
       ROOT_DIR="${BASH_REMATCH[1]/#\~/$HOME}"
+
+    elif [[ "$line" =~ ^pre_start:[[:space:]]*(.+)$ ]]; then
+      [[ -z "$PRE_START_CMD" ]] && PRE_START_CMD="${BASH_REMATCH[1]}"
 
     elif [[ "$line" =~ ^windows: ]]; then
       in_windows=true
@@ -99,6 +105,12 @@ fi
 if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
   info "session '$SESSION_NAME' already exists — attaching"
   exec tmux attach-session -t "$SESSION_NAME"
+fi
+
+# ── pre-start command ─────────────────────────────────────────────────────────
+if [[ -n "$PRE_START_CMD" ]]; then
+  info "pre-start: $PRE_START_CMD"
+  (cd "$ROOT_DIR" && eval "$PRE_START_CMD") || die "pre-start command failed: $PRE_START_CMD"
 fi
 
 # ── create session ────────────────────────────────────────────────────────────
