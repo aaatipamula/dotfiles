@@ -3,8 +3,8 @@
   "spacing": 4,
   "layer": "top",
   "modules-left": [
-    // "hyprland/workspaces",
-    "niri/workspaces",
+    "hyprland/workspaces",
+    // "niri/workspaces",
     "tray",
   ],
   "modules-center": [
@@ -127,7 +127,7 @@
 	},
   "clock": {
    "format": " {:%m/%d/%Y -  %I:%M %p}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
     "format-alt": " {:%I:%M %p}"
   },
   "cpu": {

@@ -23,12 +23,12 @@
   context = 3
   renames = copies
   innerHunkContext = 10
-  # tool = diff-so-fancy
+  tool = diff-so-fancy
 
 [pager]
     branch = false  # no need to use pager for git branch
     tag = false
-    diff = diff-so-fancy | less  # diff-so-fancy as diff pager
+    diff = diff-so-fancy | less --tabs=4 -RFX # diff-so-fancy as diff pager
 
 [push]
   default = current
@@ -46,6 +46,7 @@
 [commit]
   template = ~/.config/git/template
   verbose = true
+  gpgsign = true
 
 # Colors hooray!!
 [color "blame"]
@@ -91,3 +92,8 @@
   rs = restore
   rss = restore --staged
 
+[interactive]
+	diffFilter = diff-so-fancy --patch
+
+[gpg]
+  program = gpg
