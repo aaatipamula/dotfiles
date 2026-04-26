@@ -6,8 +6,7 @@ zinit snippet OMZP::nvm
 source <(fzf --zsh)
 
 # Load zoxide (better cd)
-eval "$(zoxide init zsh)"
-alias cd=z
+eval "$(zoxide init zsh --cmd cd)"
 
 # Load starship (prompt)
 eval "$(starship init zsh)"
@@ -16,6 +15,8 @@ eval "$(starship init zsh)"
 export VISUAL=nvim
 export EDITOR=nvim
 alias vim=nvim
+alias vims='nvim -S Session.vim'
+alias nvims='nvim -S Session.vim'
 
 # Find files
 alias ff='find /home/aaatipamula -type f | fzf'
@@ -37,8 +38,8 @@ alias systemctlu='systemctl --user'
 # Mac style open
 alias open=xdg-open
 
-# Fix Ghidra on Wayland
-_JAVA_AWT_WM_NONREPARENTING=1
+# Weather alias
+alias weather="curl wttr.in"
 
 # Status of laptop
 asus-status() {
@@ -49,4 +50,59 @@ asus-status() {
 	echo "$(tput setaf 9)Current GPU Power Profile$(tput sgr0): $(supergfxctl -g)"
 	echo "$(tput setaf 9)Avaliable GPU Power Profiles$(tput sgr0): [Integrated, Hybrid, AsusMuxDgpu]"
 	echo "$(tput setaf 9)Set GPU With$(tput sgr0): supergfxctl -m <profile>"
+}
+
+# Todo files
+todo() {
+  local todo_file
+  local todo_template="$HOME/.todo_template.md"
+
+  # Create todos if not exists
+  if [[ ! -d "$HOME/todo" ]]; then
+    mkdir "$HOME/todo"
+  fi
+
+  # Get the file to edit
+  if [[ -z "$1" ]]; then
+    todo_file="$HOME/todo/$(date +%Y-%j).md"
+  else
+    todo_file="$HOME/todo/$(date -d $1 +%Y-%j).md"
+  fi
+
+  # Use the todo template file if exists
+  if [[ -f "$todo_template" ]]; then
+    cp "$todo_template" "$todo_file"
+  else
+    touch "$todo_file"
+  fi
+
+  $EDITOR $todo_file
+}
+
+# Swap two files
+swap() {
+  if [[ $# -ne 2 ]]; then
+    echo "Usage: swap <file1> <file2>" >&2
+    return 1
+  fi
+
+  local file1="$1"
+  local file2="$2"
+
+  if [[ ! -e "$file1" ]]; then
+    echo "Error: '$file1' does not exist" >&2
+    return 1
+  fi
+
+  if [[ ! -e "$file2" ]]; then
+    echo "Error: '$file2' does not exist" >&2
+    return 1
+  fi
+
+  local tmp
+  tmp=$(mktemp "${file1}.XXXXXX") || return 1
+
+  mv -- "$file1" "$tmp" &&
+  mv -- "$file2" "$file1" &&
+  mv -- "$tmp" "$file2"
 }

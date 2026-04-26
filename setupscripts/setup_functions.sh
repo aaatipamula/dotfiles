@@ -640,3 +640,12 @@ setup_starship()
 
   return 0
 }
+
+setup_vicinae()
+{
+  info "Setting up vicinae"
+
+  link_directory $HOME_CONFIG_DIR/vicinae $XDG_CONFIG_HOME
+
+  return 0
+}

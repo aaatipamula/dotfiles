@@ -213,7 +213,7 @@
   "custom/powermenu": {
     "format": "󰐥",
     "tooltip": false,
-    "on-click": "~/.config/waybar/scripts/powermenu.sh"
+    "on-click": "vicinae vicinae://launch/power"
   }
 }
 
