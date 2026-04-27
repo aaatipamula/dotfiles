@@ -57,6 +57,7 @@ CONFIG_PROGRAMS=(
   "swaync"
   "niri"
   "starship"
+  "vicinae"
 )
 
 ###############

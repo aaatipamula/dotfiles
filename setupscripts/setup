@@ -27,7 +27,7 @@ if [ "$1" = "preset" ]; then
     main)
       setup_apps $3
       for prog in ${CONFIG_PROGRAMS[@]}; do
-        eval setup_$prog
+        eval "setup_$prog"
       done
       ;;
 
