@@ -64,4 +64,5 @@ Use:
   - swaync
   - niri
   - starship
+  - vicinae
 ```
